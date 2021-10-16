@@ -3,6 +3,8 @@ import { UsersService } from './users.service';
 import { UsersRepository } from './users.repository';
 import { SignUpDto } from './dto/sign.up.dto';
 import * as faker from 'faker';
+import * as bcrypt from 'bcrypt';
+import { UtilsHelper } from '../common/utils/utils.helper';
 
 const mockUsersRepository = {
   create: jest.fn(),
@@ -21,6 +23,7 @@ describe('UsersService', () => {
           provide: UsersRepository,
           useValue: mockUsersRepository,
         },
+        UtilsHelper,
       ],
     }).compile();
 
@@ -63,6 +66,36 @@ describe('UsersService', () => {
 
       // then
       expect(result).toBe(successResponse);
+    });
+
+    it('should make hashed password to use in UsersRepository', async () => {
+      // given
+      const requestBody: SignUpDto = {
+        email: faker.internet.email(),
+        nickname: faker.internet.userName(),
+        password: faker.random.alpha(),
+      };
+      Object.defineProperties(bcrypt, {
+        genSalt: {
+          value: jest
+            .fn()
+            .mockResolvedValueOnce(faker.datatype.hexaDecimal(16)),
+        },
+        hash: {
+          value: jest
+            .fn()
+            .mockResolvedValueOnce(faker.datatype.hexaDecimal(64)),
+        },
+      });
+
+      // when
+      await service.signUp(requestBody as any);
+
+      // then
+      expect(
+        requestBody.password !==
+          (await bcrypt.hash(requestBody.password, await bcrypt.genSalt())),
+      ).toBeTruthy();
     });
   });
 });
