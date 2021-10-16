@@ -4,6 +4,7 @@ import { UsersService } from './users.service';
 import { SignUpDto } from './dto/sign.up.dto';
 import * as faker from 'faker';
 import { ArgumentMetadata, ValidationPipe } from '@nestjs/common';
+import { SignInDto } from './dto/sign.in.dto';
 
 const mockUsersService = {
   signUp: jest.fn(),
@@ -81,6 +82,35 @@ describe('UsersController', () => {
       // when
       const result = await controller.signUp(signUpDTO);
       // then
+      expect(result).toBe(successResponse);
+    });
+  });
+
+  describe('Sign-In', () => {
+    it('should return access-token when sign-in is succeed', async () => {
+      // given
+      const shaAlgorithmValue = 256 / 4;
+
+      const signInDto: SignInDto = {
+        email: faker.internet.email(),
+        password: faker.internet.password(),
+      };
+
+      const successResponse = {
+        success: true,
+        token: `${faker.datatype.hexaDecimal(
+          shaAlgorithmValue,
+        )}.${faker.datatype.hexaDecimal(
+          shaAlgorithmValue,
+        )}.${faker.datatype.hexaDecimal(shaAlgorithmValue)}`,
+      };
+
+      service.signIn = jest.fn().mockResolvedValueOnce(successResponse);
+
+      // when
+      const result = await controller.signIn(signInDto);
+      // then
+
       expect(result).toBe(successResponse);
     });
   });
