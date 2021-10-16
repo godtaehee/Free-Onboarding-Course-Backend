@@ -27,6 +27,8 @@
     "@nestjs/typeorm": "^8.0.2",
     "@types/faker": "^5.5.8",
     "@types/morgan": "^1.9.3",
+    "class-transformer": "^0.4.0",
+    "class-validator": "^0.13.1",
     "faker": "^5.5.3",
     "morgan": "^1.10.0",
     "nest-morgan": "^2.0.0",
