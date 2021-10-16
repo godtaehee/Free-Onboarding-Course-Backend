@@ -5,6 +5,7 @@ import { UsersModule } from './users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { MorganInterceptor, MorganModule } from 'nest-morgan';
 import { APP_INTERCEPTOR } from '@nestjs/core';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { APP_INTERCEPTOR } from '@nestjs/core';
       synchronize: true,
     }),
     MorganModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [
