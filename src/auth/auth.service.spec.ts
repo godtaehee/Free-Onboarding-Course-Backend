@@ -5,16 +5,29 @@ import { UtilsHelper } from '../common/utils/utils.helper';
 import { SignUpDto } from './dto/sign.up.dto';
 import * as faker from 'faker';
 import * as bcrypt from 'bcrypt';
+import { JwtService } from '@nestjs/jwt';
+
+const shaAlgorithmValue = 256 / 4;
+
+const fakeJwtToken = `${faker.datatype.hexaDecimal(
+  shaAlgorithmValue,
+)}.${faker.datatype.hexaDecimal(
+  shaAlgorithmValue,
+)}.${faker.datatype.hexaDecimal(shaAlgorithmValue)}`;
 
 const mockUsersRepository = {
   create: jest.fn(),
   save: jest.fn(),
   signUp: jest.fn(),
+  signIn: jest.fn(),
+};
+
+const mockJwtService = {
+  sign: jest.fn().mockReturnValueOnce(fakeJwtToken),
 };
 describe('AuthService', () => {
   let service: AuthService;
   let repository: UsersRepository;
-
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
@@ -22,6 +35,10 @@ describe('AuthService', () => {
         {
           provide: UsersRepository,
           useValue: mockUsersRepository,
+        },
+        {
+          provide: JwtService,
+          useValue: mockJwtService,
         },
         UtilsHelper,
       ],
@@ -91,6 +108,29 @@ describe('AuthService', () => {
         requestBody.password !==
           (await bcrypt.hash(requestBody.password, await bcrypt.genSalt())),
       ).toBeTruthy();
+    });
+  });
+
+  describe('Sign-in', () => {
+    it('should return valid access-token if user exist and password comparing is succeed', async () => {
+      // given
+      const signInDto = {};
+      repository.signIn = jest.fn().mockResolvedValueOnce({
+        id: faker.datatype.number(),
+        email: faker.internet.email(),
+        password: faker.internet.password(),
+        nickname: faker.internet.userName(),
+      });
+
+      Object.defineProperty(bcrypt, 'compare', {
+        value: jest.fn().mockResolvedValueOnce(true),
+      });
+
+      // when
+      const result = await service.signIn(signInDto as any);
+
+      // then
+      expect(result.accessToken).toBe(fakeJwtToken);
     });
   });
 });
