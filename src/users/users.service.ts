@@ -4,6 +4,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { UsersRepository } from './users.repository';
 import * as bcrypt from 'bcrypt';
 import { UtilsHelper } from '../common/utils/utils.helper';
+import { SignInDto } from './dto/sign.in.dto';
 
 @Injectable()
 export class UsersService {
@@ -19,4 +20,6 @@ export class UsersService {
     clonedSignUpDto.password = hashedPassword;
     return this.usersRepository.signUp(clonedSignUpDto);
   }
+
+  signIn(signInDto: SignInDto) {}
 }
