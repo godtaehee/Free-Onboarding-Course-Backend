@@ -5,9 +5,13 @@ import { SignUpDto } from './dto/sign.up.dto';
 @EntityRepository(User)
 export class UsersRepository extends Repository<User> {
   async signUp(signUpDto: SignUpDto) {
-    const user = this.create(signUpDto);
+    const createdUser = this.create(signUpDto);
     try {
-      return await this.save(user);
+      const savedUser = await this.save(createdUser);
+      return {
+        success: true,
+        id: savedUser.id,
+      };
     } catch (err) {
       throw err;
     }
