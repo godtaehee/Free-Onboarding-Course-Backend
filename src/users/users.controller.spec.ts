@@ -63,7 +63,7 @@ describe('UsersController', () => {
       }
     });
 
-    it('should return token when sign-up is succeed', async () => {
+    it('should return id when sign-up is succeed', async () => {
       // given
       const shaAlgorithmValue = 256 / 4;
 
@@ -75,11 +75,7 @@ describe('UsersController', () => {
 
       const successResponse = {
         success: true,
-        token: `${faker.datatype.hexaDecimal(
-          shaAlgorithmValue,
-        )}.${faker.datatype.hexaDecimal(
-          shaAlgorithmValue,
-        )}.${faker.datatype.hexaDecimal(shaAlgorithmValue)}`,
+        id: faker.datatype.number(),
       };
 
       service.signUp = jest.fn().mockResolvedValueOnce(successResponse);
