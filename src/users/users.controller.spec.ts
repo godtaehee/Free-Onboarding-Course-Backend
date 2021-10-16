@@ -3,6 +3,7 @@ import { UsersController } from './users.controller';
 import { UsersService } from './users.service';
 import { SignUpDto } from './dto/sign.up.dto';
 import * as faker from 'faker';
+import { ArgumentMetadata, ValidationPipe } from '@nestjs/common';
 
 const mockUsersService = {
   signUp: jest.fn(),
@@ -35,6 +36,33 @@ describe('UsersController', () => {
   });
 
   describe('Sign-Up', () => {
+    it('should require the proper type', async () => {
+      // given
+      const notContainEmailRequestBody = {
+        password: faker.internet.password(),
+        nickname: faker.internet.userName(),
+      };
+      let target: ValidationPipe = new ValidationPipe({
+        transform: true,
+        whitelist: true,
+      });
+      const metadata: ArgumentMetadata = {
+        type: 'body',
+        metatype: SignUpDto,
+      };
+
+      // when
+      // then
+      try {
+        await target.transform(notContainEmailRequestBody, metadata);
+      } catch (err) {
+        expect(err.getResponse().message).toStrictEqual([
+          'email must be an email',
+          'email should not be empty',
+        ]);
+      }
+    });
+
     it('should return token when sign-up is succeed', async () => {
       // given
       const shaAlgorithmValue = 256 / 4;
