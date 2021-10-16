@@ -37,7 +37,7 @@ describe('UsersService', () => {
   });
 
   describe('Sign-up', () => {
-    it('should be return token when sign-up is succeed', async () => {
+    it('should return token when sign-up is succeed', async () => {
       // given
       const shaAlgorithmValue = 256 / 4;
 
