@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Post, ValidationPipe } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { SignUpDto } from './dto/sign.up.dto';
 
@@ -7,7 +7,7 @@ export class UsersController {
   constructor(private usersService: UsersService) {}
 
   @Post('sign-up')
-  signUp(@Body() signUpDto: SignUpDto) {
+  signUp(@Body(ValidationPipe) signUpDto: SignUpDto) {
     return this.usersService.signUp(signUpDto);
   }
 }
