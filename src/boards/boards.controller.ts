@@ -36,8 +36,8 @@ export class BoardsController {
     return this.boardsService.createBoard(user, boardCreateDto);
   }
 
-  @Get('/:id')
-  getSingleBoard(@Param('id') id: number) {
-    return this.boardsService.getSingleBoard(id);
+  @Get('/:board-id')
+  getSingleBoard(@Param('board-id') boardId: number) {
+    return this.boardsService.getSingleBoard(boardId);
   }
 }
