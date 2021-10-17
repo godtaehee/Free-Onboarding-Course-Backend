@@ -4,6 +4,7 @@ import { BoardsService } from './boards.service';
 import { WINSTON_MODULE_PROVIDER } from 'nest-winston';
 import * as faker from 'faker';
 import { BoardCreateDto } from './dto/board.create.dto';
+import { User } from '../users/users.entity';
 
 const mockWinston = {
   debug: jest.fn(),
@@ -70,6 +71,34 @@ describe('BoardsController', () => {
 
       // then
       expect(result).toBe(successResponse);
+    });
+  });
+
+  describe('Get-Single-Board', () => {
+    it('should return single board', async () => {
+      // given
+      const id: number = faker.datatype.number({ min: 1 });
+      const writerInfo: User = {} as any;
+
+      const successGetSingleBoardInfo = {
+        id,
+        title: faker.name.title(),
+        content: faker.lorem.sentences(),
+        createdAt: faker.date.recent(),
+        updateAt: faker.date.recent(-1),
+        deletedAt: null,
+        user: writerInfo,
+      };
+
+      service.getSingleBoard = jest
+        .fn()
+        .mockReturnValueOnce(successGetSingleBoardInfo);
+
+      // when
+      const result = await controller.getSingleBoard(id);
+
+      // then
+      expect(result).toBe(successGetSingleBoardInfo);
     });
   });
 });
