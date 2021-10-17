@@ -13,4 +13,8 @@ export class BoardsService {
   createBoard(user, boardCreateDto: BoardCreateDto) {
     return this.boardsRepository.createBoard(user, boardCreateDto);
   }
+
+  getSingleBoard(id: number) {
+    return this.boardsRepository.getSingleBoard(id);
+  }
 }
