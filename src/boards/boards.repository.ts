@@ -1,6 +1,7 @@
 import { EntityRepository, Repository } from 'typeorm';
 import { Board } from './boards.entity';
 import { BoardCreateDto } from './dto/board.create.dto';
+import { BoardUpdateDto } from './dto/board.update.dto';
 
 @EntityRepository(Board)
 export class BoardsRepository extends Repository<Board> {
@@ -27,7 +28,15 @@ export class BoardsRepository extends Repository<Board> {
     return this.createQueryBuilder('boards')
       .innerJoinAndSelect('boards.user', 'user')
       .select(['boards', 'user.id', 'user.nickname'])
-      .where({ boardId })
+      .where({ id: boardId })
+      .getOne();
+  }
+
+  async getBoardSpecificUser(userId: number, boardId: number) {
+    return this.createQueryBuilder('boards')
+      .innerJoinAndSelect('boards.user', 'user')
+      .select(['boards', 'user.id', 'user.nickname'])
+      .where('user.id = :userId AND boards.id = :boardId', { userId, boardId })
       .getOne();
   }
 }
