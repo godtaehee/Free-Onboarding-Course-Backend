@@ -7,6 +7,7 @@ import { MorganInterceptor, MorganModule } from 'nest-morgan';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
+import { BoardsModule } from './boards/boards.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { ConfigModule } from '@nestjs/config';
     }),
     MorganModule,
     AuthModule,
+    BoardsModule,
   ],
   controllers: [AppController],
   providers: [
