@@ -22,4 +22,12 @@ export class BoardsRepository extends Repository<Board> {
       throw err;
     }
   }
+
+  async getSingleBoard(id: number) {
+    return this.createQueryBuilder('boards')
+      .innerJoinAndSelect('boards.user', 'user')
+      .select(['boards', 'user.id', 'user.nickname'])
+      .where({ id })
+      .getOne();
+  }
 }
