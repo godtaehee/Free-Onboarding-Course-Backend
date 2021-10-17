@@ -10,5 +10,7 @@ export class BoardsService {
     private boardsRepository: BoardsRepository,
   ) {}
 
-  createBoard(user, boardCreateDto: BoardCreateDto) {}
+  createBoard(user, boardCreateDto: BoardCreateDto) {
+    return this.boardsRepository.createBoard(user, boardCreateDto);
+  }
 }
