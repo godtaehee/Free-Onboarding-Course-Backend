@@ -39,4 +39,13 @@ export class BoardsRepository extends Repository<Board> {
       .where('user.id = :userId AND boards.id = :boardId', { userId, boardId })
       .getOne();
   }
+
+  async updateBoard(board: Board, updateRequestBody: BoardUpdateDto) {
+    const { title, content } = updateRequestBody;
+
+    board.title = title;
+    board.content = content;
+
+    return await this.save(board);
+  }
 }
