@@ -5,9 +5,14 @@ import * as faker from 'faker';
 import { ArgumentMetadata, ValidationPipe } from '@nestjs/common';
 import { SignUpDto } from './dto/sign.up.dto';
 import { SignInDto } from './dto/sign.in.dto';
+import { WINSTON_MODULE_PROVIDER } from 'nest-winston';
 
 const mockAuthService = {
   signUp: jest.fn(),
+};
+
+const mockWinston = {
+  debug: jest.fn(),
 };
 
 describe('AuthController', () => {
@@ -21,6 +26,10 @@ describe('AuthController', () => {
         {
           provide: AuthService,
           useValue: mockAuthService,
+        },
+        {
+          provide: WINSTON_MODULE_PROVIDER,
+          useValue: mockWinston,
         },
       ],
     }).compile();
