@@ -6,6 +6,7 @@ import * as faker from 'faker';
 import { BoardCreateDto } from './dto/board.create.dto';
 import { User } from '../users/users.entity';
 import { BoardUpdateDto } from './dto/board.update.dto';
+import { fake } from 'faker';
 
 const mockWinston = {
   debug: jest.fn(),
@@ -18,6 +19,14 @@ const mockService = {
 describe('BoardsController', () => {
   let controller: BoardsController;
   let service: BoardsService;
+
+  const requestUserInfo: User = {
+    id: faker.datatype.number(),
+    email: faker.internet.email(),
+    nickname: faker.internet.userName(),
+    password: faker.internet.password(),
+    boards: 'some boards' as any,
+  };
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -106,7 +115,7 @@ describe('BoardsController', () => {
   describe('Update-Board', () => {
     it('should be return success property and updated board id', async () => {
       // given
-      const updateRequestUserId: number = faker.datatype.number();
+
       const boardIdFromParam: number = faker.datatype.number();
       const updateRequestDto: BoardUpdateDto = {
         title: faker.lorem.sentence(),
@@ -124,7 +133,7 @@ describe('BoardsController', () => {
 
       // when
       const result = await controller.updateBoard(
-        updateRequestUserId,
+        requestUserInfo,
         boardIdFromParam,
         updateRequestDto,
       );
@@ -136,7 +145,6 @@ describe('BoardsController', () => {
   describe('Delete-Board', () => {
     it('should return success property and deleted board-id', async () => {
       // given
-      const deleteRequestUserId: number = faker.datatype.number();
       const boardIdFromParam: number = faker.datatype.number();
 
       const successDeletedResponse = {
@@ -150,7 +158,7 @@ describe('BoardsController', () => {
 
       // when
       const result = await controller.deleteBoard(
-        deleteRequestUserId,
+        requestUserInfo,
         boardIdFromParam,
       );
 
