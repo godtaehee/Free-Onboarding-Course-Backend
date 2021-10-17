@@ -20,9 +20,6 @@ export class Board {
   @Column()
   content: string;
 
-  @Column()
-  nickname: string;
-
   @CreateDateColumn()
   createdAt: Date;
 
