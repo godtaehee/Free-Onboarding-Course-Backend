@@ -21,9 +21,6 @@ export class Board {
   content: string;
 
   @Column()
-  password: string;
-
-  @Column()
   nickname: string;
 
   @CreateDateColumn()
