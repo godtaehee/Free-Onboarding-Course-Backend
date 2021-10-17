@@ -23,11 +23,11 @@ export class BoardsRepository extends Repository<Board> {
     }
   }
 
-  async getSingleBoard(id: number) {
+  async getSingleBoard(boardId: number) {
     return this.createQueryBuilder('boards')
       .innerJoinAndSelect('boards.user', 'user')
       .select(['boards', 'user.id', 'user.nickname'])
-      .where({ id })
+      .where({ boardId })
       .getOne();
   }
 }
