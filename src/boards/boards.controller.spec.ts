@@ -5,6 +5,7 @@ import { WINSTON_MODULE_PROVIDER } from 'nest-winston';
 import * as faker from 'faker';
 import { BoardCreateDto } from './dto/board.create.dto';
 import { User } from '../users/users.entity';
+import { BoardUpdateDto } from './dto/board.update.dto';
 
 const mockWinston = {
   debug: jest.fn(),
@@ -99,6 +100,38 @@ describe('BoardsController', () => {
 
       // then
       expect(result).toBe(successGetSingleBoardInfo);
+    });
+  });
+
+  describe('Update-Board', () => {
+    it('should be return success property and updated board id', async () => {
+      // given
+      const updateRequestUserId: number = faker.datatype.number();
+      const boardIdFromParam: number = faker.datatype.number();
+      const updateRequestDto: BoardUpdateDto = {
+        title: faker.lorem.sentence(),
+        content: faker.lorem.sentences(),
+      };
+
+      const successUpdatedResponse = {
+        success: true,
+        updatedBoardId: boardIdFromParam,
+      };
+
+      service.updateBoard = jest
+        .fn()
+        .mockResolvedValueOnce(successUpdatedResponse);
+
+      // when
+
+      const result = await controller.updateBoard(
+        updateRequestUserId,
+        boardIdFromParam,
+        updateRequestDto,
+      );
+      // then
+
+      expect(result).toBe(successUpdatedResponse);
     });
   });
 });
