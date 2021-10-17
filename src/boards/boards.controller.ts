@@ -5,6 +5,8 @@ import {
   Inject,
   Logger,
   Param,
+  ParseIntPipe,
+  Patch,
   Post,
   UseGuards,
   ValidationPipe,
@@ -14,8 +16,8 @@ import { GetUser } from '../common/decorators/get-user.decorator';
 import { BoardsService } from './boards.service';
 import { WINSTON_MODULE_PROVIDER } from 'nest-winston';
 import { BoardCreateDto } from './dto/board.create.dto';
+import { BoardUpdateDto } from './dto/board.update.dto';
 
-@UseGuards(AuthGuard('jwt'))
 @Controller('boards')
 export class BoardsController {
   constructor(
@@ -24,6 +26,7 @@ export class BoardsController {
   ) {}
 
   @Post('/create')
+  @UseGuards(AuthGuard('jwt'))
   createBoard(
     @GetUser() user,
     @Body(ValidationPipe) boardCreateDto: BoardCreateDto,
@@ -36,8 +39,18 @@ export class BoardsController {
     return this.boardsService.createBoard(user, boardCreateDto);
   }
 
-  @Get('/:board-id')
-  getSingleBoard(@Param('board-id') boardId: number) {
+  @Get('/:boardId')
+  getSingleBoard(@Param('boardId') boardId: number) {
     return this.boardsService.getSingleBoard(boardId);
+  }
+
+  @Patch('/:boardId')
+  @UseGuards(AuthGuard('jwt'))
+  async updateBoard(
+    @GetUser() user,
+    @Param('boardId', ParseIntPipe) boardId: number,
+    @Body() updateRequestBody: BoardUpdateDto,
+  ) {
+    return this.boardsService.updateBoard(user.id, boardId, updateRequestBody);
   }
 }
