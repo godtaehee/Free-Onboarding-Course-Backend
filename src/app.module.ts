@@ -8,11 +8,19 @@ import { APP_INTERCEPTOR } from '@nestjs/core';
 import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
 import { BoardsModule } from './boards/boards.module';
+import { WinstonModule } from 'nest-winston';
+import * as winston from 'winston';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
+    }),
+    WinstonModule.forRootAsync({
+      useFactory: () => ({
+        level: 'debug',
+        transports: [new winston.transports.Console()],
+      }),
     }),
     UsersModule,
     TypeOrmModule.forRoot({
