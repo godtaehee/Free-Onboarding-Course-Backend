@@ -132,4 +132,30 @@ describe('BoardsController', () => {
       expect(result).toBe(successUpdatedResponse);
     });
   });
+
+  describe('Delete-Board', () => {
+    it('should return success property and deleted board-id', async () => {
+      // given
+      const deleteRequestUserId: number = faker.datatype.number();
+      const boardIdFromParam: number = faker.datatype.number();
+
+      const successDeletedResponse = {
+        success: true,
+        deletedBoardId: boardIdFromParam,
+      };
+
+      service.deleteBoard = jest
+        .fn()
+        .mockResolvedValueOnce(successDeletedResponse);
+
+      // when
+      const result = await controller.deleteBoard(
+        deleteRequestUserId,
+        boardIdFromParam,
+      );
+
+      // then
+      expect(result).toBe(successDeletedResponse);
+    });
+  });
 });
