@@ -3,9 +3,11 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { User } from '../users/users.entity';
 
 @Entity()
 export class Board {
@@ -32,4 +34,7 @@ export class Board {
 
   @DeleteDateColumn()
   deletedAt: Date | null;
+
+  @ManyToOne((type) => User, (user) => user.boards, { eager: false })
+  user: User;
 }
