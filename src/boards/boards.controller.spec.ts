@@ -123,14 +123,12 @@ describe('BoardsController', () => {
         .mockResolvedValueOnce(successUpdatedResponse);
 
       // when
-
       const result = await controller.updateBoard(
         updateRequestUserId,
         boardIdFromParam,
         updateRequestDto,
       );
       // then
-
       expect(result).toBe(successUpdatedResponse);
     });
   });
