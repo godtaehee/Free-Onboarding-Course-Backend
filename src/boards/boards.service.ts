@@ -14,7 +14,7 @@ export class BoardsService {
     return this.boardsRepository.createBoard(user, boardCreateDto);
   }
 
-  getSingleBoard(id: number) {
-    return this.boardsRepository.getSingleBoard(id);
+  getSingleBoard(boardId: number) {
+    return this.boardsRepository.getSingleBoard(boardId);
   }
 }
