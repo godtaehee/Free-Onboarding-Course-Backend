@@ -1,8 +1,10 @@
 import {
   Body,
   Controller,
+  Get,
   Inject,
   Logger,
+  Param,
   Post,
   UseGuards,
   ValidationPipe,
@@ -32,5 +34,10 @@ export class BoardsController {
       }' request board-create`,
     );
     return this.boardsService.createBoard(user, boardCreateDto);
+  }
+
+  @Get('/:id')
+  getSingleBoard(@Param('id') id: number) {
+    return this.boardsService.getSingleBoard(id);
   }
 }
