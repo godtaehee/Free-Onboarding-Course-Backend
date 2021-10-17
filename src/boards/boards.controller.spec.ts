@@ -7,6 +7,10 @@ const mockWinston = {
   debug: jest.fn(),
 };
 
+const mockService = {
+  createBoard: jest.fn(),
+};
+
 describe('BoardsController', () => {
   let controller: BoardsController;
   let service: BoardsService;
@@ -15,7 +19,10 @@ describe('BoardsController', () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [BoardsController],
       providers: [
-        BoardsService,
+        {
+          provide: BoardsService,
+          useValue: mockService,
+        },
         {
           provide: WINSTON_MODULE_PROVIDER,
           useValue: mockWinston,
