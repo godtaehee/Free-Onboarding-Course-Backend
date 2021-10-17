@@ -5,6 +5,7 @@ import {
   Logger,
   Post,
   UseGuards,
+  ValidationPipe,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { GetUser } from '../common/decorators/get-user.decorator';
@@ -21,13 +22,15 @@ export class BoardsController {
   ) {}
 
   @Post('/create')
-  createBoard(@GetUser() user, @Body() boardCreateDto: BoardCreateDto) {
+  createBoard(
+    @GetUser() user,
+    @Body(ValidationPipe) boardCreateDto: BoardCreateDto,
+  ) {
     this.logger.debug(
       `${new Date().toLocaleString()} userId: '${
         user.id
       }' request board-create`,
     );
-
     return this.boardsService.createBoard(user, boardCreateDto);
   }
 }
