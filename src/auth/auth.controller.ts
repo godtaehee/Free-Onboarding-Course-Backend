@@ -14,8 +14,11 @@ export class AuthController {
   constructor(
     private authService: AuthService,
     @Inject(WINSTON_MODULE_PROVIDER) private readonly logger: Logger,
-  ) {}
+  ) {
+    this.tag = '[AuthController]';
+  }
 
+  tag: string;
   @ApiOperation({
     summary: '회원가입을 합니다.',
     description:
@@ -31,7 +34,9 @@ export class AuthController {
   @Post('sign-up')
   signUp(@Body(ValidationPipe) signUpDto: SignUpDto) {
     this.logger.debug(
-      `${new Date().toLocaleString()} '${signUpDto.email}' request sign-up`,
+      `${this.tag} ${new Date().toLocaleString()} '${
+        signUpDto.email
+      }' request sign-up`,
     );
     return this.authService.signUp(signUpDto);
   }
@@ -52,7 +57,9 @@ export class AuthController {
   @Post('sign-in')
   signIn(@Body(ValidationPipe) signInDto: SignInDto) {
     this.logger.debug(
-      `${new Date().toLocaleString()} '${signInDto.email}' request sign-in`,
+      `${this.tag} ${new Date().toLocaleString()} '${
+        signInDto.email
+      }' request sign-in`,
     );
     return this.authService.signIn(signInDto);
   }
