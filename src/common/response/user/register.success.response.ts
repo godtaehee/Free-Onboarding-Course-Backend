@@ -1,4 +1,3 @@
-import { Board } from '../../../boards/boards.entity';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class RegisterSuccessResponse {
