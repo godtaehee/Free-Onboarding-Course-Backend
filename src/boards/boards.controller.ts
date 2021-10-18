@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  DefaultValuePipe,
   Delete,
   Get,
   Inject,
@@ -38,6 +39,11 @@ export class BoardsController {
     @Inject(WINSTON_MODULE_PROVIDER) private readonly logger: Logger,
   ) {}
 
+  @ApiBearerAuth('access-token')
+  @ApiOperation({
+    summary: '게시글을 생성합니다.',
+    description: '회원가입을 한 유저만 게시글을 작성할수 있습니다.',
+  })
   @Post('/create')
   @UseGuards(AuthGuard('jwt'))
   createBoard(
