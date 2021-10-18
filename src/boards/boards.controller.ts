@@ -97,6 +97,7 @@ export class BoardsController {
     return this.boardsService.getAllBoard(query.limit, query.offset);
   }
 
+  @ApiBearerAuth('access-token')
   @ApiOperation({
     summary: '게시글을 업데이트 합니다.',
     description:
