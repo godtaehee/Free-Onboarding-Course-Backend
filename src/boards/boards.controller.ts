@@ -66,7 +66,7 @@ export class BoardsController {
     name: 'offset',
     required: true,
     description:
-      '게시판의 시작페이지의 수를 나타냅니다. 0을 포함한 양수의 값입니다.',
+      '게시판의 시작페이지의 수를 나타냅니다. 0을 제외한 양수의 값입니다.',
   })
   @ApiResponse({
     status: 201,
