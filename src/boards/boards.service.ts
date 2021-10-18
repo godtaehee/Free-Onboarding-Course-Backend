@@ -24,14 +24,19 @@ export class BoardsService {
     boardId: number,
     updateRequestBody: BoardUpdateDto,
   ) {
+    const selectedBoard = await this.confirmValidBoard(userId, boardId);
+    return this.boardsRepository.updateBoard(selectedBoard, updateRequestBody);
+  }
+
+  async confirmValidBoard(userId, boardId) {
     const selectedBoard = await this.boardsRepository.getBoardSpecificUser(
       userId,
       boardId,
     );
 
     if (!selectedBoard)
-      throw new UnauthorizedException('해당 게시글을 작성하신 분이 아닙니다.');
+      throw new UnauthorizedException('해당 요청을 처리할수 없습니다.');
 
-    return this.boardsRepository.updateBoard(selectedBoard, updateRequestBody);
+    return selectedBoard;
   }
 }
