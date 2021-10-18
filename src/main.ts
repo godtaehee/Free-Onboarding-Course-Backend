@@ -1,6 +1,8 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { RegisterSuccessResponse } from './common/response/user/register.success.response';
+import { SignInSuccessResponse } from './common/response/user/sign.in.success.response';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -17,7 +19,9 @@ async function bootstrap() {
     )
     .build();
 
-  const swaggerDocument = SwaggerModule.createDocument(app, swaggerConfig);
+  const swaggerDocument = SwaggerModule.createDocument(app, swaggerConfig, {
+    extraModels: [RegisterSuccessResponse, SignInSuccessResponse],
+  });
 
   SwaggerModule.setup('api', app, swaggerDocument);
 
