@@ -65,6 +65,14 @@ export class BoardsController {
     return this.boardsService.createBoard(user, boardCreateDto);
   }
 
+  @ApiOperation({
+    summary: '게시글의 id를 기준으로 읽습니다.',
+  })
+  @ApiParam({
+    name: 'boardId',
+    required: true,
+    description: '읽어올 게시글의 고유 번호입니다.',
+  })
   @Get('/:boardId')
   getSingleBoard(@Param('boardId') boardId: number) {
     return this.boardsService.getSingleBoard(boardId);
