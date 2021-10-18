@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { BoardsRepository } from './boards.repository';
 import { BoardCreateDto } from './dto/board.create.dto';
 import { BoardUpdateDto } from './dto/board.update.dto';
+import { ReadAllBoardResponse } from '../common/response/board/read.all.board.response';
 
 @Injectable()
 export class BoardsService {
@@ -19,8 +20,14 @@ export class BoardsService {
     return this.boardsRepository.getSingleBoard(boardId);
   }
 
-  getAllBoard(limit: number, offset: number) {
-    return this.boardsRepository.getAllBoard(limit, offset);
+  async getAllBoard(limit: number, offset: number) {
+    const result = await this.boardsRepository.getAllBoard(limit, offset);
+    const readAllBoardResponse: ReadAllBoardResponse = {
+      success: true,
+      count: result.length,
+      data: result,
+    };
+    return readAllBoardResponse;
   }
 
   async updateBoard(
