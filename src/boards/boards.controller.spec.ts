@@ -112,6 +112,36 @@ describe('BoardsController', () => {
     });
   });
 
+  describe('Get-All-Board', () => {
+    it('should return success property and count and all-board-data', async () => {
+      // given
+      const limit = faker.datatype.number(30);
+      const offset = faker.datatype.number(30 * limit);
+      const query = {
+        limit,
+        offset,
+      };
+
+      const successData = {
+        count: limit,
+        data: [
+          {
+            id: faker.datatype.number(),
+            title: faker.lorem.sentence(),
+            content: faker.lorem.sentences(),
+          },
+        ],
+      };
+      service.getAllBoard = jest.fn().mockResolvedValueOnce(successData);
+
+      // when
+      const result = await controller.getAllBoard(query as any);
+
+      // then
+      expect(result).toBe(successData);
+    });
+  });
+
   describe('Update-Board', () => {
     it('should be return success property and updated board id', async () => {
       // given
