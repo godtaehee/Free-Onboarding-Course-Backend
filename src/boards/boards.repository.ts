@@ -62,7 +62,7 @@ export class BoardsRepository extends Repository<Board> {
     return this.createQueryBuilder('boards')
       .innerJoinAndSelect('boards.user', 'user')
       .limit(limit)
-      .offset(offset * limit)
+      .offset((offset - 1) * limit)
       .getMany();
   }
 }
