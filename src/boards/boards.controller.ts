@@ -30,7 +30,7 @@ import {
 } from '@nestjs/swagger';
 import { ReadAllBoardResponse } from '../common/response/board/read.all.board.response';
 import { PaginationDto } from './dto/pagination.dto';
-import { CreateBoardResponse } from '../common/response/board/create.board.response';
+import { CommonBoardResponse } from '../common/response/board/common.board.response';
 import { NotInclueSensitiveBoardInfoResponse } from '../common/response/board/not.inclue.sensitive.board.info.response';
 
 @ApiTags('게시글')
@@ -49,7 +49,7 @@ export class BoardsController {
   @ApiResponse({
     status: 201,
     description: '성공적으로 Board를 생성했을때의 응답입니다.',
-    type: CreateBoardResponse,
+    type: CommonBoardResponse,
   })
   @Post('/create')
   @UseGuards(AuthGuard('jwt'))
@@ -134,6 +134,11 @@ export class BoardsController {
     name: 'boardId',
     required: true,
     description: '삭제할 게시글의 고유 번호입니다.',
+  })
+  @ApiResponse({
+    status: 201,
+    description: '성공적으로 Board를 삭제했을때 응답입니다.',
+    type: CommonBoardResponse,
   })
   @Delete('/:boardId')
   @UseGuards(AuthGuard('jwt'))
