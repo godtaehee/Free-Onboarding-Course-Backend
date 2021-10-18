@@ -125,6 +125,16 @@ export class BoardsController {
   }
 
   @ApiBearerAuth('access-token')
+  @ApiOperation({
+    summary: '게시글을 삭제합니다.',
+    description:
+      '자신이 작성한 게시글만 삭제 할수있으며, 발급받은 Access-Token을 이용해 업데이트 권한을 인가받습니다. Soft-Delete 정책을 사용했습니다.',
+  })
+  @ApiParam({
+    name: 'boardId',
+    required: true,
+    description: '삭제할 게시글의 고유 번호입니다.',
+  })
   @Delete('/:boardId')
   @UseGuards(AuthGuard('jwt'))
   async deleteBoard(
