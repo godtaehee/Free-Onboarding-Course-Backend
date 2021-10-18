@@ -36,7 +36,6 @@ import { PositiveNumberValidationPipe } from '../common/pipe/positive.number.val
 import { CommonResponseFormInterceptor } from '../common/interceptors/common.response.form.interceptor';
 
 @ApiTags('게시글')
-@UseInterceptors(CommonResponseFormInterceptor)
 @Controller('boards')
 export class BoardsController {
   constructor(
@@ -60,6 +59,7 @@ export class BoardsController {
   })
   @Post('/create')
   @UseGuards(AuthGuard('jwt'))
+  @UseInterceptors(CommonResponseFormInterceptor)
   createBoard(
     @GetUser() user,
     @Body(ValidationPipe) boardCreateDto: BoardCreateDto,
@@ -86,6 +86,7 @@ export class BoardsController {
     description: '성공적으로 Board를 가져왔을때의 응답입니다.',
     type: NotInclueSensitiveBoardInfoResponse,
   })
+  @UseInterceptors(CommonResponseFormInterceptor)
   @Get('/:boardId')
   getSingleBoard(
     @Param('boardId', PositiveNumberValidationPipe) boardId: number,
@@ -148,6 +149,7 @@ export class BoardsController {
   })
   @Patch('/:boardId')
   @UseGuards(AuthGuard('jwt'))
+  @UseInterceptors(CommonResponseFormInterceptor)
   async updateBoard(
     @GetUser() user: User,
     @Param('boardId', PositiveNumberValidationPipe) boardId: number,
@@ -179,6 +181,7 @@ export class BoardsController {
   })
   @Delete('/:boardId')
   @UseGuards(AuthGuard('jwt'))
+  @UseInterceptors(CommonResponseFormInterceptor)
   async deleteBoard(
     @GetUser() user: User,
     @Param('boardId', PositiveNumberValidationPipe) boardId: number,
