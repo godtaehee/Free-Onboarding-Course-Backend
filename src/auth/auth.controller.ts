@@ -4,7 +4,9 @@ import { AuthService } from './auth.service';
 import { SignInDto } from './dto/sign.in.dto';
 import { WINSTON_MODULE_PROVIDER } from 'nest-winston';
 import { Logger } from 'winston';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('회원가입 & 로그인')
 @Controller('auth')
 export class AuthController {
   constructor(
