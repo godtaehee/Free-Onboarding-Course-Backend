@@ -44,7 +44,6 @@ export class BoardsService {
     await this.confirmValidBoard(userId, boardId);
     await this.boardsRepository.deleteBoard(boardId);
     const successResponseBody: CommonBoardResponse = {
-      success: true,
       boardId,
     };
     return successResponseBody;
