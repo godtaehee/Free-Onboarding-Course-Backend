@@ -6,11 +6,11 @@ import {
   Inject,
   Logger,
   Param,
-  ParseIntPipe,
   Patch,
   Post,
   Query,
   UseGuards,
+  UseInterceptors,
   ValidationPipe,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
@@ -33,8 +33,10 @@ import { PaginationDto } from './dto/pagination.dto';
 import { CommonBoardResponse } from '../common/response/board/common.board.response';
 import { NotInclueSensitiveBoardInfoResponse } from '../common/response/board/not.inclue.sensitive.board.info.response';
 import { PositiveNumberValidationPipe } from '../common/pipe/positive.number.validation.pipe';
+import { CommonResponseFormInterceptor } from '../common/interceptors/common.response.form.interceptor';
 
 @ApiTags('게시글')
+@UseInterceptors(CommonResponseFormInterceptor)
 @Controller('boards')
 export class BoardsController {
   constructor(
