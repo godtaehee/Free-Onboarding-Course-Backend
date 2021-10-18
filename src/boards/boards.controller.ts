@@ -31,6 +31,7 @@ import {
 import { ReadAllBoardResponse } from '../common/response/board/read.all.board.response';
 import { PaginationDto } from './dto/pagination.dto';
 import { CreateBoardResponse } from '../common/response/board/create.board.response';
+import { NotInclueSensitiveBoardInfoResponse } from '../common/response/board/not.inclue.sensitive.board.info.response';
 
 @ApiTags('게시글')
 @Controller('boards')
@@ -107,6 +108,11 @@ export class BoardsController {
     name: 'boardId',
     required: true,
     description: '수정할 게시글의 고유 번호입니다.',
+  })
+  @ApiResponse({
+    status: 200,
+    description: '성공적으로 Board를 가져왔을때의 응답입니다.',
+    type: NotInclueSensitiveBoardInfoResponse,
   })
   @Patch('/:boardId')
   @UseGuards(AuthGuard('jwt'))
