@@ -28,6 +28,11 @@ export class BoardsService {
     return this.boardsRepository.updateBoard(selectedBoard, updateRequestBody);
   }
 
+  async deleteBoard(deleteRequestUserId: number, boardIdFromParam: number) {
+    await this.confirmValidBoard(deleteRequestUserId, boardIdFromParam);
+    return this.boardsRepository.deleteBoard(boardIdFromParam);
+  }
+
   async confirmValidBoard(userId, boardId) {
     const selectedBoard = await this.boardsRepository.getBoardSpecificUser(
       userId,
