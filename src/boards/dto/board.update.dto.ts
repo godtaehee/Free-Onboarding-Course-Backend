@@ -1,11 +1,7 @@
-import { Column } from 'typeorm';
-import { IsNotEmpty } from 'class-validator';
+import { PickType } from '@nestjs/swagger';
+import { Board } from '../boards.entity';
 
-export class BoardUpdateDto {
-  @Column()
-  @IsNotEmpty()
-  title: string;
-
-  @Column()
-  content: string;
-}
+export class BoardUpdateDto extends PickType(Board, [
+  'title',
+  'content',
+] as const) {}
