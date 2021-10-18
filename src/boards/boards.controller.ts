@@ -9,6 +9,7 @@ import {
   ParseIntPipe,
   Patch,
   Post,
+  Query,
   UseGuards,
   ValidationPipe,
 } from '@nestjs/common';
@@ -44,6 +45,12 @@ export class BoardsController {
   @Get('/:boardId')
   getSingleBoard(@Param('boardId') boardId: number) {
     return this.boardsService.getSingleBoard(boardId);
+  }
+
+  @Get('/')
+  getAllBoard(@Query() query) {
+    this.logger.debug(query);
+    return this.boardsService.getAllBoard(query.limit, query.offset);
   }
 
   @Patch('/:boardId')
