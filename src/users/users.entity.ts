@@ -48,11 +48,13 @@ export class User {
 
   @ApiProperty({
     example: faker.internet.userName(),
-    description: '사용자의 닉네임입니다.',
+    title: '사용자의 닉네임입니다.',
+    description: '최소 2자부터 최대 20자까지 설정할수 있습니다.',
     required: true,
   })
   @IsNotEmpty()
   @IsString()
+  @Length(2, 20)
   @Column()
   nickname: string;
 
