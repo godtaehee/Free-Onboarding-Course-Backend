@@ -4,7 +4,7 @@ import { AuthService } from './auth.service';
 import { SignInDto } from './dto/sign.in.dto';
 import { WINSTON_MODULE_PROVIDER } from 'nest-winston';
 import { Logger } from 'winston';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('회원가입 & 로그인')
 @Controller('auth')
@@ -14,6 +14,13 @@ export class AuthController {
     @Inject(WINSTON_MODULE_PROVIDER) private readonly logger: Logger,
   ) {}
 
+  @ApiOperation({
+    summary: '회원가입을 합니다.',
+    description:
+      '회원가입할때 이메일, 닉네임, 패스워드를 입력 받습니다. ' +
+      '회원가입을 하지않아도 게시글을 볼수는 있습니다. ' +
+      '하지만 회원가입을 해야 게시글을 작성, 수정, 삭제를 할수 있습니다.',
+  })
   @Post('sign-up')
   signUp(@Body(ValidationPipe) signUpDto: SignUpDto) {
     this.logger.debug(
