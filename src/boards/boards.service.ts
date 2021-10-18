@@ -19,6 +19,10 @@ export class BoardsService {
     return this.boardsRepository.getSingleBoard(boardId);
   }
 
+  getAllBoard(limit: number, offset: number) {
+    return this.boardsRepository.getAllBoard(limit, offset);
+  }
+
   async updateBoard(
     userId: number,
     boardId: number,
