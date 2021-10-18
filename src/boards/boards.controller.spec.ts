@@ -6,7 +6,6 @@ import * as faker from 'faker';
 import { BoardCreateDto } from './dto/board.create.dto';
 import { User } from '../users/users.entity';
 import { BoardUpdateDto } from './dto/board.update.dto';
-import { fake } from 'faker';
 
 const mockWinston = {
   debug: jest.fn(),
@@ -20,13 +19,11 @@ describe('BoardsController', () => {
   let controller: BoardsController;
   let service: BoardsService;
 
-  const requestUserInfo: User = {
+  const requestUserInfo: Partial<User> = {
     id: faker.datatype.number(),
     email: faker.internet.email(),
     nickname: faker.internet.userName(),
     password: faker.internet.password(),
-    boards: 'some boards' as any,
-    setPassword: jest.fn() as any,
   };
 
   beforeEach(async () => {
@@ -163,7 +160,7 @@ describe('BoardsController', () => {
 
       // when
       const result = await controller.updateBoard(
-        requestUserInfo,
+        requestUserInfo as any,
         boardIdFromParam,
         updateRequestDto,
       );
@@ -188,7 +185,7 @@ describe('BoardsController', () => {
 
       // when
       const result = await controller.deleteBoard(
-        requestUserInfo,
+        requestUserInfo as any,
         boardIdFromParam,
       );
 
