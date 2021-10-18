@@ -59,7 +59,6 @@ describe('AuthService', () => {
   describe('Sign-up', () => {
     it('should return id when sign-up is succeed', async () => {
       // given
-
       const signUpDTO: SignUpDto = {
         email: faker.internet.email(),
         password: faker.internet.password(),
