@@ -6,6 +6,7 @@ import { WINSTON_MODULE_PROVIDER } from 'nest-winston';
 import { Logger } from 'winston';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { RegisterSuccessResponse } from '../common/response/user/register.success.response';
+import { SignInSuccessResponse } from '../common/response/user/sign.in.success.response';
 
 @ApiTags('회원가입 & 로그인')
 @Controller('auth')
@@ -42,6 +43,11 @@ export class AuthController {
       '로그인 후 게시글 작성, 수정, 삭제를 위한 JWT 기반의 Access-Token을 반환 받습니다. ' +
       '로그인 후 이 토큰을 이용해야만 게시글을 작성, 수정, 삭제를 할수 있습니다. ' +
       '토큰은 1시간뒤 만료됩니다.',
+  })
+  @ApiResponse({
+    status: 201,
+    description: '성공적으로 AccessToken을 발급 받았을때의 응답입니다.',
+    type: SignInSuccessResponse,
   })
   @Post('sign-in')
   signIn(@Body(ValidationPipe) signInDto: SignInDto) {
