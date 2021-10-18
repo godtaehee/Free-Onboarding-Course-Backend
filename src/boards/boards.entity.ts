@@ -55,7 +55,7 @@ export class Board {
   @ApiProperty({
     examples: [null, new Date()],
     description:
-      '게시글이 삭제된 날을 나타냅니다 Soft-Delete 방식을 채택했습니다.',
+      '게시글이 삭제된 날을 나타냅니다 Soft-Delete 방식을 채택했습니다. 게시글이 삭제되지 않았다면 이 값은 NULL이 됩니다.',
   })
   @DeleteDateColumn()
   deletedAt: Date | null;
