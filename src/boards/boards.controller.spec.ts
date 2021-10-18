@@ -26,6 +26,7 @@ describe('BoardsController', () => {
     nickname: faker.internet.userName(),
     password: faker.internet.password(),
     boards: 'some boards' as any,
+    setPassword: jest.fn() as any,
   };
 
   beforeEach(async () => {
@@ -145,7 +146,6 @@ describe('BoardsController', () => {
   describe('Update-Board', () => {
     it('should be return success property and updated board id', async () => {
       // given
-
       const boardIdFromParam: number = faker.datatype.number();
       const updateRequestDto: BoardUpdateDto = {
         title: faker.lorem.sentence(),
