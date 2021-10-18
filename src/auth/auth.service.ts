@@ -5,7 +5,6 @@ import { SignInDto } from './dto/sign.in.dto';
 import * as bcrypt from 'bcrypt';
 import { User } from '../users/users.entity';
 import { JwtService } from '@nestjs/jwt';
-import { SignInSuccessResponse } from '../common/response/user/sign.in.success.response';
 
 @Injectable()
 export class AuthService {
@@ -26,11 +25,7 @@ export class AuthService {
       const payload = { email };
       const accessToken = this.jwtService.sign(payload);
 
-      const responseBody: SignInSuccessResponse = {
-        success: true,
-        accessToken,
-      };
-      return responseBody;
+      return { accessToken };
     } else throw new UnauthorizedException('logIn failed');
   }
 }
