@@ -23,6 +23,7 @@ import { User } from '../users/users.entity';
 import {
   ApiBearerAuth,
   ApiOperation,
+  ApiParam,
   ApiQuery,
   ApiResponse,
   ApiTags,
@@ -100,6 +101,11 @@ export class BoardsController {
     summary: '게시글을 업데이트 합니다.',
     description:
       '자신이 작성한 게시글만 업데이트 할수있으며, 발급받은 Access-Token을 이용해 업데이트 권한을 인가받습니다.',
+  })
+  @ApiParam({
+    name: 'boardId',
+    required: true,
+    description: '수정할 게시글의 고유 번호입니다.',
   })
   @Patch('/:boardId')
   @UseGuards(AuthGuard('jwt'))
