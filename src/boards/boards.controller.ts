@@ -96,6 +96,11 @@ export class BoardsController {
     return this.boardsService.getAllBoard(query.limit, query.offset);
   }
 
+  @ApiOperation({
+    summary: '게시글을 업데이트 합니다.',
+    description:
+      '자신이 작성한 게시글만 업데이트 할수있으며, 발급받은 Access-Token을 이용해 업데이트 권한을 인가받습니다.',
+  })
   @Patch('/:boardId')
   @UseGuards(AuthGuard('jwt'))
   async updateBoard(
