@@ -95,9 +95,10 @@ export class BoardsController {
   }
 
   @ApiOperation({
-    summary: '게시글을 limit개 단위로 가져옵니다. (Pagination)',
+    summary: '게시글을 최대 limit개 단위로 가져옵니다. (Pagination)',
     description:
-      '게시글을 limit개 단위로 가져옵니다. Pagination을 구현하실때 사용하실수 있습니다.',
+      '게시글을 최대 limit개 단위로 가져옵니다. Pagination을 구현하실때 사용하실수 있습니다. ' +
+      '삭제된 게시글은 가져올수 없습니다.',
   })
   @ApiQuery({
     name: 'limit',
@@ -120,9 +121,9 @@ export class BoardsController {
     @Query(ValidationPipe) query: PaginationDto,
   ): Promise<ReadAllBoardResponse> {
     this.logger.debug(
-      `${this.tag} ${new Date()} ${(query.offset - 1) * query.limit}번째부터 '${
-        query.limit
-      }'개의 게시물을 읽어옵니다.`,
+      `${this.tag} ${new Date()} ${
+        (query.offset - 1) * query.limit
+      }번째부터 최대 '${query.limit}'개의 게시물을 읽어옵니다.`,
     );
     return this.boardsService.getAllBoard(query.limit, query.offset);
   }
