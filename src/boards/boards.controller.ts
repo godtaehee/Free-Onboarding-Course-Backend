@@ -32,6 +32,7 @@ import { ReadAllBoardResponse } from '../common/response/board/read.all.board.re
 import { PaginationDto } from './dto/pagination.dto';
 import { CommonBoardResponse } from '../common/response/board/common.board.response';
 import { NotInclueSensitiveBoardInfoResponse } from '../common/response/board/not.inclue.sensitive.board.info.response';
+import { PositiveNumberValidationPipe } from '../common/pipe/positive.number.validation.pipe';
 
 @ApiTags('게시글')
 @Controller('boards')
@@ -79,7 +80,9 @@ export class BoardsController {
     type: NotInclueSensitiveBoardInfoResponse,
   })
   @Get('/:boardId')
-  getSingleBoard(@Param('boardId') boardId: number) {
+  getSingleBoard(
+    @Param('boardId', PositiveNumberValidationPipe) boardId: number,
+  ) {
     return this.boardsService.getSingleBoard(boardId);
   }
 
