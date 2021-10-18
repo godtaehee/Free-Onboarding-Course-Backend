@@ -16,12 +16,7 @@ export class AuthService {
   ) {}
 
   async signUp(signUpDto: SignUpDto) {
-    const { password } = signUpDto;
-    const salt = await bcrypt.genSalt();
-    const hashedPassword = await bcrypt.hash(password, salt);
-    let clonedSignUpDto = this.utilsHelper.getDeepCloneObject(signUpDto);
-    clonedSignUpDto.password = hashedPassword;
-    return this.usersRepository.signUp(clonedSignUpDto);
+    return this.usersRepository.signUp(signUpDto);
   }
 
   async signIn(signInDto: SignInDto) {
