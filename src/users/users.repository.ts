@@ -9,7 +9,6 @@ export class UsersRepository extends Repository<User> {
     try {
       const savedUser = await this.save(createdUser);
       return {
-        success: true,
         id: savedUser.id,
       };
     } catch (err) {
