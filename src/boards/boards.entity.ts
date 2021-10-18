@@ -9,6 +9,7 @@ import {
 } from 'typeorm';
 import { User } from '../users/users.entity';
 import { ApiProperty } from '@nestjs/swagger';
+import { Length } from 'class-validator';
 
 @Entity()
 export class Board {
@@ -22,9 +23,11 @@ export class Board {
 
   @ApiProperty({
     example: 'Nest.js 탐험기',
-    description: '게시글의 제목입니다.',
+    title: '게시글의 제목입니다.',
+    description: '최소 2글자에서 최대 100글자까지 가능합니다.',
     required: true,
   })
+  @Length(2, 100)
   @Column()
   title: string;
 
