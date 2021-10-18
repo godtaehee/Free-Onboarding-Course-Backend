@@ -1,7 +1,6 @@
 import {
   Body,
   Controller,
-  DefaultValuePipe,
   Delete,
   Get,
   Inject,
@@ -30,6 +29,7 @@ import {
 } from '@nestjs/swagger';
 import { ReadAllBoardResponse } from '../common/response/board/read.all.board.response';
 import { PaginationDto } from './dto/pagination.dto';
+import { CreateBoardResponse } from '../common/response/board/create.board.response';
 
 @ApiTags('게시글')
 @Controller('boards')
@@ -43,6 +43,11 @@ export class BoardsController {
   @ApiOperation({
     summary: '게시글을 생성합니다.',
     description: '회원가입을 한 유저만 게시글을 작성할수 있습니다.',
+  })
+  @ApiResponse({
+    status: 201,
+    description: '성공적으로 Board를 생성했을때의 응답입니다.',
+    type: CreateBoardResponse,
   })
   @Post('/create')
   @UseGuards(AuthGuard('jwt'))
