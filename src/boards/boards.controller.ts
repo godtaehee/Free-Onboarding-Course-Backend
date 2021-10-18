@@ -118,6 +118,7 @@ export class BoardsController {
     return this.boardsService.updateBoard(user.id, boardId, updateRequestBody);
   }
 
+  @ApiBearerAuth('access-token')
   @Delete('/:boardId')
   @UseGuards(AuthGuard('jwt'))
   async deleteBoard(
