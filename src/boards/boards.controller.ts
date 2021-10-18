@@ -68,6 +68,11 @@ export class BoardsController {
     return this.boardsService.getSingleBoard(boardId);
   }
 
+  @ApiOperation({
+    summary: '게시글을 limit개 단위로 가져옵니다. (Pagination)',
+    description:
+      '게시글을 limit개 단위로 가져옵니다. Pagination을 구현하실때 사용하실수 있습니다.',
+  })
   @ApiQuery({
     name: 'limit',
     required: true,
