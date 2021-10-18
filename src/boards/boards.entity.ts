@@ -60,6 +60,11 @@ export class Board {
   @DeleteDateColumn()
   deletedAt: Date | null;
 
+  @ApiProperty({
+    type: () => User,
+    title: '작성자 정보',
+    description: '게시글을 작성한 작성자의 정보를 나타냅니다.',
+  })
   @ManyToOne((type) => User, (user) => user.boards, { eager: false })
   user: User;
 }
