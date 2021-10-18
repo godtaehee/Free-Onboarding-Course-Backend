@@ -1,9 +1,12 @@
 import {
   BeforeInsert,
   Column,
+  CreateDateColumn,
+  DeleteDateColumn,
   Entity,
   OneToMany,
   PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 import { Board } from '../boards/boards.entity';
 import * as bcrypt from 'bcrypt';
@@ -21,6 +24,15 @@ export class User {
 
   @Column()
   nickname: string;
+
+  @CreateDateColumn()
+  createdAt: Date;
+
+  @UpdateDateColumn()
+  updatedAt: Date;
+
+  @DeleteDateColumn()
+  deletedAt: Date | null;
 
   @OneToMany((type) => Board, (board) => board.user, { eager: false })
   boards: Board[];
