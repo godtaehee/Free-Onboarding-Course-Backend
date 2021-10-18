@@ -35,6 +35,14 @@ export class AuthController {
     return this.authService.signUp(signUpDto);
   }
 
+  @ApiOperation({
+    summary: '로그인을 합니다.',
+    description:
+      '로그인할때 이메일, 패스워드를 입력 받습니다. ' +
+      '로그인 후 게시글 작성, 수정, 삭제를 위한 JWT 기반의 Access-Token을 반환 받습니다. ' +
+      '로그인 후 이 토큰을 이용해야만 게시글을 작성, 수정, 삭제를 할수 있습니다. ' +
+      '토큰은 1시간뒤 만료됩니다.',
+  })
   @Post('sign-in')
   signIn(@Body(ValidationPipe) signInDto: SignInDto) {
     this.logger.debug(
