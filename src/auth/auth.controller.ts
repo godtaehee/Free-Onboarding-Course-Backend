@@ -4,7 +4,8 @@ import { AuthService } from './auth.service';
 import { SignInDto } from './dto/sign.in.dto';
 import { WINSTON_MODULE_PROVIDER } from 'nest-winston';
 import { Logger } from 'winston';
-import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { RegisterSuccessResponse } from '../common/response/user/register.success.response';
 
 @ApiTags('회원가입 & 로그인')
 @Controller('auth')
@@ -20,6 +21,11 @@ export class AuthController {
       '회원가입할때 이메일, 닉네임, 패스워드를 입력 받습니다. ' +
       '회원가입을 하지않아도 게시글을 볼수는 있습니다. ' +
       '하지만 회원가입을 해야 게시글을 작성, 수정, 삭제를 할수 있습니다.',
+  })
+  @ApiResponse({
+    status: 201,
+    description: '성공적으로 Board를 가져왔을때의 응답입니다.',
+    type: RegisterSuccessResponse,
   })
   @Post('sign-up')
   signUp(@Body(ValidationPipe) signUpDto: SignUpDto) {
