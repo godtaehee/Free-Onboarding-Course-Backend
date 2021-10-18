@@ -11,7 +11,7 @@ import {
 import { Board } from '../boards/boards.entity';
 import * as bcrypt from 'bcrypt';
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
+import { IsEmail, IsNotEmpty, IsString, Length } from 'class-validator';
 import * as faker from 'faker';
 
 @Entity()
@@ -26,11 +26,13 @@ export class User {
 
   @ApiProperty({
     example: faker.internet.email(),
-    description: '사용자의 이메일입니다.',
+    title: '사용자의 이메일',
+    description: '5~50자 사이의 이메일이어야 합니다.',
     required: true,
   })
   @IsNotEmpty()
   @IsEmail()
+  @Length(5, 50)
   @Column({ unique: true })
   email: string;
 
