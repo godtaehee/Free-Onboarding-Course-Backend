@@ -49,12 +49,26 @@ export class User {
   @Column()
   nickname: string;
 
+  @ApiProperty({
+    example: new Date(),
+    description: '유저가 회원가입한 날을 나타냅니다.',
+  })
   @CreateDateColumn()
   createdAt: Date;
 
+  @ApiProperty({
+    example: new Date(),
+    description:
+      '유저의 정보가 업데이트된 날을 나타냅니다. 최초 생성시 createdAt과 동일한 시간을 가집니다.',
+  })
   @UpdateDateColumn()
   updatedAt: Date;
 
+  @ApiProperty({
+    examples: [null, new Date()],
+    description:
+      '유저가 회원탈퇴한 날을 나타냅니다 Soft-Delete 방식을 채택했습니다. 회원탈퇴를 하지 않았으면 이 값은 NULL이 됩니다.',
+  })
   @DeleteDateColumn()
   deletedAt: Date | null;
 
