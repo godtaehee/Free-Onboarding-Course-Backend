@@ -57,4 +57,12 @@ export class BoardsRepository extends Repository<Board> {
       })
       .execute();
   }
+
+  getAllBoard(limit: number, offset: number) {
+    return this.createQueryBuilder('boards')
+      .innerJoinAndSelect('boards.user', 'user')
+      .limit(limit)
+      .offset(offset * limit)
+      .getMany();
+  }
 }
