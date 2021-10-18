@@ -40,7 +40,11 @@ export class BoardsController {
   constructor(
     private boardsService: BoardsService,
     @Inject(WINSTON_MODULE_PROVIDER) private readonly logger: Logger,
-  ) {}
+  ) {
+    this.tag = '[BoardsController]';
+  }
+
+  tag: string;
 
   @ApiBearerAuth('access-token')
   @ApiOperation({
@@ -59,7 +63,7 @@ export class BoardsController {
     @Body(ValidationPipe) boardCreateDto: BoardCreateDto,
   ) {
     this.logger.debug(
-      `${new Date().toLocaleString()} userId: '${
+      `${this.tag} ${new Date().toLocaleString()} userId: '${
         user.id
       }' request board-create`,
     );
@@ -68,6 +72,7 @@ export class BoardsController {
 
   @ApiOperation({
     summary: '게시글의 id를 기준으로 읽습니다.',
+    description: '한개의 게시물을 읽어옵니다.',
   })
   @ApiParam({
     name: 'boardId',
@@ -83,6 +88,9 @@ export class BoardsController {
   getSingleBoard(
     @Param('boardId', PositiveNumberValidationPipe) boardId: number,
   ) {
+    this.logger.debug(
+      `${this.tag} ${new Date()} '${boardId}'번째 게시물을 읽어옵니다.`,
+    );
     return this.boardsService.getSingleBoard(boardId);
   }
 
@@ -111,6 +119,11 @@ export class BoardsController {
   getAllBoard(
     @Query(ValidationPipe) query: PaginationDto,
   ): Promise<ReadAllBoardResponse> {
+    this.logger.debug(
+      `${this.tag} ${new Date()} ${(query.offset - 1) * query.limit}번째부터 '${
+        query.limit
+      }'개의 게시물을 읽어옵니다.`,
+    );
     return this.boardsService.getAllBoard(query.limit, query.offset);
   }
 
@@ -134,9 +147,14 @@ export class BoardsController {
   @UseGuards(AuthGuard('jwt'))
   async updateBoard(
     @GetUser() user: User,
-    @Param('boardId', ParseIntPipe) boardId: number,
+    @Param('boardId', PositiveNumberValidationPipe) boardId: number,
     @Body() updateRequestBody: BoardUpdateDto,
   ) {
+    this.logger.debug(
+      `${this.tag} ${new Date()} '${boardId}'번 아이디의 게시물을 제목은 ${
+        updateRequestBody.title
+      }, 내용은 ${updateRequestBody.content.substr(10)}..으로 수정하겠습니다.`,
+    );
     return this.boardsService.updateBoard(user.id, boardId, updateRequestBody);
   }
 
@@ -160,8 +178,13 @@ export class BoardsController {
   @UseGuards(AuthGuard('jwt'))
   async deleteBoard(
     @GetUser() user: User,
-    @Param('boardId', ParseIntPipe) boardId: number,
+    @Param('boardId', PositiveNumberValidationPipe) boardId: number,
   ) {
+    this.logger.debug(
+      `${
+        this.tag
+      } ${new Date()} '${boardId}'번 아이디의 게시물을 삭제하겠습니다.`,
+    );
     return this.boardsService.deleteBoard(user.id, boardId);
   }
 }
