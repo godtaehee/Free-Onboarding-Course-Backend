@@ -4,6 +4,7 @@ import { BoardsRepository } from './boards.repository';
 import { BoardCreateDto } from './dto/board.create.dto';
 import { BoardUpdateDto } from './dto/board.update.dto';
 import { ReadAllBoardResponse } from '../common/response/board/read.all.board.response';
+import { CommonBoardResponse } from '../common/response/board/common.board.response';
 
 @Injectable()
 export class BoardsService {
@@ -39,9 +40,14 @@ export class BoardsService {
     return this.boardsRepository.updateBoard(selectedBoard, updateRequestBody);
   }
 
-  async deleteBoard(deleteRequestUserId: number, boardIdFromParam: number) {
-    await this.confirmValidBoard(deleteRequestUserId, boardIdFromParam);
-    return this.boardsRepository.deleteBoard(boardIdFromParam);
+  async deleteBoard(userId: number, boardId: number) {
+    await this.confirmValidBoard(userId, boardId);
+    await this.boardsRepository.deleteBoard(boardId);
+    const successResponseBody: CommonBoardResponse = {
+      success: true,
+      boardId,
+    };
+    return successResponseBody;
   }
 
   async confirmValidBoard(userId, boardId) {
