@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Inject,
   Logger,
@@ -17,6 +18,7 @@ import { BoardsService } from './boards.service';
 import { WINSTON_MODULE_PROVIDER } from 'nest-winston';
 import { BoardCreateDto } from './dto/board.create.dto';
 import { BoardUpdateDto } from './dto/board.update.dto';
+import { User } from '../users/users.entity';
 
 @Controller('boards')
 export class BoardsController {
@@ -47,10 +49,19 @@ export class BoardsController {
   @Patch('/:boardId')
   @UseGuards(AuthGuard('jwt'))
   async updateBoard(
-    @GetUser() user,
+    @GetUser() user: User,
     @Param('boardId', ParseIntPipe) boardId: number,
     @Body() updateRequestBody: BoardUpdateDto,
   ) {
     return this.boardsService.updateBoard(user.id, boardId, updateRequestBody);
+  }
+
+  @Delete('/:boardId')
+  @UseGuards(AuthGuard('jwt'))
+  async deleteBoard(
+    @GetUser() user: User,
+    @Param('boardId', ParseIntPipe) boardId: number,
+  ) {
+    return this.boardsService.deleteBoard(user.id, boardId);
   }
 }
