@@ -68,6 +68,7 @@ describe('AuthController', () => {
         await target.transform(notContainEmailRequestBody, metadata);
       } catch (err) {
         expect(err.getResponse().message).toStrictEqual([
+          'email must be longer than or equal to 5 characters',
           'email must be an email',
           'email should not be empty',
         ]);
