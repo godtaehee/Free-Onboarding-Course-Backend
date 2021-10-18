@@ -48,4 +48,13 @@ export class BoardsRepository extends Repository<Board> {
 
     return await this.save(board);
   }
+
+  async deleteBoard(boardId: number) {
+    return this.createQueryBuilder('boards')
+      .softDelete()
+      .where('id = :boardId', {
+        boardId,
+      })
+      .execute();
+  }
 }
