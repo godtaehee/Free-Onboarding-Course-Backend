@@ -85,7 +85,9 @@ describe('AuthController', () => {
 
       const successResponse = {
         success: true,
-        id: faker.datatype.number(),
+        data: {
+          userId: faker.datatype.number(),
+        },
       };
 
       service.signUp = jest.fn().mockResolvedValueOnce(successResponse);
