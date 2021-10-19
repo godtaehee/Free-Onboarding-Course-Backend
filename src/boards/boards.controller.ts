@@ -22,10 +22,12 @@ import { BoardUpdateDto } from './dto/board.update.dto';
 import { User } from '../users/users.entity';
 import {
   ApiBearerAuth,
+  ApiOkResponse,
   ApiOperation,
   ApiParam,
   ApiQuery,
   ApiTags,
+  getSchemaPath,
 } from '@nestjs/swagger';
 import { BoardSearchRequest } from './dto/board.search.request';
 import { CommonBoardResponse } from '../common/response/board/common.board.response';
@@ -110,6 +112,31 @@ export class BoardsController {
     required: true,
     description:
       '게시판의 시작페이지의 수를 나타냅니다. 0을 제외한 양수의 값입니다.',
+  })
+  @ApiOkResponse({
+    schema: {
+      allOf: [
+        {
+          properties: {
+            pageSize: {
+              type: 'number',
+              example: '10',
+            },
+            totalCount: {
+              type: 'number',
+              example: '200',
+            },
+            totalPage: {
+              type: 'number',
+              example: '5',
+            },
+            items: {
+              $ref: getSchemaPath(NotInclueSensitiveBoardInfoResponse),
+            },
+          },
+        },
+      ],
+    },
   })
   @Get('/')
   getAllBoard(
