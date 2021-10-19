@@ -165,4 +165,40 @@ describe('BoardsService', () => {
       expect(result).rejects.toThrowError();
     });
   });
+
+  describe('Update-Board', () => {
+    it('should return updated board', () => {
+      // given
+      const userId = faker.datatype.number();
+      const boardId = faker.datatype.number();
+
+      const updateRequestBody = {
+        title: faker.lorem.sentence(),
+        content: faker.lorem.sentences(),
+      };
+      const selectedBoard = {
+        title: faker.lorem.sentence(),
+        content: faker.lorem.sentences(),
+      };
+
+      const successUpdatedBoard = {
+        title: faker.lorem.sentence(),
+        content: faker.lorem.sentences(),
+      };
+
+      queryRepository.getBoardSpecificUser = jest
+        .fn()
+        .mockResolvedValueOnce(selectedBoard);
+
+      commandRepository.updateBoard = jest
+        .fn()
+        .mockResolvedValueOnce(successUpdatedBoard);
+
+      // when
+      const result = service.updateBoard(userId, boardId, updateRequestBody);
+
+      // then
+      expect(result).resolves.toBe(successUpdatedBoard);
+    });
+  });
 });
