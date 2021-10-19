@@ -25,17 +25,16 @@ import {
   ApiOperation,
   ApiParam,
   ApiQuery,
-  ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
-import { ReadAllBoardResponse } from '../common/response/board/read.all.board.response';
-import { PaginationDto } from './dto/pagination.dto';
+import { BoardSearchRequest } from './dto/board.search.request';
 import { CommonBoardResponse } from '../common/response/board/common.board.response';
 import { NotInclueSensitiveBoardInfoResponse } from '../common/response/board/not.inclue.sensitive.board.info.response';
 import { PositiveNumberValidationPipe } from '../common/pipe/positive.number.validation.pipe';
 import { CommonResponseFormInterceptor } from '../common/interceptors/common.response.form.interceptor';
 import { ApiCommonCreateResponseForm } from '../common/decorators/api.common.create.response.form';
 import { ApiCommonOkResponseForm } from '../common/decorators/api.common.Ok.response.form';
+import { Page } from '../common/page';
 
 @ApiTags('게시글')
 @Controller('boards')
@@ -112,21 +111,16 @@ export class BoardsController {
     description:
       '게시판의 시작페이지의 수를 나타냅니다. 0을 제외한 양수의 값입니다.',
   })
-  @ApiResponse({
-    status: 201,
-    description: '성공적으로 Board를 가져왔을때의 응답입니다.',
-    type: ReadAllBoardResponse,
-  })
   @Get('/')
   getAllBoard(
-    @Query(ValidationPipe) query: PaginationDto,
-  ): Promise<ReadAllBoardResponse> {
+    @Query(new ValidationPipe({ transform: true })) query: BoardSearchRequest,
+  ): Promise<Page<NotInclueSensitiveBoardInfoResponse>> {
     this.logger.debug(
       `${this.tag} ${new Date()} ${
         (query.offset - 1) * query.limit
       }번째부터 최대 '${query.limit}'개의 게시물을 읽어옵니다.`,
     );
-    return this.boardsService.getAllBoard(query.limit, query.offset);
+    return this.boardsService.getAllBoard(query);
   }
 
   @ApiBearerAuth('access-token')
