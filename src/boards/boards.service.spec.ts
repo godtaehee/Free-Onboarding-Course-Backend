@@ -5,6 +5,7 @@ import { BoardsQueryRepository } from './boards.query.repository';
 import * as faker from 'faker';
 import { BoardCreateDto } from './dto/board.create.dto';
 import { Board } from './boards.entity';
+import { BoardSearchRequest } from './dto/board.search.request';
 
 const mockBoardsRepository = {
   save: jest.fn(),
@@ -111,6 +112,41 @@ describe('BoardsService', () => {
 
       // then
       expect(result).rejects.toThrowError();
+    });
+  });
+
+  describe('Get-All-Board', () => {
+    const board: Board = {
+      title: faker.lorem.sentence(),
+      content: faker.lorem.sentences(),
+    } as any;
+    it('should return all board which is contained valid page scope', () => {
+      // given
+      const boards = [board];
+      const pageSize = faker.datatype.number(50);
+      const totalCount = faker.datatype.number();
+      const totalPage = totalCount / pageSize;
+      const query: BoardSearchRequest = {} as any;
+
+      const successResponse = {
+        pageSize,
+        totalCount,
+        totalPage,
+        items: boards,
+      };
+      queryRepository.getAllBoard = jest
+        .fn()
+        .mockResolvedValueOnce([board, totalCount]);
+
+      service.getPaginationItems = jest
+        .fn()
+        .mockResolvedValueOnce(successResponse);
+
+      // when
+      const result = service.getAllBoard(query);
+
+      // then
+      expect(result).resolves.toBe(successResponse);
     });
   });
 });
