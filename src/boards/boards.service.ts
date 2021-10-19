@@ -1,16 +1,25 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { BoardsRepository } from './boards.repository';
 import { BoardCreateDto } from './dto/board.create.dto';
 import { BoardUpdateDto } from './dto/board.update.dto';
-import { ReadAllBoardResponse } from '../common/response/board/read.all.board.response';
 import { CommonBoardResponse } from '../common/response/board/common.board.response';
+import { BoardSearchRequest } from './dto/board.search.request';
+import { BoardsQueryRepository } from './boards.query.repository';
+import { Page } from '../common/page';
+import { NotInclueSensitiveBoardInfoResponse } from '../common/response/board/not.inclue.sensitive.board.info.response';
 
 @Injectable()
 export class BoardsService {
   constructor(
     @InjectRepository(BoardsRepository)
     private boardsRepository: BoardsRepository,
+    @InjectRepository(BoardsQueryRepository)
+    private boardsQueryRepository: BoardsQueryRepository,
   ) {}
 
   createBoard(user, boardCreateDto: BoardCreateDto) {
@@ -18,17 +27,21 @@ export class BoardsService {
   }
 
   getSingleBoard(boardId: number) {
-    return this.boardsRepository.getSingleBoard(boardId);
+    return this.boardsQueryRepository.getSingleBoard(boardId);
   }
 
-  async getAllBoard(limit: number, offset: number) {
-    const result = await this.boardsRepository.getAllBoard(limit, offset);
-    const readAllBoardResponse: ReadAllBoardResponse = {
-      success: true,
-      count: result.length,
-      data: result,
-    };
-    return readAllBoardResponse;
+  async getAllBoard(query: BoardSearchRequest) {
+    const [boards, count] = await this.boardsQueryRepository.getAllBoard(query);
+
+    if (boards.length <= 0)
+      throw new BadRequestException(
+        `해당 ${query.offset}번째 페이지의 게시글이 존재하지 않습니다.`,
+      );
+    return new Page<NotInclueSensitiveBoardInfoResponse>(
+      count,
+      query.limit,
+      boards.map((b) => new NotInclueSensitiveBoardInfoResponse(b, b.user)),
+    );
   }
 
   async updateBoard(
@@ -50,7 +63,7 @@ export class BoardsService {
   }
 
   async confirmValidBoard(userId, boardId) {
-    const selectedBoard = await this.boardsRepository.getBoardSpecificUser(
+    const selectedBoard = await this.boardsQueryRepository.getBoardSpecificUser(
       userId,
       boardId,
     );
