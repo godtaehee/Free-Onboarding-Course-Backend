@@ -69,7 +69,9 @@ describe('BoardsController', () => {
 
       const successResponse = {
         success: true,
-        boardId: faker.datatype.number(),
+        data: {
+          boardId: faker.datatype.number(),
+        },
       };
 
       service.createBoard = jest.fn().mockReturnValueOnce(successResponse);
