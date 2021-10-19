@@ -167,15 +167,16 @@ describe('BoardsService', () => {
   });
 
   describe('Update-Board', () => {
+    const userId = faker.datatype.number();
+    const boardId = faker.datatype.number();
+
+    const updateRequestBody = {
+      title: faker.lorem.sentence(),
+      content: faker.lorem.sentences(),
+    };
     it('should return updated board', () => {
       // given
-      const userId = faker.datatype.number();
-      const boardId = faker.datatype.number();
 
-      const updateRequestBody = {
-        title: faker.lorem.sentence(),
-        content: faker.lorem.sentences(),
-      };
       const selectedBoard = {
         title: faker.lorem.sentence(),
         content: faker.lorem.sentences(),
@@ -199,6 +200,19 @@ describe('BoardsService', () => {
 
       // then
       expect(result).resolves.toBe(successUpdatedBoard);
+    });
+
+    it('should throw Error if selectedBoard is not existed in board data in database table', () => {
+      // given
+      queryRepository.getBoardSpecificUser = jest
+        .fn()
+        .mockResolvedValueOnce(undefined);
+
+      // when
+      const result = service.updateBoard(userId, boardId, updateRequestBody);
+
+      // then
+      expect(result).rejects.toThrowError();
     });
   });
 });
