@@ -4,6 +4,7 @@ import { BoardsRepository } from './boards.repository';
 import { BoardsQueryRepository } from './boards.query.repository';
 import * as faker from 'faker';
 import { BoardCreateDto } from './dto/board.create.dto';
+import { Board } from './boards.entity';
 
 const mockBoardsRepository = {
   save: jest.fn(),
@@ -76,6 +77,27 @@ describe('BoardsService', () => {
 
       // then
       expect(result).toBe(successResponse);
+    });
+  });
+
+  describe('Get-Single-Board', () => {
+    it('should return single board if boardId is valid number', async () => {
+      // given
+      const boardId: number = faker.datatype.number();
+      const singleBoard: Board = {
+        title: faker.lorem.sentence(),
+        content: faker.lorem.sentences(),
+      } as any;
+
+      queryRepository.getSingleBoard = jest
+        .fn()
+        .mockResolvedValueOnce(singleBoard);
+
+      // when
+      const result = await service.getSingleBoard(boardId);
+
+      // then
+      expect(result).toBe(singleBoard);
     });
   });
 });
