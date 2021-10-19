@@ -3,6 +3,7 @@ import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { Connection, QueryRunner } from 'typeorm';
 import { AppModule } from '../src/app.module';
+import * as faker from 'faker';
 
 describe('AppController (e2e) [COMMAND]', () => {
   let app: INestApplication;
@@ -39,5 +40,43 @@ describe('AppController (e2e) [COMMAND]', () => {
 
   afterEach(async () => {
     await queryRunner.rollbackTransaction();
+  });
+
+  describe('auth', () => {
+    it('/auth/sign-up (POST)', async () => {
+      // given
+      // when
+      const result = await request(app.getHttpServer())
+        .post('/auth/sign-up')
+        .send({
+          email: faker.internet.email(),
+          nickname: faker.internet.userName(),
+          password: faker.internet.password(),
+        })
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/);
+
+      // then
+      expect(result.body.success).toBeTruthy();
+    });
+  });
+
+  describe('boards', () => {
+    it('/boards/create (POST)', async () => {
+      // given
+      // when
+      const result = await request(app.getHttpServer())
+        .post('/boards/create')
+        .set('Authorization', 'bearer ' + accessToken)
+        .send({
+          title: faker.lorem.sentence(),
+          content: faker.lorem.sentences(),
+        })
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/);
+
+      // then
+      expect(result.body.success).toBeTruthy();
+    });
   });
 });
