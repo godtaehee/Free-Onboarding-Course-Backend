@@ -148,5 +148,21 @@ describe('BoardsService', () => {
       // then
       expect(result).resolves.toBe(successResponse);
     });
+
+    it('should return all board which is contained valid page scope', () => {
+      // given
+      const boards = [];
+      const totalCount = {} as any;
+      const query = {} as any;
+
+      queryRepository.getAllBoard = jest
+        .fn()
+        .mockResolvedValueOnce([boards, totalCount]);
+
+      // when
+      const result = service.getAllBoard(query);
+      // then
+      expect(result).rejects.toThrowError();
+    });
   });
 });
