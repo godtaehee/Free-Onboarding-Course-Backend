@@ -136,7 +136,7 @@ describe('BoardsService', () => {
       };
       queryRepository.getAllBoard = jest
         .fn()
-        .mockResolvedValueOnce([board, totalCount]);
+        .mockResolvedValueOnce([boards, totalCount]);
 
       service.getPaginationItems = jest
         .fn()
