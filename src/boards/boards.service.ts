@@ -1,8 +1,4 @@
-import {
-  BadRequestException,
-  Injectable,
-  UnauthorizedException,
-} from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { BoardsRepository } from './boards.repository';
 import { BoardCreateDto } from './dto/board.create.dto';
@@ -70,8 +66,7 @@ export class BoardsService {
       boardId,
     );
 
-    if (!selectedBoard)
-      throw new UnauthorizedException('해당 요청을 처리할수 없습니다.');
+    if (!selectedBoard) throw new BadRequestException('잘못된 요청입니다.');
 
     return selectedBoard;
   }
