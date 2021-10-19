@@ -27,6 +27,7 @@ import {
   ApiParam,
   ApiQuery,
   ApiTags,
+  ApiUnauthorizedResponse,
   getSchemaPath,
 } from '@nestjs/swagger';
 import { BoardSearchRequest } from './dto/board.search.request';
@@ -37,6 +38,7 @@ import { CommonResponseFormInterceptor } from '../common/interceptors/common.res
 import { ApiCommonCreateResponseForm } from '../common/decorators/api.common.create.response.form';
 import { ApiCommonOkResponseForm } from '../common/decorators/api.common.Ok.response.form';
 import { Page } from '../common/page';
+import { FourHundredOneError } from '../common/response/error/four.hundred.one.error';
 
 @ApiTags('게시글')
 @Controller('boards')
@@ -57,6 +59,9 @@ export class BoardsController {
   })
   @ApiCommonCreateResponseForm(CommonBoardResponse, {
     description: '성공적으로 Board를 생성했을때의 응답입니다.',
+  })
+  @ApiUnauthorizedResponse({
+    type: FourHundredOneError,
   })
   @Post('/create')
   @UseGuards(AuthGuard('jwt'))
