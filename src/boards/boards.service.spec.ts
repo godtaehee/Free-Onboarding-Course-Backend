@@ -42,4 +42,8 @@ describe('BoardsService', () => {
   it('should be defined', () => {
     expect(commandRepository).toBeDefined();
   });
+
+  it('should be defined', () => {
+    expect(queryRepository).toBeDefined();
+  });
 });
