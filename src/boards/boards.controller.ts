@@ -21,6 +21,7 @@ import { BoardCreateDto } from './dto/board.create.dto';
 import { BoardUpdateDto } from './dto/board.update.dto';
 import { User } from '../users/users.entity';
 import {
+  ApiBadRequestResponse,
   ApiBearerAuth,
   ApiOkResponse,
   ApiOperation,
@@ -39,6 +40,7 @@ import { ApiCommonCreateResponseForm } from '../common/decorators/api.common.cre
 import { ApiCommonOkResponseForm } from '../common/decorators/api.common.Ok.response.form';
 import { Page } from '../common/page';
 import { FourHundredOneError } from '../common/response/error/four.hundred.one.error';
+import { FourHundredError } from '../common/response/error/four.hundred.error';
 
 @ApiTags('게시글')
 @Controller('boards')
@@ -59,6 +61,9 @@ export class BoardsController {
   })
   @ApiCommonCreateResponseForm(CommonBoardResponse, {
     description: '성공적으로 Board를 생성했을때의 응답입니다.',
+  })
+  @ApiBadRequestResponse({
+    type: FourHundredError,
   })
   @ApiUnauthorizedResponse({
     type: FourHundredOneError,
