@@ -12,6 +12,8 @@ const mockBoardsQueryRepository = {
 };
 describe('BoardsService', () => {
   let service: BoardsService;
+  let commandRepository: BoardsRepository;
+  let queryRepository: BoardsQueryRepository;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -29,9 +31,15 @@ describe('BoardsService', () => {
     }).compile();
 
     service = module.get<BoardsService>(BoardsService);
+    commandRepository = module.get<BoardsRepository>(BoardsRepository);
+    queryRepository = module.get<BoardsQueryRepository>(BoardsQueryRepository);
   });
 
   it('should be defined', () => {
     expect(service).toBeDefined();
+  });
+
+  it('should be defined', () => {
+    expect(commandRepository).toBeDefined();
   });
 });
