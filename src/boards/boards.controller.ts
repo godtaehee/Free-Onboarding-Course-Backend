@@ -41,6 +41,7 @@ import { ApiCommonOkResponseForm } from '../common/decorators/api.common.Ok.resp
 import { Page } from '../common/page';
 import { FourHundredOneError } from '../common/response/error/four.hundred.one.error';
 import { FourHundredError } from '../common/response/error/four.hundred.error';
+import { NotValidNumberError } from '../common/response/error/not.valid.number.error';
 
 @ApiTags('게시글')
 @Controller('boards')
@@ -94,6 +95,9 @@ export class BoardsController {
   })
   @ApiCommonOkResponseForm(NotInclueSensitiveBoardInfoResponse, {
     description: '성공적으로 Board를 가져왔을때의 응답입니다.',
+  })
+  @ApiBadRequestResponse({
+    type: NotValidNumberError,
   })
   @UseInterceptors(CommonResponseFormInterceptor)
   @Get('/:boardId')
