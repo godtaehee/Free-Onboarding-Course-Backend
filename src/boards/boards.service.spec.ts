@@ -215,4 +215,23 @@ describe('BoardsService', () => {
       expect(result).rejects.toThrowError();
     });
   });
+
+  describe('Delete-Boards', () => {
+    it('should return deleted boardId If soft-delete is succeed', () => {
+      // given
+      const validUserId = faker.datatype.number();
+      const validBoardId = faker.datatype.number();
+
+      service.confirmValidBoard = jest.fn().mockResolvedValueOnce(true);
+      commandRepository.deleteBoard = jest.fn().mockResolvedValueOnce(true);
+
+      // when
+      const result = service.deleteBoard(validUserId, validBoardId);
+
+      // then
+      expect(result).resolves.toBe({
+        boardId: validBoardId,
+      });
+    });
+  });
 });
