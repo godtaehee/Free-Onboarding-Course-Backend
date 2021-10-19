@@ -1,7 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { AuthService } from './auth.service';
 import { UsersRepository } from '../users/users.repository';
-import { UtilsHelper } from '../common/utils/utils.helper';
 import { SignUpDto } from './dto/sign.up.dto';
 import * as faker from 'faker';
 import * as bcrypt from 'bcrypt';
@@ -40,7 +39,6 @@ describe('AuthService', () => {
           provide: JwtService,
           useValue: mockJwtService,
         },
-        UtilsHelper,
       ],
     }).compile();
 
