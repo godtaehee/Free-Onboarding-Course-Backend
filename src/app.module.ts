@@ -25,9 +25,10 @@ import * as winston from 'winston';
     UsersModule,
     TypeOrmModule.forRoot({
       type: 'sqlite',
-      database: 'wecode',
+      database: process.env.NODE_ENV === 'dev' ? 'wecode' : 'testwecode',
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true,
+      keepConnectionAlive: true,
     }),
     MorganModule,
     AuthModule,
