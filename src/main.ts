@@ -4,6 +4,7 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { RegisterSuccessResponse } from './common/response/user/register.success.response';
 import { SignInSuccessResponse } from './common/response/user/sign.in.success.response';
 import { NotInclueSensitiveBoardInfoResponse } from './common/response/board/not.inclue.sensitive.board.info.response';
+import { CommonBoardResponse } from './common/response/board/common.board.response';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -25,6 +26,7 @@ async function bootstrap() {
       RegisterSuccessResponse,
       SignInSuccessResponse,
       NotInclueSensitiveBoardInfoResponse,
+      CommonBoardResponse,
     ],
   });
 
