@@ -78,5 +78,22 @@ describe('AppController (e2e) [COMMAND]', () => {
       // then
       expect(result.body.success).toBeTruthy();
     });
+
+    it('/boards/:boardId (PATCH)', async () => {
+      // given
+      // when
+      const result = await request(app.getHttpServer())
+        .patch('/boards/1')
+        .set('Authorization', 'bearer ' + accessToken)
+        .send({
+          title: faker.lorem.sentence(),
+          content: faker.lorem.sentences(),
+        })
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/);
+
+      // then
+      expect(result.body.success).toBeTruthy();
+    });
   });
 });
