@@ -1,7 +1,8 @@
-import { IsNotEmpty, IsNumber, IsPositive } from 'class-validator';
+import { IsNotEmpty, IsPositive } from 'class-validator';
 import { Type } from 'class-transformer';
+import { PageRequest } from '../../common/abstract/page.request';
 
-export class PaginationDto {
+export class BoardSearchRequest extends PageRequest {
   @IsNotEmpty()
   @IsPositive()
   @Type(() => Number)
