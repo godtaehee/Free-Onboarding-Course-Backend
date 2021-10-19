@@ -24,6 +24,7 @@ export class BoardsQueryRepository extends Repository<Board> {
     return this.createQueryBuilder('boards')
       .innerJoinAndSelect('boards.user', 'user')
       .select(['boards', 'user.id', 'user.nickname'])
+      .orderBy('boards.id', 'DESC')
       .limit(query.getLimit())
       .offset(query.getOffset())
       .getManyAndCount();
