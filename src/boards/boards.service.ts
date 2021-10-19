@@ -26,8 +26,10 @@ export class BoardsService {
     return this.boardsRepository.createBoard(user, boardCreateDto);
   }
 
-  getSingleBoard(boardId: number) {
-    return this.boardsQueryRepository.getSingleBoard(boardId);
+  async getSingleBoard(boardId: number) {
+    const result = await this.boardsQueryRepository.getSingleBoard(boardId);
+    if (!result) throw new BadRequestException('잘못된 요청입니다.');
+    return result;
   }
 
   async getAllBoard(query: BoardSearchRequest) {
