@@ -81,9 +81,9 @@ describe('BoardsService', () => {
   });
 
   describe('Get-Single-Board', () => {
+    const boardId: number = faker.datatype.number();
     it('should return single board if boardId is valid number', async () => {
       // given
-      const boardId: number = faker.datatype.number();
       const singleBoard: Board = {
         title: faker.lorem.sentence(),
         content: faker.lorem.sentences(),
@@ -98,6 +98,19 @@ describe('BoardsService', () => {
 
       // then
       expect(result).toBe(singleBoard);
+    });
+
+    it('should throw BadRequestException if certain error is occurred', () => {
+      // given
+
+      queryRepository.getSingleBoard = jest
+        .fn()
+        .mockResolvedValueOnce(undefined);
+      // when
+      const result = service.getSingleBoard(boardId);
+
+      // then
+      expect(result).rejects.toThrowError();
     });
   });
 });
