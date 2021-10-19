@@ -36,7 +36,9 @@ export class AuthController {
       '회원가입을 하지않아도 게시글을 볼수는 있습니다. ' +
       '하지만 회원가입을 해야 게시글을 작성, 수정, 삭제를 할수 있습니다.',
   })
-  @ApiCommonCreateResponseForm(RegisterSuccessResponse)
+  @ApiCommonCreateResponseForm(RegisterSuccessResponse, {
+    description: '회원가입 성공시의 응답입니다.',
+  })
   @Post('sign-up')
   signUp(@Body(ValidationPipe) signUpDto: SignUpDto) {
     this.logger.debug(
