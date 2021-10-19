@@ -23,22 +23,6 @@ export class BoardsRepository extends Repository<Board> {
     }
   }
 
-  async getSingleBoard(boardId: number) {
-    return this.createQueryBuilder('boards')
-      .innerJoinAndSelect('boards.user', 'user')
-      .select(['boards', 'user.id', 'user.nickname'])
-      .where({ id: boardId })
-      .getOne();
-  }
-
-  async getBoardSpecificUser(userId: number, boardId: number) {
-    return this.createQueryBuilder('boards')
-      .innerJoinAndSelect('boards.user', 'user')
-      .select(['boards', 'user.id', 'user.nickname'])
-      .where('user.id = :userId AND boards.id = :boardId', { userId, boardId })
-      .getOne();
-  }
-
   async updateBoard(board: Board, updateRequestBody: BoardUpdateDto) {
     const { title, content } = updateRequestBody;
 
@@ -55,13 +39,5 @@ export class BoardsRepository extends Repository<Board> {
         boardId,
       })
       .execute();
-  }
-
-  getAllBoard(limit: number, offset: number) {
-    return this.createQueryBuilder('boards')
-      .innerJoinAndSelect('boards.user', 'user')
-      .limit(limit)
-      .offset((offset - 1) * limit)
-      .getMany();
   }
 }
