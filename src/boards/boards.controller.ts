@@ -131,7 +131,10 @@ export class BoardsController {
               example: '5',
             },
             items: {
-              $ref: getSchemaPath(NotInclueSensitiveBoardInfoResponse),
+              type: 'array',
+              items: {
+                $ref: getSchemaPath(NotInclueSensitiveBoardInfoResponse),
+              },
             },
           },
         },
