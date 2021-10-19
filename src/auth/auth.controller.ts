@@ -55,7 +55,9 @@ export class AuthController {
       '로그인 후 이 토큰을 이용해야만 게시글을 작성, 수정, 삭제를 할수 있습니다. ' +
       '토큰은 1시간뒤 만료됩니다.',
   })
-  @ApiCommonCreateResponseForm(SignInSuccessResponse)
+  @ApiCommonCreateResponseForm(SignInSuccessResponse, {
+    description: '성공적으로 AccessToken을 발급 받았을때의 응답입니다.',
+  })
   @Post('sign-in')
   signIn(@Body(ValidationPipe) signInDto: SignInDto) {
     this.logger.debug(
