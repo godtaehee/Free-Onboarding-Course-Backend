@@ -20,4 +20,11 @@ describe('AppController (e2e)', () => {
 
     expect(result.body.success).toBeTruthy();
   });
+
+  it('/boards?offset&limit (GET)', async () => {
+    const result = await request(app.getHttpServer()).get(
+      '/boards?offset=1&limit=20',
+    );
+    expect(result.body).toBeTruthy();
+  });
 });
