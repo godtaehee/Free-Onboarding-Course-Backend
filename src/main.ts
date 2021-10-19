@@ -7,6 +7,7 @@ import { NotInclueSensitiveBoardInfoResponse } from './common/response/board/not
 import { CommonBoardResponse } from './common/response/board/common.board.response';
 import { FourHundredOneError } from './common/response/error/four.hundred.one.error';
 import { FourHundredError } from './common/response/error/four.hundred.error';
+import { SignInFailError } from './common/response/error/sign.in.fail.error';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -31,6 +32,7 @@ async function bootstrap() {
       CommonBoardResponse,
       FourHundredError,
       FourHundredOneError,
+      SignInFailError,
     ],
   });
 
