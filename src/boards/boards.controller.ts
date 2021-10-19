@@ -155,6 +155,9 @@ export class BoardsController {
       ],
     },
   })
+  @ApiBadRequestResponse({
+    type: NotValidNumberError,
+  })
   @Get('/')
   getAllBoard(
     @Query(new ValidationPipe({ transform: true })) query: BoardSearchRequest,
@@ -181,6 +184,12 @@ export class BoardsController {
   @ApiCommonOkResponseForm(NotInclueSensitiveBoardInfoResponse, {
     description:
       '성공적으로 Board를 업데이트 했을때의 응답입니다. 업데이트 후의 Board의 상태를 응답합니다.',
+  })
+  @ApiBadRequestResponse({
+    type: NotValidNumberError,
+  })
+  @ApiUnauthorizedResponse({
+    type: FourHundredOneError,
   })
   @Patch('/:boardId')
   @UseGuards(AuthGuard('jwt'))
@@ -215,6 +224,12 @@ export class BoardsController {
   @Delete('/:boardId')
   @UseGuards(AuthGuard('jwt'))
   @UseInterceptors(CommonResponseFormInterceptor)
+  @ApiBadRequestResponse({
+    type: NotValidNumberError,
+  })
+  @ApiUnauthorizedResponse({
+    type: FourHundredOneError,
+  })
   async deleteBoard(
     @GetUser() user: User,
     @Param('boardId', PositiveNumberValidationPipe) boardId: number,
