@@ -34,6 +34,7 @@ import { CommonBoardResponse } from '../common/response/board/common.board.respo
 import { NotInclueSensitiveBoardInfoResponse } from '../common/response/board/not.inclue.sensitive.board.info.response';
 import { PositiveNumberValidationPipe } from '../common/pipe/positive.number.validation.pipe';
 import { CommonResponseFormInterceptor } from '../common/interceptors/common.response.form.interceptor';
+import { ApiCommonResponseForm } from '../common/decorators/api.common.response.form';
 
 @ApiTags('게시글')
 @Controller('boards')
@@ -52,11 +53,7 @@ export class BoardsController {
     summary: '게시글을 생성합니다.',
     description: '회원가입을 한 유저만 게시글을 작성할수 있습니다.',
   })
-  @ApiResponse({
-    status: 201,
-    description: '성공적으로 Board를 생성했을때의 응답입니다.',
-    type: CommonBoardResponse,
-  })
+  @ApiCommonResponseForm(CommonBoardResponse)
   @Post('/create')
   @UseGuards(AuthGuard('jwt'))
   @UseInterceptors(CommonResponseFormInterceptor)
