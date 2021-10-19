@@ -95,5 +95,18 @@ describe('AppController (e2e) [COMMAND]', () => {
       // then
       expect(result.body.success).toBeTruthy();
     });
+
+    it('/boards/:boardId (DELETE)', async () => {
+      // given
+      // when
+      const result = await request(app.getHttpServer())
+        .delete('/boards/1')
+        .set('Authorization', 'bearer ' + accessToken)
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/);
+
+      // then
+      expect(result.body.success).toBeTruthy();
+    });
   });
 });
