@@ -1,7 +1,7 @@
 import { ApiExtraModels, ApiProperty } from '@nestjs/swagger';
 
 @ApiExtraModels()
-export class FourHundredOne {
+export class FourHundredOneError {
   @ApiProperty({
     type: 'number',
     description:
