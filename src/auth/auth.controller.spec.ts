@@ -125,5 +125,33 @@ describe('AuthController', () => {
       // then
       expect(result).toBe(successResponse);
     });
+
+    it('should require the proper type', async () => {
+      // given
+      const signInDto = {
+        password: faker.internet.password(),
+      };
+
+      let target: ValidationPipe = new ValidationPipe({
+        transform: true,
+        whitelist: true,
+      });
+      const metadata: ArgumentMetadata = {
+        type: 'body',
+        metatype: SignInDto,
+      };
+
+      // when
+      // then
+      try {
+        await target.transform(signInDto, metadata);
+      } catch (err) {
+        expect(err.getResponse().message).toStrictEqual([
+          'email must be longer than or equal to 5 characters',
+          'email must be an email',
+          'email should not be empty',
+        ]);
+      }
+    });
   });
 });
