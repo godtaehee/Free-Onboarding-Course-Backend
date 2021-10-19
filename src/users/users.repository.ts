@@ -16,7 +16,11 @@ export class UsersRepository extends Repository<User> {
     }
   }
 
-  async signIn(email: string) {
-    return this.findOne({ email });
+  signIn(email: string) {
+    try {
+      return this.findOne({ email });
+    } catch (err) {
+      throw err;
+    }
   }
 }
