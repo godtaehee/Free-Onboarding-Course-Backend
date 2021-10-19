@@ -8,6 +8,7 @@ import { CommonBoardResponse } from './common/response/board/common.board.respon
 import { FourHundredOneError } from './common/response/error/four.hundred.one.error';
 import { FourHundredError } from './common/response/error/four.hundred.error';
 import { SignInFailError } from './common/response/error/sign.in.fail.error';
+import { NotValidNumberError } from './common/response/error/not.valid.number.error';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -33,6 +34,7 @@ async function bootstrap() {
       FourHundredError,
       FourHundredOneError,
       SignInFailError,
+      NotValidNumberError,
     ],
   });
 
