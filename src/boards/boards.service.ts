@@ -35,11 +35,15 @@ export class BoardsService {
       throw new BadRequestException(
         `해당 ${query.offset}번째 페이지의 게시글이 존재하지 않습니다.`,
       );
-    return new Page<NotInclueSensitiveBoardInfoResponse>(
+    return this.getPaginationItems<NotInclueSensitiveBoardInfoResponse>(
       count,
       query.limit,
       boards.map((b) => new NotInclueSensitiveBoardInfoResponse(b, b.user)),
     );
+  }
+
+  getPaginationItems<T>(count: number, limit: number, items: T[]) {
+    return new Page<T>(count, limit, items);
   }
 
   async updateBoard(
