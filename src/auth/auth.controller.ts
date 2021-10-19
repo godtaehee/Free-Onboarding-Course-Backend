@@ -11,11 +11,18 @@ import { AuthService } from './auth.service';
 import { SignInDto } from './dto/sign.in.dto';
 import { WINSTON_MODULE_PROVIDER } from 'nest-winston';
 import { Logger } from 'winston';
-import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBadRequestResponse,
+  ApiOperation,
+  ApiTags,
+  ApiUnauthorizedResponse,
+} from '@nestjs/swagger';
 import { RegisterSuccessResponse } from '../common/response/user/register.success.response';
 import { SignInSuccessResponse } from '../common/response/user/sign.in.success.response';
 import { CommonResponseFormInterceptor } from '../common/interceptors/common.response.form.interceptor';
 import { ApiCommonCreateResponseForm } from '../common/decorators/api.common.create.response.form';
+import { FourHundredError } from '../common/response/error/four.hundred.error';
+import { SignInFailError } from '../common/response/error/sign.in.fail.error';
 
 @UseInterceptors(CommonResponseFormInterceptor)
 @ApiTags('회원가입 & 로그인')
@@ -39,6 +46,9 @@ export class AuthController {
   @ApiCommonCreateResponseForm(RegisterSuccessResponse, {
     description: '회원가입 성공시의 응답입니다.',
   })
+  @ApiBadRequestResponse({
+    type: FourHundredError,
+  })
   @Post('sign-up')
   signUp(@Body(ValidationPipe) signUpDto: SignUpDto) {
     this.logger.debug(
@@ -59,6 +69,12 @@ export class AuthController {
   })
   @ApiCommonCreateResponseForm(SignInSuccessResponse, {
     description: '성공적으로 AccessToken을 발급 받았을때의 응답입니다.',
+  })
+  @ApiBadRequestResponse({
+    type: FourHundredError,
+  })
+  @ApiUnauthorizedResponse({
+    type: SignInFailError,
   })
   @Post('sign-in')
   signIn(@Body(ValidationPipe) signInDto: SignInDto) {
