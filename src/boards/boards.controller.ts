@@ -140,10 +140,9 @@ export class BoardsController {
     required: true,
     description: '수정할 게시글의 고유 번호입니다.',
   })
-  @ApiResponse({
-    status: 200,
-    description: '성공적으로 Board를 가져왔을때의 응답입니다.',
-    type: NotInclueSensitiveBoardInfoResponse,
+  @ApiCommonOkResponseForm(NotInclueSensitiveBoardInfoResponse, {
+    description:
+      '성공적으로 Board를 업데이트 했을때의 응답입니다. 업데이트 후의 Board의 상태를 응답합니다.',
   })
   @Patch('/:boardId')
   @UseGuards(AuthGuard('jwt'))
