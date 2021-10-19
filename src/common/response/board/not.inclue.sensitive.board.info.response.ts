@@ -11,6 +11,17 @@ export class NotInclueSensitiveBoardInfoResponse extends PickType(Board, [
   'updatedAt',
   'deletedAt',
 ]) {
+  constructor(board: Board, user: NotInclueSensitiveUserInfoResponse) {
+    super();
+    this.id = board.id;
+    this.title = board.title;
+    this.content = board.content;
+    this.createdAt = board.createdAt;
+    this.updatedAt = board.updatedAt;
+    this.deletedAt = board.deletedAt;
+    this.user = user;
+  }
+
   @ApiProperty({
     type: () => NotInclueSensitiveUserInfoResponse,
     description: 'test',
