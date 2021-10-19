@@ -3,6 +3,7 @@ import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { RegisterSuccessResponse } from './common/response/user/register.success.response';
 import { SignInSuccessResponse } from './common/response/user/sign.in.success.response';
+import { NotInclueSensitiveBoardInfoResponse } from './common/response/board/not.inclue.sensitive.board.info.response';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -20,7 +21,11 @@ async function bootstrap() {
     .build();
 
   const swaggerDocument = SwaggerModule.createDocument(app, swaggerConfig, {
-    extraModels: [RegisterSuccessResponse, SignInSuccessResponse],
+    extraModels: [
+      RegisterSuccessResponse,
+      SignInSuccessResponse,
+      NotInclueSensitiveBoardInfoResponse,
+    ],
   });
 
   SwaggerModule.setup('api', app, swaggerDocument);
