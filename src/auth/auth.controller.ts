@@ -15,7 +15,7 @@ import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { RegisterSuccessResponse } from '../common/response/user/register.success.response';
 import { SignInSuccessResponse } from '../common/response/user/sign.in.success.response';
 import { CommonResponseFormInterceptor } from '../common/interceptors/common.response.form.interceptor';
-import { ApiCommonResponseForm } from '../common/decorators/api.common.response.form';
+import { ApiCommonCreateResponseForm } from '../common/decorators/api.common.create.response.form';
 
 @UseInterceptors(CommonResponseFormInterceptor)
 @ApiTags('회원가입 & 로그인')
@@ -36,7 +36,7 @@ export class AuthController {
       '회원가입을 하지않아도 게시글을 볼수는 있습니다. ' +
       '하지만 회원가입을 해야 게시글을 작성, 수정, 삭제를 할수 있습니다.',
   })
-  @ApiCommonResponseForm(RegisterSuccessResponse)
+  @ApiCommonCreateResponseForm(RegisterSuccessResponse)
   @Post('sign-up')
   signUp(@Body(ValidationPipe) signUpDto: SignUpDto) {
     this.logger.debug(
@@ -55,7 +55,7 @@ export class AuthController {
       '로그인 후 이 토큰을 이용해야만 게시글을 작성, 수정, 삭제를 할수 있습니다. ' +
       '토큰은 1시간뒤 만료됩니다.',
   })
-  @ApiCommonResponseForm(SignInSuccessResponse)
+  @ApiCommonCreateResponseForm(SignInSuccessResponse)
   @Post('sign-in')
   signIn(@Body(ValidationPipe) signInDto: SignInDto) {
     this.logger.debug(

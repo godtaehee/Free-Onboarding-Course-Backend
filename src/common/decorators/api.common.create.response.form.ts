@@ -1,7 +1,7 @@
 import { applyDecorators, Type } from '@nestjs/common';
 import { ApiCreatedResponse, getSchemaPath } from '@nestjs/swagger';
 
-export const ApiCommonResponseForm = <TModel extends Type<any>>(
+export const ApiCommonCreateResponseForm = <TModel extends Type<any>>(
   model: TModel,
 ) => {
   return applyDecorators(
