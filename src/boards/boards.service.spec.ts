@@ -202,7 +202,7 @@ describe('BoardsService', () => {
       expect(result).resolves.toBe(successUpdatedBoard);
     });
 
-    it('should throw Error if selectedBoard is not existed in board data in database table', () => {
+    it('should throw Error if selectedBoard is not existed in board database table', () => {
       // given
       queryRepository.getBoardSpecificUser = jest
         .fn()
@@ -232,6 +232,22 @@ describe('BoardsService', () => {
       expect(result).resolves.toBe({
         boardId: validBoardId,
       });
+    });
+
+    it('should throw Error if selectedBoard is not existed in board database table', () => {
+      // given
+
+      const notValidUserId = faker.datatype.number();
+      const notValidBoardId = faker.datatype.number();
+      queryRepository.getBoardSpecificUser = jest
+        .fn()
+        .mockResolvedValueOnce(undefined);
+
+      // when
+      const result = service.deleteBoard(notValidUserId, notValidBoardId);
+
+      // then
+      expect(result).rejects.toThrowError();
     });
   });
 });
