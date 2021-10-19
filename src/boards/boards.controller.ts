@@ -171,10 +171,8 @@ export class BoardsController {
     required: true,
     description: '삭제할 게시글의 고유 번호입니다.',
   })
-  @ApiResponse({
-    status: 201,
+  @ApiCommonOkResponseForm(CommonBoardResponse, {
     description: '성공적으로 Board를 삭제했을때 응답입니다.',
-    type: CommonBoardResponse,
   })
   @Delete('/:boardId')
   @UseGuards(AuthGuard('jwt'))
