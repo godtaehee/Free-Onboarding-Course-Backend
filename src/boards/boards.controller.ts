@@ -42,6 +42,7 @@ import { Page } from '../common/page';
 import { FourHundredOneError } from '../common/response/error/four.hundred.one.error';
 import { FourHundredError } from '../common/response/error/four.hundred.error';
 import { NotValidNumberError } from '../common/response/error/not.valid.number.error';
+import { Board } from './boards.entity';
 
 @ApiTags('게시글')
 @Controller('boards')
@@ -75,7 +76,7 @@ export class BoardsController {
   createBoard(
     @GetUser() user,
     @Body(ValidationPipe) boardCreateDto: BoardCreateDto,
-  ) {
+  ): Promise<CommonBoardResponse> {
     this.logger.debug(
       `${this.tag} ${new Date().toLocaleString()} userId: '${
         user.id
@@ -103,7 +104,7 @@ export class BoardsController {
   @Get('/:boardId')
   getSingleBoard(
     @Param('boardId', PositiveNumberValidationPipe) boardId: number,
-  ) {
+  ): Promise<Board> {
     this.logger.debug(
       `${this.tag} ${new Date()} '${boardId}'번째 게시물을 읽어옵니다.`,
     );
@@ -198,7 +199,7 @@ export class BoardsController {
     @GetUser() user: User,
     @Param('boardId', PositiveNumberValidationPipe) boardId: number,
     @Body() updateRequestBody: BoardUpdateDto,
-  ) {
+  ): Promise<Board> {
     this.logger.debug(
       `${this.tag} ${new Date()} '${boardId}'번 아이디의 게시물을 제목은 ${
         updateRequestBody.title
@@ -233,7 +234,7 @@ export class BoardsController {
   async deleteBoard(
     @GetUser() user: User,
     @Param('boardId', PositiveNumberValidationPipe) boardId: number,
-  ) {
+  ): Promise<CommonBoardResponse> {
     this.logger.debug(
       `${
         this.tag

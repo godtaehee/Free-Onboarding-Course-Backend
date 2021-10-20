@@ -1,11 +1,15 @@
-import { EntityRepository, Repository } from 'typeorm';
+import { EntityRepository, Repository, UpdateResult } from 'typeorm';
 import { Board } from './boards.entity';
 import { BoardCreateDto } from './dto/board.create.dto';
 import { BoardUpdateDto } from './dto/board.update.dto';
+import { CommonBoardResponse } from '../common/response/board/common.board.response';
 
 @EntityRepository(Board)
 export class BoardsRepository extends Repository<Board> {
-  async createBoard(user, boardCreateDto: BoardCreateDto) {
+  async createBoard(
+    user,
+    boardCreateDto: BoardCreateDto,
+  ): Promise<CommonBoardResponse> {
     const { title, content } = boardCreateDto;
 
     const createdBoard = this.create({
@@ -23,7 +27,10 @@ export class BoardsRepository extends Repository<Board> {
     }
   }
 
-  async updateBoard(board: Board, updateRequestBody: BoardUpdateDto) {
+  async updateBoard(
+    board: Board,
+    updateRequestBody: BoardUpdateDto,
+  ): Promise<Board> {
     const { title, content } = updateRequestBody;
 
     board.title = title;
@@ -32,7 +39,7 @@ export class BoardsRepository extends Repository<Board> {
     return await this.save(board);
   }
 
-  async deleteBoard(boardId: number) {
+  async deleteBoard(boardId: number): Promise<UpdateResult> {
     return this.createQueryBuilder('boards')
       .softDelete()
       .where('id = :boardId', {

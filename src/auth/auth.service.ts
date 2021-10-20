@@ -5,6 +5,8 @@ import { SignInDto } from './dto/sign.in.dto';
 import * as bcrypt from 'bcrypt';
 import { User } from '../users/users.entity';
 import { JwtService } from '@nestjs/jwt';
+import { RegisterSuccessResponse } from '../common/response/user/register.success.response';
+import { SignInSuccessResponse } from '../common/response/user/sign.in.success.response';
 
 @Injectable()
 export class AuthService {
@@ -13,11 +15,11 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  async signUp(signUpDto: SignUpDto) {
+  async signUp(signUpDto: SignUpDto): Promise<RegisterSuccessResponse> {
     return this.usersRepository.signUp(signUpDto);
   }
 
-  async signIn(signInDto: SignInDto) {
+  async signIn(signInDto: SignInDto): Promise<SignInSuccessResponse> {
     const { email, password } = signInDto;
     const user: User = await this.usersRepository.signIn(email);
 

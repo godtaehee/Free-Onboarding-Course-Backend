@@ -50,7 +50,9 @@ export class AuthController {
     type: FourHundredError,
   })
   @Post('sign-up')
-  signUp(@Body(ValidationPipe) signUpDto: SignUpDto) {
+  signUp(
+    @Body(ValidationPipe) signUpDto: SignUpDto,
+  ): Promise<RegisterSuccessResponse> {
     this.logger.debug(
       `${this.tag} ${new Date().toLocaleString()} '${
         signUpDto.email
@@ -77,7 +79,9 @@ export class AuthController {
     type: SignInFailError,
   })
   @Post('sign-in')
-  signIn(@Body(ValidationPipe) signInDto: SignInDto) {
+  signIn(
+    @Body(ValidationPipe) signInDto: SignInDto,
+  ): Promise<SignInSuccessResponse> {
     this.logger.debug(
       `${this.tag} ${new Date().toLocaleString()} '${
         signInDto.email

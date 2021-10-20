@@ -4,7 +4,7 @@ import { BoardSearchRequest } from './dto/board.search.request';
 
 @EntityRepository(Board)
 export class BoardsQueryRepository extends Repository<Board> {
-  async getSingleBoard(boardId: number) {
+  async getSingleBoard(boardId: number): Promise<Board> {
     return this.createQueryBuilder('boards')
       .innerJoinAndSelect('boards.user', 'user')
       .select(['boards', 'user.id', 'user.nickname'])
@@ -12,7 +12,7 @@ export class BoardsQueryRepository extends Repository<Board> {
       .getOne();
   }
 
-  async getBoardSpecificUser(userId: number, boardId: number) {
+  async getBoardSpecificUser(userId: number, boardId: number): Promise<Board> {
     return this.createQueryBuilder('boards')
       .innerJoinAndSelect('boards.user', 'user')
       .select(['boards', 'user.id', 'user.nickname'])
