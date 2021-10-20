@@ -23,7 +23,7 @@ import * as winston from 'winston';
     UsersModule,
     TypeOrmModule.forRoot({
       type: 'sqlite',
-      database: process.env.NODE_ENV === 'dev' ? 'wecode' : 'testwecode',
+      database: process.env.NODE_ENV === 'prod' ? 'wecode' : 'testwecode',
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true,
       keepConnectionAlive: true,
