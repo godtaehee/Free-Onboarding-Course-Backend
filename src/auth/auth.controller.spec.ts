@@ -94,7 +94,7 @@ describe('AuthController', () => {
       // when
       const result = await controller.signUp(signUpDTO);
       // then
-      expect(result).toBe(successResponse);
+      expect(result).toStrictEqual(successResponse);
     });
   });
 
@@ -123,7 +123,7 @@ describe('AuthController', () => {
       const result = await controller.signIn(signInDto);
 
       // then
-      expect(result).toBe(successResponse);
+      expect(result).toStrictEqual(successResponse);
     });
 
     it('should require the proper type', async () => {

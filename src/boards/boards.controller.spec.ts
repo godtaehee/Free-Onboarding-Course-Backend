@@ -80,7 +80,7 @@ describe('BoardsController', () => {
       const result = await controller.createBoard(requestUser, boardCreateDto);
 
       // then
-      expect(result).toBe(successResponse);
+      expect(result).toStrictEqual(successResponse);
     });
   });
 
@@ -108,7 +108,7 @@ describe('BoardsController', () => {
       const result = await controller.getSingleBoard(id);
 
       // then
-      expect(result).toBe(successGetSingleBoardInfo);
+      expect(result).toStrictEqual(successGetSingleBoardInfo);
     });
   });
 
@@ -138,7 +138,7 @@ describe('BoardsController', () => {
       const result = await controller.getAllBoard(query as any);
 
       // then
-      expect(result).toBe(successData);
+      expect(result).toStrictEqual(successData);
     });
   });
 
@@ -167,7 +167,7 @@ describe('BoardsController', () => {
         updateRequestDto,
       );
       // then
-      expect(result).toBe(successUpdatedResponse);
+      expect(result).toStrictEqual(successUpdatedResponse);
     });
   });
 
@@ -192,7 +192,7 @@ describe('BoardsController', () => {
       );
 
       // then
-      expect(result).toBe(successDeletedResponse);
+      expect(result).toStrictEqual(successDeletedResponse);
     });
   });
 });

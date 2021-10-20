@@ -74,7 +74,7 @@ describe('AuthService', () => {
       const result = await service.signUp(signUpDTO);
 
       // then
-      expect(result).toBe(successResponse);
+      expect(result).toStrictEqual(successResponse);
     });
 
     it('should make hashed password to use in UsersRepository', async () => {
@@ -127,7 +127,7 @@ describe('AuthService', () => {
       const result = await service.signIn(signInDto as any);
 
       // then
-      expect(result.accessToken).toBe(fakeJwtToken);
+      expect(result.accessToken).toStrictEqual(fakeJwtToken);
     });
   });
 });

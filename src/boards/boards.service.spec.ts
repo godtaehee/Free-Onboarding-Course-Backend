@@ -77,7 +77,7 @@ describe('BoardsService', () => {
       const result = await service.createBoard(user as any, boardCreateDto);
 
       // then
-      expect(result).toBe(successResponse);
+      expect(result).toStrictEqual(successResponse);
     });
   });
 
@@ -98,7 +98,7 @@ describe('BoardsService', () => {
       const result = await service.getSingleBoard(boardId);
 
       // then
-      expect(result).toBe(singleBoard);
+      expect(result).toStrictEqual(singleBoard);
     });
 
     it('should throw BadRequestException if certain error is occurred', () => {
@@ -146,7 +146,7 @@ describe('BoardsService', () => {
       const result = service.getAllBoard(query);
 
       // then
-      expect(result).resolves.toBe(successResponse);
+      expect(result).resolves.toStrictEqual(successResponse);
     });
 
     it('should return all board which is contained valid page scope', () => {
@@ -199,7 +199,7 @@ describe('BoardsService', () => {
       const result = service.updateBoard(userId, boardId, updateRequestBody);
 
       // then
-      expect(result).resolves.toBe(successUpdatedBoard);
+      expect(result).resolves.toStrictEqual(successUpdatedBoard);
     });
 
     it('should throw Error if selectedBoard is not existed in board database table', () => {
@@ -229,7 +229,7 @@ describe('BoardsService', () => {
       const result = service.deleteBoard(validUserId, validBoardId);
 
       // then
-      expect(result).resolves.toBe({
+      expect(result).resolves.toStrictEqual({
         boardId: validBoardId,
       });
     });
