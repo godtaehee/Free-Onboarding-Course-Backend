@@ -9,9 +9,12 @@ import { FourHundredOneError } from './common/response/error/four.hundred.one.er
 import { FourHundredError } from './common/response/error/four.hundred.error';
 import { SignInFailError } from './common/response/error/sign.in.fail.error';
 import { NotValidNumberError } from './common/response/error/not.valid.number.error';
+import * as morgan from 'morgan';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
+  app.use(morgan('dev'));
 
   const swaggerConfig = new DocumentBuilder()
     .setTitle('[위코드 x 원티드] 백엔드 프리온보딩 선발 과제')
