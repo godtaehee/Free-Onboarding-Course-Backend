@@ -3,7 +3,12 @@ import { UsersController } from './users.controller';
 import { UsersService } from './users.service';
 import * as faker from 'faker';
 import { User } from './users.entity';
+import { UsersQueryRepository } from './users.query.repository';
 
+const mockQueryRepository = {
+  create: jest.fn(),
+  save: jest.fn(),
+};
 describe('UsersController', () => {
   let controller: UsersController;
   let service: UsersService;
@@ -11,7 +16,13 @@ describe('UsersController', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [UsersController],
-      providers: [UsersService],
+      providers: [
+        UsersService,
+        {
+          provide: UsersQueryRepository,
+          useValue: mockQueryRepository,
+        },
+      ],
     }).compile();
 
     controller = module.get<UsersController>(UsersController);
