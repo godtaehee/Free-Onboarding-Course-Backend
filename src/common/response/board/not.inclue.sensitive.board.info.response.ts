@@ -24,7 +24,7 @@ export class NotInclueSensitiveBoardInfoResponse extends PickType(Board, [
 
   @ApiProperty({
     type: () => NotInclueSensitiveUserInfoResponse,
-    description: 'test',
+    description: '해당 게시글을 작성한 유저의 정보입니다.',
   })
   user: NotInclueSensitiveUserInfoResponse;
 }
