@@ -23,6 +23,7 @@ export class BoardsQueryRepository extends Repository<Board> {
       .getOne();
   }
 
+  // TODO User정보가 아닌 Board의 정보들만 가져올 때 사용하기위해 남겨둠
   getBoardListSpecificUser(userId: number): Promise<Board[]> {
     return this.createQueryBuilder('boards')
       .where('userId = :userId', {
