@@ -58,13 +58,20 @@ describe('UsersController', () => {
         nickname: faker.internet.userName(),
       } as any;
 
-      service.getSingleUserInfo = jest.fn().mockResolvedValueOnce(userInfo);
+      const successResponse = {
+        success: true,
+        data: userInfo,
+      };
+
+      service.getSingleUserInfo = jest
+        .fn()
+        .mockResolvedValueOnce(successResponse);
 
       // when
       const result = await controller.getSingleUserInfo(userId);
 
       // then
-      expect(result).toStrictEqual(userInfo);
+      expect(result).toStrictEqual(successResponse);
     });
   });
 });
