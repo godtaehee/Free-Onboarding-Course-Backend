@@ -29,7 +29,7 @@ export class UsersService {
       );
 
     if (users.length <= 0)
-      throw new BadRequestException(`유저가 존재하지 않습니다.`);
+      throw new BadRequestException(`해당 페이지에 유저가 존재하지 않습니다.`);
     return this.paginationHelper.getPaginationItems<UserResponse>(
       count,
       userSearchRequest.limit,
