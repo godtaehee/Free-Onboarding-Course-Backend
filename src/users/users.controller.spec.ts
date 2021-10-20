@@ -1,6 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { UsersController } from './users.controller';
 import { UsersService } from './users.service';
+import * as faker from 'faker';
+import { User } from './users.entity';
 
 describe('UsersController', () => {
   let controller: UsersController;
@@ -22,5 +24,26 @@ describe('UsersController', () => {
 
   it('should be defined', () => {
     expect(service).toBeDefined();
+  });
+
+  describe('Get-Single-User-Info', () => {
+    it('should return UserInfo', async () => {
+      // given
+      const userId = faker.datatype.number();
+      const userInfo: User = {
+        id: faker.datatype.number(),
+        email: faker.internet.email(),
+        password: faker.internet.password(),
+        nickname: faker.internet.userName(),
+      } as any;
+
+      service.getSingleUserInfo = jest.fn().mockResolvedValueOnce(userInfo);
+
+      // when
+      const result = await controller.getSingleUserInfo(userId);
+
+      // then
+      expect(result).toStrictEqual(userInfo);
+    });
   });
 });
