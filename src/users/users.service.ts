@@ -19,7 +19,9 @@ export class UsersService {
   ) {}
 
   async getSingleUserInfo(userId: number) {
-    return this.usersQueryRepository.getSingleUserInfo(userId);
+    const result = await this.usersQueryRepository.getSingleUserInfo(userId);
+    if (!result) throw new BadRequestException('잘못된 요청입니다.');
+    return result;
   }
 
   async getAllUserInfoUsingPagination(userSearchRequest: UserSearchRequest) {

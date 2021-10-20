@@ -77,5 +77,20 @@ describe('UsersService', () => {
       // then
       expect(result).resolves.toStrictEqual(successResponse);
     });
+
+    it('should be throw error if requested userId is invalid', () => {
+      // given
+      const invalidUserId = faker.datatype.number();
+
+      mockQueryRepository.getSingleUserInfo = jest
+        .fn()
+        .mockResolvedValueOnce(undefined);
+
+      // when
+      const result = service.getSingleUserInfo(invalidUserId);
+
+      // then
+      expect(result).rejects.toThrowError();
+    });
   });
 });
