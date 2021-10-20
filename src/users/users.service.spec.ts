@@ -24,7 +24,7 @@ const mockPageNationHelper = {
 
 describe('UsersService', () => {
   let service: UsersService;
-  let repository: UsersQueryRepository;
+  let queryRepository: UsersQueryRepository;
   let paginationHelper: PaginationHelper<UserResponse>;
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -46,7 +46,7 @@ describe('UsersService', () => {
     }).compile();
 
     service = module.get<UsersService>(UsersService);
-    repository = module.get<UsersQueryRepository>(UsersQueryRepository);
+    queryRepository = module.get<UsersQueryRepository>(UsersQueryRepository);
     paginationHelper =
       module.get<PaginationHelper<UserResponse>>(PaginationHelper);
   });
@@ -56,7 +56,7 @@ describe('UsersService', () => {
   });
 
   it('should be defined', () => {
-    expect(repository).toBeDefined();
+    expect(queryRepository).toBeDefined();
   });
 
   describe('Get-Single-User-Info', () => {
@@ -72,7 +72,7 @@ describe('UsersService', () => {
         success: true,
         data: user,
       };
-      repository.getSingleUserInfo = jest
+      queryRepository.getSingleUserInfo = jest
         .fn()
         .mockResolvedValueOnce(successResponse);
 
@@ -87,7 +87,9 @@ describe('UsersService', () => {
       // given
       const invalidUserId = faker.datatype.number();
 
-      repository.getSingleUserInfo = jest.fn().mockResolvedValueOnce(undefined);
+      queryRepository.getSingleUserInfo = jest
+        .fn()
+        .mockResolvedValueOnce(undefined);
 
       // when
       const result = service.getSingleUserInfo(invalidUserId);
@@ -124,7 +126,7 @@ describe('UsersService', () => {
         items: [userResponse],
       };
 
-      repository.getAllUserInfoUsingPagination = jest
+      queryRepository.getAllUserInfoUsingPagination = jest
         .fn()
         .mockResolvedValueOnce(getAllUserInfoUsingPaginationSuccessResponse);
 
@@ -137,6 +139,25 @@ describe('UsersService', () => {
 
       // then
       expect(result).resolves.toStrictEqual(successResponse);
+    });
+
+    it('should be throw BadRequestException If user is not existed in database', () => {
+      // given
+      const userSearchRequest: UserSearchRequest = {} as any;
+
+      const totalCount = faker.datatype.number();
+
+      const getAllUserInfoUsingPaginationSuccessResponse = [[[], totalCount]];
+
+      queryRepository.getAllUserInfoUsingPagination = jest
+        .fn()
+        .mockResolvedValueOnce(getAllUserInfoUsingPaginationSuccessResponse);
+
+      // when
+      const result = service.getAllUserInfoUsingPagination(userSearchRequest);
+
+      // then
+      expect(result).rejects.toThrowError();
     });
   });
 });
