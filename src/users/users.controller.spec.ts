@@ -4,8 +4,14 @@ import { UsersService } from './users.service';
 import * as faker from 'faker';
 import { User } from './users.entity';
 import { UsersQueryRepository } from './users.query.repository';
+import { BoardsQueryRepository } from '../boards/boards.query.repository';
 
-const mockQueryRepository = {
+const mockUsersQueryRepository = {
+  create: jest.fn(),
+  save: jest.fn(),
+};
+
+const mockBoardsQueryRepository = {
   create: jest.fn(),
   save: jest.fn(),
 };
@@ -20,7 +26,11 @@ describe('UsersController', () => {
         UsersService,
         {
           provide: UsersQueryRepository,
-          useValue: mockQueryRepository,
+          useValue: mockUsersQueryRepository,
+        },
+        {
+          provide: BoardsQueryRepository,
+          useValue: mockBoardsQueryRepository,
         },
       ],
     }).compile();
