@@ -4,9 +4,16 @@ import { UsersService } from './users.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './users.entity';
 import { UsersQueryRepository } from './users.query.repository';
+import { BoardsQueryRepository } from '../boards/boards.query.repository';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([User, UsersQueryRepository])],
+  imports: [
+    TypeOrmModule.forFeature([
+      User,
+      UsersQueryRepository,
+      BoardsQueryRepository,
+    ]),
+  ],
   controllers: [UsersController],
   providers: [UsersService],
 })
