@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { BoardsRepository } from './boards.repository';
 import { BoardCreateDto } from './dto/board.create.dto';
@@ -9,6 +9,7 @@ import { BoardsQueryRepository } from './boards.query.repository';
 import { Page } from '../common/page';
 import { NotInclueSensitiveBoardInfoResponse } from '../common/response/board/not.inclue.sensitive.board.info.response';
 import { Board } from './boards.entity';
+import { PaginationHelper } from '../common/utils/pagination.helper';
 
 @Injectable()
 export class BoardsService {
@@ -17,6 +18,8 @@ export class BoardsService {
     private boardsRepository: BoardsRepository,
     @InjectRepository(BoardsQueryRepository)
     private boardsQueryRepository: BoardsQueryRepository,
+    @Inject(PaginationHelper)
+    private paginationHelper: PaginationHelper<NotInclueSensitiveBoardInfoResponse>,
   ) {}
 
   createBoard(
@@ -43,15 +46,11 @@ export class BoardsService {
       throw new BadRequestException(
         `해당 ${query.offset}번째 페이지의 게시글이 존재하지 않습니다.`,
       );
-    return this.getPaginationItems<NotInclueSensitiveBoardInfoResponse>(
+    return this.paginationHelper.getPaginationItems<NotInclueSensitiveBoardInfoResponse>(
       count,
       query.limit,
       boards.map((b) => new NotInclueSensitiveBoardInfoResponse(b, b.user)),
     );
-  }
-
-  getPaginationItems<T>(count: number, limit: number, items: T[]): Page<T> {
-    return new Page<T>(count, limit, items);
   }
 
   async updateBoard(
