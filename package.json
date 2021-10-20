@@ -34,7 +34,6 @@
     "@nestjs/typeorm": "^8.0.2",
     "@types/faker": "^5.5.8",
     "@types/lodash": "^4.14.175",
-    "@types/morgan": "^1.9.3",
     "@types/passport": "^1.0.7",
     "@types/passport-jwt": "^3.0.6",
     "bcrypt": "^5.0.1",
