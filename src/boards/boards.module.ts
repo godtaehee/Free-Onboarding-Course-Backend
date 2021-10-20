@@ -5,6 +5,7 @@ import { AuthModule } from '../auth/auth.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { BoardsRepository } from './boards.repository';
 import { BoardsQueryRepository } from './boards.query.repository';
+import { PaginationHelper } from '../common/utils/pagination.helper';
 
 @Module({
   imports: [
@@ -12,6 +13,6 @@ import { BoardsQueryRepository } from './boards.query.repository';
     AuthModule,
   ],
   controllers: [BoardsController],
-  providers: [BoardsService],
+  providers: [BoardsService, PaginationHelper],
 })
 export class BoardsModule {}
