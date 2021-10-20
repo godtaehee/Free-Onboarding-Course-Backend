@@ -9,7 +9,7 @@ export class UsersRepository extends Repository<User> {
     try {
       const savedUser = await this.save(createdUser);
       return {
-        userId: savedUser.id,
+        userId: savedUser.userId,
       };
     } catch (err) {
       throw err;

@@ -4,7 +4,7 @@ import { User } from '../../../users/users.entity';
 
 @ApiExtraModels()
 export class UserResponse extends PickType(User, [
-  'id',
+  'userId',
   'email',
   'password',
   'nickname',
@@ -15,7 +15,7 @@ export class UserResponse extends PickType(User, [
 ]) {
   constructor(user: User, boards?: Board[]) {
     super();
-    this.id = user.id;
+    this.userId = user.userId;
     this.email = user.email;
     this.password = user.password;
     this.nickname = user.nickname;

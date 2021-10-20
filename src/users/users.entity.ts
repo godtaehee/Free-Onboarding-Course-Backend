@@ -21,8 +21,8 @@ export class User {
     description: '회원가입시 Auto-Generated되는 사용자의 고유 id 입니다.',
     required: true,
   })
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn({ name: 'id' })
+  userId: number;
 
   @ApiProperty({
     example: faker.internet.email(),

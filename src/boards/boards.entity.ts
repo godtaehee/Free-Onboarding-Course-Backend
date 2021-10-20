@@ -18,8 +18,8 @@ export class Board {
     description: 'Auto-Generated된 고유값입니다.',
     example: '1',
   })
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn({ name: 'id' })
+  boardId: number;
 
   @ApiProperty({
     example: 'Nest.js 탐험기',

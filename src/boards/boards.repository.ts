@@ -20,7 +20,7 @@ export class BoardsRepository extends Repository<Board> {
     try {
       const savedBoard = await this.save(createdBoard);
       return {
-        boardId: savedBoard.id,
+        boardId: savedBoard.boardId,
       };
     } catch (err) {
       throw err;

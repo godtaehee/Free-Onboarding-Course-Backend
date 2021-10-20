@@ -4,7 +4,7 @@ import { NotInclueSensitiveUserInfoResponse } from '../user/not.inclue.sensitive
 
 @ApiExtraModels()
 export class NotInclueSensitiveBoardInfoResponse extends PickType(Board, [
-  'id',
+  'boardId',
   'title',
   'content',
   'createdAt',
@@ -13,7 +13,7 @@ export class NotInclueSensitiveBoardInfoResponse extends PickType(Board, [
 ]) {
   constructor(board: Board, user: NotInclueSensitiveUserInfoResponse) {
     super();
-    this.id = board.id;
+    this.boardId = board.boardId;
     this.title = board.title;
     this.content = board.content;
     this.createdAt = board.createdAt;

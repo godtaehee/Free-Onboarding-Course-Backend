@@ -25,7 +25,7 @@ describe('BoardsController', () => {
   let service: BoardsService;
 
   const requestUserInfo: Partial<User> = {
-    id: faker.datatype.number(),
+    userId: faker.datatype.number(),
     email: faker.internet.email(),
     nickname: faker.internet.userName(),
     password: faker.internet.password(),

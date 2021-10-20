@@ -205,7 +205,11 @@ export class BoardsController {
         updateRequestBody.title
       }, 내용은 ${updateRequestBody.content.substr(10)}..으로 수정하겠습니다.`,
     );
-    return this.boardsService.updateBoard(user.id, boardId, updateRequestBody);
+    return this.boardsService.updateBoard(
+      user.userId,
+      boardId,
+      updateRequestBody,
+    );
   }
 
   @ApiBearerAuth('access-token')
@@ -240,6 +244,6 @@ export class BoardsController {
         this.tag
       } ${new Date()} '${boardId}'번 아이디의 게시물을 삭제하겠습니다.`,
     );
-    return this.boardsService.deleteBoard(user.id, boardId);
+    return this.boardsService.deleteBoard(user.userId, boardId);
   }
 }
