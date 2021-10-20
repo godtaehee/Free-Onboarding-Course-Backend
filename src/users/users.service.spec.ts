@@ -5,6 +5,8 @@ import { BoardsQueryRepository } from '../boards/boards.query.repository';
 import { PaginationHelper } from '../common/utils/pagination.helper';
 import { User } from './users.entity';
 import * as faker from 'faker';
+import { UserResponse } from '../common/response/user/user.response';
+import { UserSearchRequest } from './dto/user.search.request';
 
 const mockUsersQueryRepository = {
   create: jest.fn(),
@@ -19,9 +21,11 @@ const mockBoardQueryRepository = {
 const mockPageNationHelper = {
   getPaginationItems: jest.fn(),
 };
+
 describe('UsersService', () => {
   let service: UsersService;
-  let mockQueryRepository: UsersQueryRepository;
+  let repository: UsersQueryRepository;
+  let paginationHelper: PaginationHelper<UserResponse>;
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
@@ -42,8 +46,9 @@ describe('UsersService', () => {
     }).compile();
 
     service = module.get<UsersService>(UsersService);
-    mockQueryRepository =
-      module.get<UsersQueryRepository>(UsersQueryRepository);
+    repository = module.get<UsersQueryRepository>(UsersQueryRepository);
+    paginationHelper =
+      module.get<PaginationHelper<UserResponse>>(PaginationHelper);
   });
 
   it('should be defined', () => {
@@ -51,7 +56,7 @@ describe('UsersService', () => {
   });
 
   it('should be defined', () => {
-    expect(mockQueryRepository).toBeDefined();
+    expect(repository).toBeDefined();
   });
 
   describe('Get-Single-User-Info', () => {
@@ -67,7 +72,7 @@ describe('UsersService', () => {
         success: true,
         data: user,
       };
-      mockQueryRepository.getSingleUserInfo = jest
+      repository.getSingleUserInfo = jest
         .fn()
         .mockResolvedValueOnce(successResponse);
 
@@ -82,15 +87,56 @@ describe('UsersService', () => {
       // given
       const invalidUserId = faker.datatype.number();
 
-      mockQueryRepository.getSingleUserInfo = jest
-        .fn()
-        .mockResolvedValueOnce(undefined);
+      repository.getSingleUserInfo = jest.fn().mockResolvedValueOnce(undefined);
 
       // when
       const result = service.getSingleUserInfo(invalidUserId);
 
       // then
       expect(result).rejects.toThrowError();
+    });
+  });
+
+  describe('Get-All-UserInfo-Using-Pagination', () => {
+    it('should be return Page<UserResponse> Type Response', () => {
+      // given
+      const userSearchRequest: UserSearchRequest = {} as any;
+
+      const totalCount = faker.datatype.number();
+      const pageSize = faker.datatype.number();
+      const totalPage = totalCount / pageSize;
+
+      const user: User = {
+        userId: faker.datatype.number(),
+        nickname: faker.internet.userName(),
+      } as any;
+
+      const getAllUserInfoUsingPaginationSuccessResponse = [
+        [[user], totalCount],
+      ];
+
+      const userResponse: UserResponse = {} as any;
+
+      const successResponse = {
+        pageSize,
+        totalCount,
+        totalPage,
+        items: [userResponse],
+      };
+
+      repository.getAllUserInfoUsingPagination = jest
+        .fn()
+        .mockResolvedValueOnce(getAllUserInfoUsingPaginationSuccessResponse);
+
+      paginationHelper.getPaginationItems = jest
+        .fn()
+        .mockResolvedValueOnce(successResponse);
+
+      // when
+      const result = service.getAllUserInfoUsingPagination(userSearchRequest);
+
+      // then
+      expect(result).resolves.toStrictEqual(successResponse);
     });
   });
 });
