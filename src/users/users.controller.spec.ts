@@ -5,6 +5,7 @@ import * as faker from 'faker';
 import { User } from './users.entity';
 import { UsersQueryRepository } from './users.query.repository';
 import { BoardsQueryRepository } from '../boards/boards.query.repository';
+import { UserSearchRequest } from './dto/user.search.request';
 
 const mockUsersQueryRepository = {
   create: jest.fn(),
@@ -76,10 +77,9 @@ describe('UsersController', () => {
   });
 
   describe('Get-All-User-Info', () => {
-    it('should return UserList', () => {
+    it('should return UserList', async () => {
       // given
 
-      const userList: User[] = [];
       const userInfo: User = {
         id: faker.datatype.number(),
         email: faker.internet.email(),
@@ -87,17 +87,26 @@ describe('UsersController', () => {
         nickname: faker.internet.userName(),
       } as any;
 
+      const userList: User[] = [userInfo];
+
+      const userSearchRequest: UserSearchRequest = {} as any;
+
       const successResponse = {
         success: true,
-        data: userInfo,
+        data: userList,
       };
 
-      service.getAllUserInfo = jest.fn().mockResolvedValueOnce(successResponse);
+      service.getAllUserInfoUsingPagination = jest
+        .fn()
+        .mockResolvedValueOnce(successResponse);
       // when
 
-      const result = controller.getAllUserInfo();
+      const result = await controller.getAllUserInfoUsingPagination(
+        userSearchRequest as any,
+      );
 
       // then
+      expect(result).toStrictEqual(successResponse);
     });
   });
 });
