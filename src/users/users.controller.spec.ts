@@ -88,7 +88,6 @@ describe('UsersController', () => {
   describe('Get-All-User-Info', () => {
     it('should return UserList', async () => {
       // given
-
       const userInfo: User = {
         id: faker.datatype.number(),
         email: faker.internet.email(),
@@ -108,8 +107,8 @@ describe('UsersController', () => {
       service.getAllUserInfoUsingPagination = jest
         .fn()
         .mockResolvedValueOnce(successResponse);
-      // when
 
+      // when
       const result = await controller.getAllUserInfoUsingPagination(
         userSearchRequest as any,
       );
