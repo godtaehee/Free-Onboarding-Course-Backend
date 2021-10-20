@@ -6,6 +6,8 @@ import * as faker from 'faker';
 import { BoardCreateDto } from './dto/board.create.dto';
 import { Board } from './boards.entity';
 import { BoardSearchRequest } from './dto/board.search.request';
+import { PaginationHelper } from '../common/utils/pagination.helper';
+import { NotInclueSensitiveBoardInfoResponse } from '../common/response/board/not.inclue.sensitive.board.info.response';
 
 const mockBoardsRepository = {
   save: jest.fn(),
@@ -14,10 +16,15 @@ const mockBoardsRepository = {
 const mockBoardsQueryRepository = {
   save: jest.fn(),
 };
+
+const mockPageNationHelper = {
+  getPaginationItems: jest.fn(),
+};
 describe('BoardsService', () => {
   let service: BoardsService;
   let commandRepository: BoardsRepository;
   let queryRepository: BoardsQueryRepository;
+  let paginationHelper: PaginationHelper<NotInclueSensitiveBoardInfoResponse>;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -31,12 +38,20 @@ describe('BoardsService', () => {
           provide: BoardsQueryRepository,
           useValue: mockBoardsQueryRepository,
         },
+        {
+          provide: PaginationHelper,
+          useValue: mockPageNationHelper,
+        },
       ],
     }).compile();
 
     service = module.get<BoardsService>(BoardsService);
     commandRepository = module.get<BoardsRepository>(BoardsRepository);
     queryRepository = module.get<BoardsQueryRepository>(BoardsQueryRepository);
+    paginationHelper =
+      module.get<PaginationHelper<NotInclueSensitiveBoardInfoResponse>>(
+        PaginationHelper,
+      );
   });
 
   it('should be defined', () => {
@@ -138,7 +153,7 @@ describe('BoardsService', () => {
         .fn()
         .mockResolvedValueOnce([boards, totalCount]);
 
-      service.getPaginationItems = jest
+      paginationHelper.getPaginationItems = jest
         .fn()
         .mockResolvedValueOnce(successResponse);
 
