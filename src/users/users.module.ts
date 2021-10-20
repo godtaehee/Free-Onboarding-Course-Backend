@@ -5,6 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './users.entity';
 import { UsersQueryRepository } from './users.query.repository';
 import { BoardsQueryRepository } from '../boards/boards.query.repository';
+import { PaginationHelper } from '../common/utils/pagination.helper';
 
 @Module({
   imports: [
@@ -15,6 +16,6 @@ import { BoardsQueryRepository } from '../boards/boards.query.repository';
     ]),
   ],
   controllers: [UsersController],
-  providers: [UsersService],
+  providers: [UsersService, PaginationHelper],
 })
 export class UsersModule {}
