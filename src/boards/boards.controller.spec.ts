@@ -6,6 +6,7 @@ import * as faker from 'faker';
 import { BoardCreateDto } from './dto/board.create.dto';
 import { User } from '../users/users.entity';
 import { BoardUpdateDto } from './dto/board.update.dto';
+import { PaginationHelper } from '../common/utils/pagination.helper';
 
 const mockWinston = {
   debug: jest.fn(),
@@ -13,6 +14,10 @@ const mockWinston = {
 
 const mockService = {
   createBoard: jest.fn(),
+};
+
+const mockPageNationHelper = {
+  getPaginationItems: jest.fn(),
 };
 
 describe('BoardsController', () => {
@@ -37,6 +42,10 @@ describe('BoardsController', () => {
         {
           provide: WINSTON_MODULE_PROVIDER,
           useValue: mockWinston,
+        },
+        {
+          provide: PaginationHelper,
+          useValue: mockPageNationHelper,
         },
       ],
     }).compile();
