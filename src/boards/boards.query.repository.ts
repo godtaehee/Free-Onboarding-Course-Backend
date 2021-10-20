@@ -20,13 +20,18 @@ export class BoardsQueryRepository extends Repository<Board> {
       .getOne();
   }
 
-  getAllBoard(query: BoardSearchRequest): Promise<[Board[], number]> {
+  async getAllBoard(query: BoardSearchRequest): Promise<[Board[], number]> {
+    const subQuery = this.createQueryBuilder('covers')
+      .innerJoinAndSelect('covers.user', 'user')
+      .select('covers.id')
+      .orderBy('covers.id', 'DESC')
+      .limit(query.getLimit())
+      .offset(query.getOffset());
+
     return this.createQueryBuilder('boards')
+      .innerJoin(`(${subQuery.getQuery()})`, 'covers', 'boards.id = covers_id')
       .innerJoinAndSelect('boards.user', 'user')
       .select(['boards', 'user.id', 'user.nickname'])
-      .orderBy('boards.id', 'DESC')
-      .limit(query.getLimit())
-      .offset(query.getOffset())
       .getManyAndCount();
   }
 }
