@@ -90,7 +90,7 @@ describe('BoardsService', () => {
         content: faker.lorem.sentences(),
       } as any;
 
-      queryRepository.getSingleBoard = jest
+      queryRepository.getSingleBoardByBoardId = jest
         .fn()
         .mockResolvedValueOnce(singleBoard);
 
@@ -104,7 +104,7 @@ describe('BoardsService', () => {
     it('should throw BadRequestException if certain error is occurred', () => {
       // given
 
-      queryRepository.getSingleBoard = jest
+      queryRepository.getSingleBoardByBoardId = jest
         .fn()
         .mockResolvedValueOnce(undefined);
       // when
@@ -187,7 +187,7 @@ describe('BoardsService', () => {
         content: faker.lorem.sentences(),
       };
 
-      queryRepository.getBoardSpecificUser = jest
+      queryRepository.getSingleBoardSpecificUser = jest
         .fn()
         .mockResolvedValueOnce(selectedBoard);
 
@@ -204,7 +204,7 @@ describe('BoardsService', () => {
 
     it('should throw Error if selectedBoard is not existed in board database table', () => {
       // given
-      queryRepository.getBoardSpecificUser = jest
+      queryRepository.getSingleBoardSpecificUser = jest
         .fn()
         .mockResolvedValueOnce(undefined);
 
@@ -239,7 +239,7 @@ describe('BoardsService', () => {
 
       const notValidUserId = faker.datatype.number();
       const notValidBoardId = faker.datatype.number();
-      queryRepository.getBoardSpecificUser = jest
+      queryRepository.getSingleBoardSpecificUser = jest
         .fn()
         .mockResolvedValueOnce(undefined);
 
