@@ -27,7 +27,9 @@ export class BoardsService {
   }
 
   async getSingleBoard(boardId: number): Promise<Board> {
-    const result = await this.boardsQueryRepository.getSingleBoard(boardId);
+    const result = await this.boardsQueryRepository.getSingleBoardByBoardId(
+      boardId,
+    );
     if (!result) throw new BadRequestException('잘못된 요청입니다.');
     return result;
   }
@@ -73,10 +75,11 @@ export class BoardsService {
   }
 
   async confirmValidBoard(userId, boardId): Promise<Board> {
-    const selectedBoard = await this.boardsQueryRepository.getBoardSpecificUser(
-      userId,
-      boardId,
-    );
+    const selectedBoard =
+      await this.boardsQueryRepository.getSingleBoardSpecificUser(
+        userId,
+        boardId,
+      );
 
     if (!selectedBoard) throw new BadRequestException('잘못된 요청입니다.');
 
