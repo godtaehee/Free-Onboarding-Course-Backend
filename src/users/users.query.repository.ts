@@ -4,8 +4,11 @@ import { UserSearchRequest } from './dto/user.search.request';
 
 @EntityRepository(User)
 export class UsersQueryRepository extends Repository<User> {
-  getSingleUserInfo(userId: number) {
-    return this.createQueryBuilder('users').where({ id: userId }).getOne();
+  getSingleUserInfo(userId: number): Promise<User> {
+    return this.createQueryBuilder('user')
+      .leftJoinAndSelect('user.boards', 'boards')
+      .where('user.id = :userId', { userId })
+      .getOne();
   }
 
   async getAllUserInfoUsingPagination(
