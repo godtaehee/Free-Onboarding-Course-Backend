@@ -21,7 +21,7 @@ export class BoardsQueryRepository extends Repository<Board> {
   }
 
   async getAllBoard(query: BoardSearchRequest): Promise<[Board[], number]> {
-    const subQuery = this.createQueryBuilder('covers')
+    const coveringIndexQueryBuilder = this.createQueryBuilder('covers')
       .innerJoinAndSelect('covers.user', 'user')
       .select('covers.id')
       .orderBy('covers.id', 'DESC')
@@ -29,7 +29,11 @@ export class BoardsQueryRepository extends Repository<Board> {
       .offset(query.getOffset());
 
     return this.createQueryBuilder('boards')
-      .innerJoin(`(${subQuery.getQuery()})`, 'covers', 'boards.id = covers_id')
+      .innerJoin(
+        `(${coveringIndexQueryBuilder.getQuery()})`,
+        'covers',
+        'boards.id = covers_id',
+      )
       .innerJoinAndSelect('boards.user', 'user')
       .select(['boards', 'user.id', 'user.nickname'])
       .getManyAndCount();
