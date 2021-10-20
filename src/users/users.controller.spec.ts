@@ -6,6 +6,7 @@ import { User } from './users.entity';
 import { UsersQueryRepository } from './users.query.repository';
 import { BoardsQueryRepository } from '../boards/boards.query.repository';
 import { UserSearchRequest } from './dto/user.search.request';
+import { PaginationHelper } from '../common/utils/pagination.helper';
 
 const mockUsersQueryRepository = {
   create: jest.fn(),
@@ -15,6 +16,10 @@ const mockUsersQueryRepository = {
 const mockBoardsQueryRepository = {
   create: jest.fn(),
   save: jest.fn(),
+};
+
+const mockPageNationHelper = {
+  getPaginationItems: jest.fn(),
 };
 describe('UsersController', () => {
   let controller: UsersController;
@@ -32,6 +37,10 @@ describe('UsersController', () => {
         {
           provide: BoardsQueryRepository,
           useValue: mockBoardsQueryRepository,
+        },
+        {
+          provide: PaginationHelper,
+          useValue: mockPageNationHelper,
         },
       ],
     }).compile();
