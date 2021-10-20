@@ -74,4 +74,30 @@ describe('UsersController', () => {
       expect(result).toStrictEqual(successResponse);
     });
   });
+
+  describe('Get-All-User-Info', () => {
+    it('should return UserList', () => {
+      // given
+
+      const userList: User[] = [];
+      const userInfo: User = {
+        id: faker.datatype.number(),
+        email: faker.internet.email(),
+        password: faker.internet.password(),
+        nickname: faker.internet.userName(),
+      } as any;
+
+      const successResponse = {
+        success: true,
+        data: userInfo,
+      };
+
+      service.getAllUserInfo = jest.fn().mockResolvedValueOnce(successResponse);
+      // when
+
+      const result = controller.getAllUserInfo();
+
+      // then
+    });
+  });
 });
