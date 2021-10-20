@@ -19,6 +19,7 @@ const mockPageNationHelper = {
 };
 describe('UsersService', () => {
   let service: UsersService;
+  let mockQueryRepository: UsersQueryRepository;
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
@@ -39,9 +40,15 @@ describe('UsersService', () => {
     }).compile();
 
     service = module.get<UsersService>(UsersService);
+    mockQueryRepository =
+      module.get<UsersQueryRepository>(UsersQueryRepository);
   });
 
   it('should be defined', () => {
     expect(service).toBeDefined();
+  });
+
+  it('should be defined', () => {
+    expect(mockQueryRepository).toBeDefined();
   });
 });
