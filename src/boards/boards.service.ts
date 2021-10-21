@@ -37,6 +37,14 @@ export class BoardsService {
     return result;
   }
 
+  async getBoardListSpecificUser(userId: number) {
+    const result = await this.boardsQueryRepository.getBoardListSpecificUser(
+      userId,
+    );
+    if (result.length == 0) throw new BadRequestException('잘못된 요청입니다.');
+    return result;
+  }
+
   async getAllBoard(
     query: BoardSearchRequest,
   ): Promise<Page<NotIncludeSensitiveBoardInfoResponse>> {
@@ -83,9 +91,5 @@ export class BoardsService {
     if (!selectedBoard) throw new BadRequestException('잘못된 요청입니다.');
 
     return selectedBoard;
-  }
-
-  getBoardListSpecificUser(userId: number) {
-    return this.boardsQueryRepository.getBoardListSpecificUser(userId);
   }
 }
