@@ -29,15 +29,17 @@ export class BoardsRepository extends Repository<Board> {
   }
 
   async updateBoard(
-    board: NotIncludeSensitiveInfoBoardResponse,
+    board: Board,
     updateRequestBody: BoardUpdateDto,
-  ): Promise<Board> {
+  ): Promise<NotIncludeSensitiveInfoBoardResponse> {
     const { title, content } = updateRequestBody;
 
     board.title = title;
     board.content = content;
 
-    return await this.save(board);
+    await this.save(board);
+
+    return new NotIncludeSensitiveInfoBoardResponse(board, board.user);
   }
 
   async deleteBoard(boardId: number): Promise<UpdateResult> {
