@@ -27,7 +27,6 @@ import * as winston from 'winston';
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true,
       keepConnectionAlive: true,
-      logging: true,
     }),
     AuthModule,
     BoardsModule,
