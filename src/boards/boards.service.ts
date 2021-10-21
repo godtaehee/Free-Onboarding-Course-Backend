@@ -84,4 +84,8 @@ export class BoardsService {
 
     return selectedBoard;
   }
+
+  getBoardListSpecificUser(userId: number) {
+    return this.boardsQueryRepository.getBoardListSpecificUser(userId);
+  }
 }
