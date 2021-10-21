@@ -42,6 +42,8 @@ import { FourHundredError } from '../common/response/error/four.hundred.error';
 import { NotValidNumberError } from '../common/response/error/not.valid.number.error';
 import { Board } from './boards.entity';
 import { ApiCommonPaginationOkResponseForm } from '../common/decorators/pagination/api.common.Ok.response.form';
+import { NotIncludeUserInfoResponse } from '../common/response/board/not.include.user.info.response';
+import { ApiCommonOkArrayResponseForm } from '../common/decorators/api.common.ok.array.response.form';
 
 @Controller('boards')
 export class BoardsController {
@@ -64,6 +66,7 @@ export class BoardsController {
     summary: '특정 유저의 작성 게시글을 가져옵니다.',
     description: '회원가입을 한 유저의 게시글만 가져올 수 있습니다.',
   })
+  @ApiCommonOkArrayResponseForm(NotIncludeUserInfoResponse)
   @UseInterceptors(CommonResponseFormInterceptor)
   @Get('/user')
   getBoardListSpecificUser(@Query('id') userId: number) {
