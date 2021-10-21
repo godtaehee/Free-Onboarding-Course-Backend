@@ -59,7 +59,7 @@ async function bootstrap() {
   await app.listen(3000, () => {
     logger.log(
       `http://localhost:${port} 에서 서버가 시작되었습니다. ` +
-        `애플리케이션의 API 문서는 http://localhost:${process.env.PORT}/api 에서 확인하실수 있습니다.`,
+        `애플리케이션의 API 문서는 http://localhost:${process.env.PORT}/api 에서 확인하실 수 있습니다.`,
     );
   });
 }
