@@ -35,6 +35,7 @@
 - Bcrypt && JWT && Passport (인증, 인가 기능)
 - Winston (Logging)
 - Swagger (API 명세 생성)
+- Prettier (코드 세이브시 코드를 가독성있게 정리해주기 위하여 사용)
 
 ## 2. 자세한 애플리케이션 실행방법
 <details>
@@ -242,5 +243,262 @@ git clone https://github.com/godtaehee/Free-Onboarding-Course-Backend
 해당 문서는 Swagger로 만들어져있으며 애플리케이션 실행 후 http://localhost:3000/api 에서 확인하실 수 있습니다.
 
 ## 5. 구현한 방법과 이유에 대한 간략한 내용
+
+### .env
+
+- JWT_SECRET_KEY
+  - JWT을 만들기 위한 SECRET_KEY가 있습니다.
+- NODE_ENV
+  - 해당값에 따라 Database를 다르게 사용할수 있습니다. `typeorm-seeding`을 이용하여 시드 데이터들을 넣거나 E2E테스트를 진행할때 실제 배포환경의 데이터베이스가 아닌 테스트환경의 데이터베이스를 이용하기위해 사용하였으며 그 외에도 다양한 환경값에 따라 다르게 적용해야하는 부분에서 사용할수 있습니다.
+- PORT
+  - 서버의 포트값입니다.
+
+### package.json (typeorm-seeding)
+
+```javascript
+...
+"seed:run": "ts-node ./node_modules/typeorm-seeding/dist/cli.js seed -n seedconfig.ts",
+"seed:board": "ts-node ./node_modules/typeorm-seeding/dist/cli.js seed -n seedconfig.ts --seed CreateBoard",
+"seed:user": "ts-node ./node_modules/typeorm-seeding/dist/cli.js seed -n seedconfig.ts --seed CreateUser"
+...
+```
+
+해당 명령어는 `typeorm-seeding`을 이용하여 Dummy Data를 테스트 데이터베이스에 제가 원하는 만큼 넣을수 있게 해줍니다.
+
+해당 명령어들은 `npm run seed:run`과 같이 사용할수 있으며 각 명령어에 대한 설명은 아래와 같습니다.
+
+> `seed:run`: 유저 10명의 정보, 게시글 100개를 생성합니다.  
+`seed:board`: 게시글 100개를 생성합니다.  
+`seed:user`: 유저 10명의 정보를 생성합니다.
+
+
+저는 testwecode 데이터베이스에 약 10만개, 100만개의 게시글을 생성하여 Pagination의 성능을 측정해보기위한 데이터 생성으로서 사용하였습니다.
+
+성능 측정의 결과는 후의 Pagination부분에서 다루도록 하겠습니다.
+
+유저 20명, 게시글 200개를 생성하여 단순 API를 테스트하기위해서도 사용했습니다.
+
+#### typeorm-seeding 설정은 아래경로의 `seedConfig.ts`에서 확인하실수 있습니다.
+
+```
+📦 
+├─ package.json
+├─ seedConfig.ts // 해당 파일
+```
+
+#### seed와 factory에 관한 파일은 아래경로에 해당하는 폴더에 있습니다.
+
+```
+📦 
+├─ .env
+├─ .eslintrc.js
+├─ seedConfig.ts
+├─ src
+│  ├─ database
+│  │  ├─ factories
+│  │  │  ├─ board.factories.ts // 해당 파일
+│  │  │  └─ user.factories.ts // 해당 파일
+│  │  └─ seeds
+│  │     ├─ board.seeds.ts // 해당 파일
+│  │     └─ user.seeds.ts // 해당 파일
+```
+
+#### Factory
+
+```javascript
+// board.factories.ts
+import { define } from 'typeorm-seeding';
+import { User } from '../../users/users.entity';
+import * as faker from 'faker';
+
+define(User, () => {
+  const email = faker.internet.email();
+  const nickname = faker.internet.userName();
+
+  const user = new User();
+  user.email = email;
+  user.password = nickname;
+  user.nickname = nickname;
+  return user;
+});
+
+```
+
+User 데이터를 어떻게 만들지를 정의해주는 Factory에서 password와 nickname이 같은 값을 갖게 했습니다.
+
+패스워드는 한번 bcrypt로 hash 값이 되면 API 테스트를 하기위해서 결국 수동으로 제가 유저를 하나 만들어야 했습니다.
+
+따라서 어떠한 계정으로도 우선 테스트가 가능하게 하기 위해 위와 같이 구현했습니다.
+
+즉 유저의 password는 nickname과 같게됩니다.
+
+#### Seed
+
+Factory를 기반으로 만든 유저의 정보를 바탕으로 실제 데이터베이스에 데이터들을 생성해줍니다.
+
+
+### AppModule
+
+```javascript
+// 코드 전문
+// app.module.ts
+... imports
+
+@Module({
+  imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
+    WinstonModule.forRootAsync({
+      useFactory: () => ({
+        level: 'debug',
+        transports: [new winston.transports.Console()],
+        silent: true,
+        // silent: process.env.NODE_ENV === 'prod',
+      }),
+    }),
+    UsersModule,
+    TypeOrmModule.forRoot({
+      type: 'sqlite',
+      database: process.env.NODE_ENV === 'prod' ? 'wecode' : 'testwecode',
+      entities: [__dirname + '/**/*.entity{.ts,.js}'],
+      synchronize: process.env.NODE_ENV === 'dev',
+      keepConnectionAlive: true,
+    }),
+    AuthModule,
+    BoardsModule,
+  ],
+  controllers: [AppController],
+  providers: [AppService],
+})
+export class AppModule {}
+
+```
+
+#### ConfigModule
+
+```javascript
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
+```
+
+process.env 값을 글로벌하게 사용할수 있도록 설정해주었습니다.
+
+#### WinstonModule
+
+```javascript
+WinstonModule.forRootAsync({
+  useFactory: () => ({
+    level: 'debug',
+    transports: [new winston.transports.Console()],
+    silent: true,
+    // silent: process.env.NODE_ENV === 'prod',
+  }),
+}),
+```
+
+E2E Test를 했을때 `NODE_ENV`값은 `test`가 됩니다.
+
+README의 `자세한 테스팅 실행방법`의 `E2E Test`에서의 예처럼 로깅이 무조건 적용되지 않게 과제 제출을 했지만 `NODE_ENV`값을 prod가 아닌 dev로 바꾸고 주석을 제거하면 정상적으로 로그 출력이 됩니다. 
+
+Nest.js의 기본 내장 로거도 충분한 편의성을 갖췄지만 Nest.js 공식문서에서도 조금 더 많은 로깅옵션을 이용하고싶다면 `Winston`과 함께 사용해도 된다고 적혀있어 `Winston`을 적용해 보았습니다.
+
+### TypeOrmModule
+
+```javascript
+TypeOrmModule.forRoot({
+  type: 'sqlite',
+  database: process.env.NODE_ENV === 'prod' ? 'wecode' : 'testwecode',
+  entities: [__dirname + '/**/*.entity{.ts,.js}'],
+  synchronize: process.env.NODE_ENV === 'dev',
+  keepConnectionAlive: true,
+}),
+```
+
+typeorm을 사용하기위한 설정을 해주었습니다. `SQLite`를 사용하였으며 환경변수에 따라 데이터베이스의 사용이 다릅니다.
+
+`synchronize`를 통해 Database의 컬럼 이름이 바뀌었을때 자동으로 적용시켜주었습니다. prod상태에서는 반드시 false값이 되어야합니다. 그렇지 않으면 모든 테이블이 Drop이 될 위험이 있습니다.
+
+`keepConnectionAlive` 옵션을 이용하여 E2E 테스트시 Connection이 테스트할때 유지되도록 해주었습니다.
+
+### AuthModule
+
+```javascript
+// 코드 전문
+// auth.module.ts
+...imports
+
+@Module({
+  imports: [
+    TypeOrmModule.forFeature([UsersRepository]),
+    PassportModule.register({ defaultStrategy: 'jwt' }),
+    JwtModule.registerAsync({
+      useFactory: () => ({
+        secret: process.env.JWT_SECRET_KEY,
+        signOptions: {
+          expiresIn: 60 * 60,
+        },
+      }),
+    }),
+  ],
+  controllers: [AuthController],
+  providers: [AuthService, JwtStrategy, UtilsHelper],
+})
+export class AuthModule {}
+```
+
+
+#### TypeOrmModule
+
+```javascript
+TypeOrmModule.forFeature([UsersRepository]),
+```
+
+UsersRepository를 Auth Domain영역 전체에서 사용하기 위해 import 해주었습니다.
+
+#### PassportModule
+
+```javascript
+PassportModule.register({ defaultStrategy: 'jwt' }),
+```
+
+제 애플리케이션에서는 Passport의 jwt전략을 기본전략으로 사용하여 인증 / 인가 처리를 해줬습니다.
+
+그외에 `local`, `kakao`등등의 많은 전략이 있습니다.
+
+#### JwtModule
+
+```javascript
+JwtModule.registerAsync({
+  useFactory: () => ({
+    secret: process.env.JWT_SECRET_KEY,
+    signOptions: {
+      expiresIn: 60 * 60,
+    },
+  }),
+}),
+```
+
+과제를 진행함에 있어서 당황스러웠던 부분입니다.
+
+`JwtModule.register`를 통하여 처음에는 동기적으로 JwtModule을 register해주었는데
+
+`JwtService`의 `signin` method가 `process.env`의 값을 인식하지 못하여 undefined로 읽어 `POST /auth/sign-in` API를 개발함에 있어 어려움이 있었습니다.
+
+![Screen Shot 2021-10-22 at 2 02 00 AM](https://user-images.githubusercontent.com/44861205/138324027-91aacdb1-f7d8-451b-a0d3-358af8ddd517.png)
+
+Nest.js의 공식 `Discord`를 이용하여 여쭤보았는데 Module에서 만들어진 환경값을 서비스에서 사용하기위해서 `registerAsync`와 `useFactory`를 이용해야했습니다.
+
+> **Dynamic module**  
+With static module binding, there's no opportunity for the `consuming module` to influence how providers from the `host module` are configured. Why does this matter? Consider the case where we have a general purpose module that needs to behave differently in different use cases. This is analogous to the concept of a "plugin" in many systems, where a generic facility requires some configuration before it can be used by a consumer. [링크](https://docs.nestjs.com/fundamentals/dynamic-modules#dynamic-modules)
+
+정확히는 `Nest.js` 공식문서의 `Dynamic module`글의 일부를 발췌해서 이해했습니다.
+
+현재 제가 처한 상황은 `AppModule`에서 `ConfigModule`에서 `isGlobal`옵션을 통해 환경값을 글로벌하게 사용할수 있게 해주었지만 AppModule이 아닌 다른 모듈인 AuthModule에서 환경값을 사용하려고 했기 때문입니다.
+
+위에서 consuming module이 AuthModule이 되고 host Module이 AppModule이 됩니다.
+
+이러한 이유때문에 저는 환경값을 불러오지 못하는 상황을 마주했고 이것을 해결하기 위해 Dynamic하게 JwtModule의 설정을 해주었습니다.
 
 
