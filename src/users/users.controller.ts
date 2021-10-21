@@ -46,7 +46,7 @@ export class UsersController {
   })
   @UseInterceptors(CommonResponseFormInterceptor)
   @Get('/:userId')
-  async getSingleUserInfo(@Param('userId') userId: number) {
+  getSingleUserInfo(@Param('userId') userId: number) {
     return this.usersService.getSingleUserInfo(userId);
   }
 

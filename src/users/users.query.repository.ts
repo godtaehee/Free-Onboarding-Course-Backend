@@ -11,7 +11,7 @@ export class UsersQueryRepository extends Repository<User> {
       .getOne();
   }
 
-  async getAllUserInfoUsingPagination(
+  getAllUserInfoUsingPagination(
     userSearchRequest: UserSearchRequest,
   ): Promise<[User[], number]> {
     const coveringIndexQueryBuilder = this.createQueryBuilder('covers')
