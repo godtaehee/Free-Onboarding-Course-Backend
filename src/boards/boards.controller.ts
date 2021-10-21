@@ -43,7 +43,6 @@ import { NotValidNumberError } from '../common/response/error/not.valid.number.e
 import { Board } from './boards.entity';
 import { ApiCommonPaginationOkResponseForm } from '../common/decorators/pagination/api.common.Ok.response.form';
 
-@ApiTags('게시글')
 @Controller('boards')
 export class BoardsController {
   constructor(
@@ -55,6 +54,7 @@ export class BoardsController {
 
   tag: string;
 
+  @ApiTags('In-Memory Database 확인용')
   @ApiQuery({
     name: 'id',
     required: true,
@@ -71,6 +71,7 @@ export class BoardsController {
     return this.boardsService.getBoardListSpecificUser(userId);
   }
 
+  @ApiTags('게시글')
   @ApiBearerAuth('access-token')
   @ApiOperation({
     summary: '게시글을 생성합니다.',
@@ -100,6 +101,7 @@ export class BoardsController {
     return this.boardsService.createBoard(user, boardCreateDto);
   }
 
+  @ApiTags('게시글')
   @ApiBearerAuth('access-token')
   @ApiOperation({
     summary: '게시글을 업데이트 합니다.',
@@ -141,6 +143,7 @@ export class BoardsController {
     );
   }
 
+  @ApiTags('게시글')
   @ApiBearerAuth('access-token')
   @ApiOperation({
     summary: '게시글을 삭제합니다.',
@@ -176,6 +179,7 @@ export class BoardsController {
     return this.boardsService.deleteBoard(user.userId, boardId);
   }
 
+  @ApiTags('게시글')
   @ApiOperation({
     summary: '게시글의 id를 기준으로 읽습니다.',
     description: '한개의 게시물을 읽어옵니다.',
@@ -202,6 +206,7 @@ export class BoardsController {
     return this.boardsService.getSingleBoard(boardId);
   }
 
+  @ApiTags('게시글')
   @ApiOperation({
     summary: '게시글을 최대 limit개 단위로 가져옵니다. (Pagination)',
     description:

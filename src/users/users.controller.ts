@@ -13,6 +13,7 @@ import {
   ApiOperation,
   ApiParam,
   ApiQuery,
+  ApiTags,
 } from '@nestjs/swagger';
 import { RequestAboutUserSuccessResponse } from '../common/response/user/request.about.user.success.response';
 import { ApiCommonOkResponseForm } from '../common/decorators/api.common.Ok.response.form';
@@ -25,6 +26,7 @@ import { CommonResponseFormInterceptor } from '../common/interceptors/common.res
 export class UsersController {
   constructor(private usersService: UsersService) {}
 
+  @ApiTags('In-Memory Database 확인용')
   @ApiOperation({
     summary: '한명의 유저의 정보를 모두 얻어옵니다.',
     description:
@@ -50,6 +52,7 @@ export class UsersController {
     return this.usersService.getSingleUserInfo(userId);
   }
 
+  @ApiTags('In-Memory Database 확인용')
   @ApiOperation({
     summary:
       '유저의 정보를 Pagination을 이용해 서비스의 모든 유저정보가 아닌 일정한 단위의 유저정보를 가져옵니다.',
