@@ -61,6 +61,11 @@ export class BoardsController {
     description:
       '특정 유저가 작성한 게시글을 가져오기위한 유저의 아이디입니다.',
   })
+  @ApiOperation({
+    summary: '특정 유저의 작성게시글을 가져옵니다..',
+    description: '회원가입을 한 유저의 게시글만 가져올수 있습니다.',
+  })
+  @UseInterceptors(CommonResponseFormInterceptor)
   @Get('/user')
   getBoardListSpecificUser(@Query('id') userId: number) {
     return this.boardsService.getBoardListSpecificUser(userId);
