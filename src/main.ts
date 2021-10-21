@@ -11,6 +11,7 @@ import { SignInFailError } from './common/response/error/sign.in.fail.error';
 import { NotValidNumberError } from './common/response/error/not.valid.number.error';
 import * as morgan from 'morgan';
 import { UserResponse } from './common/response/user/user.response';
+import { NotIncludeUserInfoResponse } from './common/response/board/not.include.user.info.response';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -40,6 +41,7 @@ async function bootstrap() {
       SignInFailError,
       NotValidNumberError,
       UserResponse,
+      NotIncludeUserInfoResponse,
     ],
   });
 
