@@ -48,6 +48,8 @@ export class AuthController {
   })
   @ApiBadRequestResponse({
     type: FourHundredError,
+    description:
+      '해당 예시에 나와 있는 오류중에 적어도 한 개의 조건에 맞지 않아 요청이 실패했습니다.',
   })
   @Post('sign-up')
   signUp(
@@ -74,9 +76,12 @@ export class AuthController {
   })
   @ApiBadRequestResponse({
     type: FourHundredError,
+    description:
+      '해당 예시에 나와 있는 오류중에 적어도 한 개의 조건에 맞지 않아 요청이 실패했습니다.',
   })
   @ApiUnauthorizedResponse({
     type: SignInFailError,
+    description: '입력된 정보가 알맞지 않아 로그인에 실패했습니다.',
   })
   @Post('sign-in')
   signIn(
