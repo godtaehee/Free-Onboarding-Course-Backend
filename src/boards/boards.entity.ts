@@ -15,8 +15,8 @@ import { Length } from 'class-validator';
 @Entity()
 export class Board {
   @ApiProperty({
-    title: 'Board 한개의 id',
-    description: 'Auto-Generated된 고유값입니다.',
+    title: 'Board 한 개의 id',
+    description: 'Auto-Generated 된 고윳값입니다.',
     example: '1',
   })
   @PrimaryGeneratedColumn({ name: 'id' })
@@ -51,7 +51,7 @@ export class Board {
   @ApiProperty({
     example: new Date(),
     description:
-      '게시글이 업데이트 된 날을 나타냅니다. 최초 생성시 createdAt과 동일한 시간을 가집니다.',
+      '게시글이 업데이트된 날을 나타냅니다. 최초 생성 시 createdAt과 같은 시간을 가집니다.',
   })
   @UpdateDateColumn()
   updatedAt: Date;
@@ -59,7 +59,7 @@ export class Board {
   @ApiProperty({
     examples: [null],
     description:
-      '게시글이 삭제된 날을 나타냅니다 Soft-Delete 방식을 채택했습니다. 게시글이 삭제되지 않았다면 이 값은 NULL이 됩니다.',
+      '게시글이 삭제된 날을 나타냅니다. Soft-Delete 방식을 채택했습니다. 게시글이 삭제되지 않았다면 이 값은 NULL이 됩니다.',
   })
   @DeleteDateColumn()
   deletedAt: Date | null;

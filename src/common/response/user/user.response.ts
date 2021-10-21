@@ -37,7 +37,7 @@ export class UserResponse extends PickType(User, [
     },
     description:
       '해당 유저가 작성한 모든 게시글을 나타냅니다. ' +
-      'User의 정보에 들어가는 Board의 정보이므로 기존의 Board에 있던 User의 정보는 들어가지않습니다',
+      'User의 정보에 들어가는 Board의 정보이므로 기존의 Board에 있던 User의 정보는 들어가지 않습니다',
   })
   boards: NotIncludeUserInfoResponse[];
 }

@@ -11,7 +11,7 @@ export class NotValidNumberError extends PickType(FourHundredError, [
     title: 'Error 메시지',
     example: '잘못된 요청입니다.',
     description:
-      'Request-Body의 각각 프로퍼티의 제약조건에 맞지않은 값이 포함되어 있습니다.',
+      'Request-Body의 각각 프로퍼티의 제약조건에 맞지 않은 값이 포함되어 있습니다.',
   })
   message: any;
 }

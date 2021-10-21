@@ -58,12 +58,11 @@ export class BoardsController {
   @ApiQuery({
     name: 'id',
     required: true,
-    description:
-      '특정 유저가 작성한 게시글을 가져오기위한 유저의 아이디입니다.',
+    description: '특정 유저가 작성한 게시글을 가져오기 위한 유저의 id 입니다.',
   })
   @ApiOperation({
-    summary: '특정 유저의 작성게시글을 가져옵니다..',
-    description: '회원가입을 한 유저의 게시글만 가져올수 있습니다.',
+    summary: '특정 유저의 작성 게시글을 가져옵니다.',
+    description: '회원가입을 한 유저의 게시글만 가져올 수 있습니다.',
   })
   @UseInterceptors(CommonResponseFormInterceptor)
   @Get('/user')
@@ -75,10 +74,10 @@ export class BoardsController {
   @ApiBearerAuth('access-token')
   @ApiOperation({
     summary: '게시글을 생성합니다.',
-    description: '회원가입을 한 유저만 게시글을 작성할수 있습니다.',
+    description: '회원가입을 한 유저만 게시글을 작성할 수 있습니다.',
   })
   @ApiCommonCreateResponseForm(CommonBoardResponse, {
-    description: '성공적으로 Board를 생성했을때의 응답입니다.',
+    description: '성공적으로 Board를 생성했을 때의 응답입니다.',
   })
   @ApiBadRequestResponse({
     type: FourHundredError,
@@ -104,9 +103,9 @@ export class BoardsController {
   @ApiTags('게시글')
   @ApiBearerAuth('access-token')
   @ApiOperation({
-    summary: '게시글을 업데이트 합니다.',
+    summary: '게시글을 업데이트합니다.',
     description:
-      '자신이 작성한 게시글만 업데이트 할수있으며, 발급받은 Access-Token을 이용해 업데이트 권한을 인가받습니다.',
+      '자신이 작성한 게시글만 업데이트 할 수 있으며, 발급받은 Access-Token을 이용해 업데이트 권한을 인가받습니다.',
   })
   @ApiParam({
     name: 'boardId',
@@ -115,7 +114,7 @@ export class BoardsController {
   })
   @ApiCommonOkResponseForm(NotIncludeSensitiveBoardInfoResponse, {
     description:
-      '성공적으로 Board를 업데이트 했을때의 응답입니다. 업데이트 후의 Board의 상태를 응답합니다.',
+      '성공적으로 Board를 업데이트 했을 때의 응답입니다. 업데이트 후의 Board의 상태를 응답합니다.',
   })
   @ApiBadRequestResponse({
     type: NotValidNumberError,
@@ -148,7 +147,7 @@ export class BoardsController {
   @ApiOperation({
     summary: '게시글을 삭제합니다.',
     description:
-      '자신이 작성한 게시글만 삭제 할수있으며, 발급받은 Access-Token을 이용해 업데이트 권한을 인가받습니다. Soft-Delete 정책을 사용했습니다.',
+      '자신이 작성한 게시글만 삭제 할 수 있으며, 발급받은 Access-Token을 이용해 업데이트 권한을 인가받습니다. Soft-Delete 정책을 사용했습니다.',
   })
   @ApiParam({
     name: 'boardId',
@@ -156,7 +155,7 @@ export class BoardsController {
     description: '삭제할 게시글의 고유 번호입니다.',
   })
   @ApiCommonOkResponseForm(CommonBoardResponse, {
-    description: '성공적으로 Board를 삭제했을때 응답입니다.',
+    description: '성공적으로 Board를 삭제했을 때 응답입니다.',
   })
   @Delete('/:boardId')
   @UseGuards(AuthGuard('jwt'))
@@ -182,7 +181,7 @@ export class BoardsController {
   @ApiTags('게시글')
   @ApiOperation({
     summary: '게시글의 id를 기준으로 읽습니다.',
-    description: '한개의 게시물을 읽어옵니다.',
+    description: '한 개의 게시물을 읽어옵니다.',
   })
   @ApiParam({
     name: 'boardId',
@@ -190,7 +189,7 @@ export class BoardsController {
     description: '읽어올 게시글의 고유 번호입니다.',
   })
   @ApiCommonOkResponseForm(NotIncludeSensitiveBoardInfoResponse, {
-    description: '성공적으로 Board를 가져왔을때의 응답입니다.',
+    description: '성공적으로 Board를 가져왔을 때의 응답입니다.',
   })
   @ApiBadRequestResponse({
     type: NotValidNumberError,
@@ -208,15 +207,15 @@ export class BoardsController {
 
   @ApiTags('게시글')
   @ApiOperation({
-    summary: '게시글을 최대 limit개 단위로 가져옵니다. (Pagination)',
+    summary: '게시글을 최대 limit 개 단위로 가져옵니다. (Pagination)',
     description:
-      '게시글을 최대 limit개 단위로 가져옵니다. Pagination을 구현하실때 사용하실수 있습니다. ' +
-      '삭제된 게시글은 가져올수 없습니다. 최신 -> 과거순으로 Board를 가져옵니다.',
+      '게시글을 최대 limit 개 단위로 가져옵니다. Pagination을 구현하실 때 사용하실 수 있습니다.' +
+      '삭제된 게시글은 가져올 수 없습니다. 최신 -> 과거순으로 Board를 가져옵니다.',
   })
   @ApiQuery({
     name: 'limit',
     required: true,
-    description: '최대 몇개의 Board를 가져올것인지에 대한 값입니다.',
+    description: '최대 몇 개의 Board를 가져올 것인지에 대한 값입니다.',
   })
   @ApiQuery({
     name: 'offset',
@@ -226,7 +225,7 @@ export class BoardsController {
   })
   @ApiCommonPaginationOkResponseForm(NotIncludeSensitiveBoardInfoResponse, {
     description:
-      '유저의 패스워드와 같은 민감한정보를 포함하지않는 Board의 응답입니다.',
+      '유저의 패스워드와 같은 민감한 정보를 포함하지 않는 Board의 응답입니다.',
   })
   @ApiBadRequestResponse({
     type: NotValidNumberError,
