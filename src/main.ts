@@ -3,7 +3,7 @@ import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { RequestAboutUserSuccessResponse } from './common/response/user/request.about.user.success.response';
 import { SignInSuccessResponse } from './common/response/user/sign.in.success.response';
-import { NotIncludeSensitiveBoardInfoResponse } from './common/response/board/not.include.sensitive.board.info.response';
+import { NotIncludeSensitiveInfoBoardResponse } from './common/response/board/not.include.sensitive.info.board.response';
 import { CommonBoardResponse } from './common/response/board/common.board.response';
 import { FourHundredOneError } from './common/response/error/four.hundred.one.error';
 import { FourHundredError } from './common/response/error/four.hundred.error';
@@ -34,7 +34,7 @@ async function bootstrap() {
     extraModels: [
       RequestAboutUserSuccessResponse,
       SignInSuccessResponse,
-      NotIncludeSensitiveBoardInfoResponse,
+      NotIncludeSensitiveInfoBoardResponse,
       CommonBoardResponse,
       FourHundredError,
       FourHundredOneError,
