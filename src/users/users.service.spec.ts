@@ -147,7 +147,7 @@ describe('UsersService', () => {
 
       const totalCount = faker.datatype.number();
 
-      const getAllUserInfoUsingPaginationSuccessResponse = [[[], totalCount]];
+      const getAllUserInfoUsingPaginationSuccessResponse = [[], totalCount];
 
       queryRepository.getAllUserInfoUsingPagination = jest
         .fn()
