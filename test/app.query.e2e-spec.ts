@@ -40,4 +40,9 @@ describe('AppController (e2e) Query', () => {
     );
     expect(result.body.pageSize).toBeTruthy();
   });
+
+  it('/users/:userId (GET)', async () => {
+    const result = await request(app.getHttpServer()).get('/users/3');
+    expect(result.body.success).toBeTruthy();
+  });
 });
