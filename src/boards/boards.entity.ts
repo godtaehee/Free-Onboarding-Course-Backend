@@ -3,6 +3,7 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  JoinColumn,
   ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -69,5 +70,6 @@ export class Board {
     description: '게시글을 작성한 작성자의 정보를 나타냅니다.',
   })
   @ManyToOne((type) => User, (user) => user.boards, { eager: false })
+  @JoinColumn({ name: 'userId' })
   user: User;
 }

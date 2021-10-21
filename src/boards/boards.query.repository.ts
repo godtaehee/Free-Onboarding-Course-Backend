@@ -4,18 +4,15 @@ import { BoardSearchRequest } from './dto/board.search.request';
 
 @EntityRepository(Board)
 export class BoardsQueryRepository extends Repository<Board> {
-  async getSingleBoardByBoardId(boardId: number): Promise<Board> {
+  getSingleBoardByBoardId(boardId: number): Promise<Board> {
     return this.createQueryBuilder('boards')
       .innerJoinAndSelect('boards.user', 'user')
-      .select(['boards', 'user.id', 'user.nickname'])
-      .where({ id: boardId })
+      .select(['boards', 'user.userId', 'user.nickname'])
+      .where({ boardId })
       .getOne();
   }
 
-  async getSingleBoardSpecificUser(
-    userId: number,
-    boardId: number,
-  ): Promise<Board> {
+  getSingleBoardSpecificUser(userId: number, boardId: number): Promise<Board> {
     return this.createQueryBuilder('boards')
       .innerJoinAndSelect('boards.user', 'user')
       .select(['boards', 'user.id', 'user.nickname'])
@@ -23,7 +20,6 @@ export class BoardsQueryRepository extends Repository<Board> {
       .getOne();
   }
 
-  // TODO User정보가 아닌 Board의 정보들만 가져올 때 사용하기위해 남겨둠
   getBoardListSpecificUser(userId: number): Promise<Board[]> {
     return this.createQueryBuilder('boards')
       .where('userId = :userId', {
@@ -32,7 +28,7 @@ export class BoardsQueryRepository extends Repository<Board> {
       .getMany();
   }
 
-  async getAllBoard(query: BoardSearchRequest): Promise<[Board[], number]> {
+  getAllBoard(query: BoardSearchRequest): Promise<[Board[], number]> {
     const coveringIndexQueryBuilder = this.createQueryBuilder('covers')
       .innerJoinAndSelect('covers.user', 'user')
       .select('covers.id')
