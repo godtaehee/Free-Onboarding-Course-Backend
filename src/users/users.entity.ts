@@ -43,6 +43,7 @@ export class User {
   })
   @IsNotEmpty()
   @IsString()
+  @Length(5, 50)
   @Column()
   password: string;
 
