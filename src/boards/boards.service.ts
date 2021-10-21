@@ -65,7 +65,7 @@ export class BoardsService {
     userId: number,
     boardId: number,
     updateRequestBody: BoardUpdateDto,
-  ): Promise<Board> {
+  ): Promise<NotIncludeSensitiveInfoBoardResponse> {
     const selectedBoard = await this.confirmValidBoard(userId, boardId);
     return this.boardsRepository.updateBoard(selectedBoard, updateRequestBody);
   }

@@ -145,7 +145,7 @@ export class BoardsController {
     @GetUser() user: User,
     @Param('boardId', PositiveNumberValidationPipe) boardId: number,
     @Body() updateRequestBody: BoardUpdateDto,
-  ): Promise<Board> {
+  ): Promise<NotIncludeSensitiveInfoBoardResponse> {
     this.logger.debug(
       `${this.tag} ${new Date()} '${boardId}'번 아이디의 게시물을 제목은 ${
         updateRequestBody.title
