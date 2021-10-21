@@ -18,6 +18,7 @@ import * as winston from 'winston';
       useFactory: () => ({
         level: 'debug',
         transports: [new winston.transports.Console()],
+        silent: true,
       }),
     }),
     UsersModule,
