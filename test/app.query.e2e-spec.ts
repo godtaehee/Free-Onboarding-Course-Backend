@@ -30,7 +30,6 @@ describe('AppController (e2e) Query', () => {
 
   it('/boards/user?id (GET)', async () => {
     const result = await request(app.getHttpServer()).get('/boards/user?id=1');
-    console.log(result.body);
     expect(result.body.success).toBeTruthy();
   });
 
