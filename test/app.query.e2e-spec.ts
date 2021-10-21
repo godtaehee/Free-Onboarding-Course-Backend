@@ -3,7 +3,7 @@ import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { AppModule } from './../src/app.module';
 
-describe('AppController (e2e)', () => {
+describe('AppController (e2e) Query', () => {
   let app: INestApplication;
 
   beforeEach(async () => {
@@ -25,6 +25,6 @@ describe('AppController (e2e)', () => {
     const result = await request(app.getHttpServer()).get(
       '/boards?offset=1&limit=20',
     );
-    expect(result.body).toBeTruthy();
+    expect(result.body.pageSize).toBeTruthy();
   });
 });
