@@ -220,10 +220,7 @@ describe('BoardsController', () => {
 
       const successResponse = {
         success: true,
-        data: {
-          userId: validUserId,
-          boardList,
-        },
+        data: boardList,
       };
 
       service.getBoardListSpecificUser = jest
