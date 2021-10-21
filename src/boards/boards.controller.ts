@@ -66,8 +66,14 @@ export class BoardsController {
     summary: '특정 유저의 작성 게시글을 가져옵니다.',
     description: '회원가입을 한 유저의 게시글만 가져올 수 있습니다.',
   })
-  @ApiCommonOkArrayResponseForm(NotIncludeUserInfoResponse)
+  @ApiCommonOkArrayResponseForm(NotIncludeUserInfoResponse, {
+    description: '성공적으로 게시글을 가져왔을 때의 응답입니다.',
+  })
   @UseInterceptors(CommonResponseFormInterceptor)
+  @ApiBadRequestResponse({
+    type: NotValidNumberError,
+    description: '제약조건에 맞지 않은 값이 포함되어 있습니다.',
+  })
   @Get('/user')
   getBoardListSpecificUser(@Query('id') userId: number) {
     return this.boardsService.getBoardListSpecificUser(userId);
@@ -84,9 +90,13 @@ export class BoardsController {
   })
   @ApiBadRequestResponse({
     type: FourHundredError,
+    description:
+      '해당 예시에 나와 있는 오류중에 적어도 한 개의 조건에 맞지 않아 요청이 실패했습니다.',
   })
   @ApiUnauthorizedResponse({
     type: FourHundredOneError,
+    description:
+      '권한이 없습니다. 토큰이 제대로 생성되거나 토큰을 이용하여 API를 호출하고 있는지 확인해주세요.',
   })
   @Post('/create')
   @UseGuards(AuthGuard('jwt'))
@@ -121,9 +131,12 @@ export class BoardsController {
   })
   @ApiBadRequestResponse({
     type: NotValidNumberError,
+    description: '제약조건에 맞지 않은 값이 포함되어 있습니다.',
   })
   @ApiUnauthorizedResponse({
     type: FourHundredOneError,
+    description:
+      '권한이 없습니다. 토큰이 제대로 생성되거나 토큰을 이용하여 API를 호출하고 있는지 확인해주세요.',
   })
   @Patch('/:boardId')
   @UseGuards(AuthGuard('jwt'))
@@ -165,9 +178,12 @@ export class BoardsController {
   @UseInterceptors(CommonResponseFormInterceptor)
   @ApiBadRequestResponse({
     type: NotValidNumberError,
+    description: '제약조건에 맞지 않은 값이 포함되어 있습니다.',
   })
   @ApiUnauthorizedResponse({
     type: FourHundredOneError,
+    description:
+      '권한이 없습니다. 토큰이 제대로 생성되거나 토큰을 이용하여 API를 호출하고 있는지 확인해주세요.',
   })
   async deleteBoard(
     @GetUser() user: User,
@@ -196,6 +212,7 @@ export class BoardsController {
   })
   @ApiBadRequestResponse({
     type: NotValidNumberError,
+    description: '제약조건에 맞지 않은 값이 포함되어 있습니다.',
   })
   @UseInterceptors(CommonResponseFormInterceptor)
   @Get('/:boardId')
@@ -232,6 +249,7 @@ export class BoardsController {
   })
   @ApiBadRequestResponse({
     type: NotValidNumberError,
+    description: '제약조건에 맞지 않은 값이 포함되어 있습니다.',
   })
   @Get('/')
   getAllBoard(
