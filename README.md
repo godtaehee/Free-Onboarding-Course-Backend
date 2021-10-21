@@ -159,19 +159,19 @@ git clone https://github.com/godtaehee/Free-Onboarding-Course-Backend
 
 총 6개의 `Suite`가 있습니다.
 
-- Auth
+- `Auth`
   - AuthController
     - 회원가입과 로그인 시 요청으로 들어오는 정보의 유효성을 검사해주는 `Validation Pipe`, 요청 성공 시 어떠한 응답을 할 것인지에 대한 테스트를 진행하였습니다.
   - AuthService
     - `bcrypt`를 이용한 비밀번호 암호화 로직을 faker와 mocking을 이용하여 진행했으며, 로직이 성공했을 때 어떠한 응답을 반환해줄 것인지에 대한 테스트를 진행하였습니다.
 
-- Board
+- `Board`
   - BoardsController
     - 게시글의 생성, 조회, 수정, 삭제가 성공했을 때 어떠한 응답을 주며, 요청으로 받은 게시글의 아이디 혹은 유저의 아이디가 음수인지에 대한 `Validation Pipe` 테스트를 진행하였습니다.
   - BoardsService
     -  Pagination을 사용하는 게시글의 API에서 어떠한 응답을 줘야 하는지, 게시글의 데이터를 다루는 도중 예기치 못한 에러가 난다면 어떠한 에러를 던져줄지에 대한 테스트를 진행하였습니다.
 
-- User
+- `User`
   - UsersController
     - Auth, Board와 마찬가지로 Controller(Route Handler) 계층의 테스트는 Validation Pipe 혹은 어떠한 응답을 반환할지에 대한 테스트가 주를 이루었습니다. 
   - UsersService
@@ -205,3 +205,42 @@ git clone https://github.com/godtaehee/Free-Onboarding-Course-Backend
   - Cycle Testing과 같이 데이터베이스에 Test가 끝나고 데이터가 저장되지 않게 Rollback 처리를 진행했습니다.
 
 </details>
+
+## 4. API 명세
+
+총 10개의 API를 이용하실수 있습니다.
+
+각각의 API는 해당 API에 알맞은 Request / Response에 대한 정보를 포함합니다.
+
+![Screen Shot 2021-10-21 at 10 08 48 PM](https://user-images.githubusercontent.com/44861205/138284110-cc88d0ce-9b1e-490d-9e7e-655c9df73975.png)
+
+### In-Memory Database 확인용
+
+> 애플리케이션을 직접 개발한 제 입장에서 보면 어느 API를 어떠한 순서로 실행해야 알고 있고 해당 데이터가 어떠한 데이터인지 명확하게 알 수 있지만 사용자 입장에서 생각을 해보니 In-Memory DB를 GUI 환경에서도 물론 볼 수 있지만 채점환경은 바로바로 애플리케이션에서 데이터에 대한 정보를 알 수 있어야 할 것 같아서 따로 3개의 API를 추가로 만들게 되었습니다.
+
+사실 해당 API는 실제 서비스의 API하고는 거리가 있습니다. 애플리케이션이 커지면 그만큼 민감한 데이터 정보(password)들을 포함하고 있을 확률이 높습니다.
+
+물론 password가 bcrypt로 암호화되어서 회원가입 후 비밀번호를 다시 발급받는 API가 있지 않으면 비밀번호를 찾을 방법은 없습니다.
+
+어디까지나 채점자분들의 편의를 위해서 만든 API이며 실제 배포환경에서는 당연히 API 명세에서도 제거하여 외부에 노출하지 않을 예정입니다. 
+
+제가 생각했던 해당 API들의 사용 목적은 아래와 같습니다.
+
+- `[GET] /users/{userId}`
+  - 회원가입 후 실제 회원가입이 이루어졌는지 확인한다.
+  - 게시글 작성 후 실제로 해당 유저가 작성한 게시글로 데이터가 저장되었는지 확인한다.
+- `[GET] /users?offset&limit`
+  - 위의 API를 이용하려면 user의 Id 값이 있어야 하는데 그것마저 잃어버렸을 때 사용할 수 있습니다.
+  - 최신 -> 과거순으로 정렬된 모든 유저의 limit 개의 정보를 JSON 형태로 반환합니다.
+- `[GET] /boards/user`
+  - user의 정보는 필요 없으며, user가 작성한 게시글의 정보만 응답받기 위해서 사용합니다.
+
+해당 3개의 API가 채점하는데 조금 더 편한 환경을 제공하기를 바랍니다.
+
+그 외의 모든 API는 서버 실행 시 이용 가능한 명세서에 자세하게 설명이 되어있습니다.
+
+해당 문서는 Swagger로 만들어져있으며 애플리케이션 실행 후 http://localhost:3000/api 에서 확인하실 수 있습니다.
+
+## 5. 구현한 방법과 이유에 대한 간략한 내용
+
+
