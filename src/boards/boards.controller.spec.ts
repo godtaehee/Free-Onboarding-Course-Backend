@@ -7,6 +7,7 @@ import { BoardCreateDto } from './dto/board.create.dto';
 import { User } from '../users/users.entity';
 import { BoardUpdateDto } from './dto/board.update.dto';
 import { PaginationHelper } from '../common/utils/pagination.helper';
+import { NotIncludeUserInfoResponse } from '../common/response/board/not.include.user.info.response';
 
 const mockWinston = {
   debug: jest.fn(),
@@ -202,6 +203,36 @@ describe('BoardsController', () => {
 
       // then
       expect(result).toStrictEqual(successDeletedResponse);
+    });
+  });
+
+  describe('Get-BoardList-SpecificUser', () => {
+    it('should return boardList if userId is valid value', () => {
+      // given
+      const validUserId = faker.datatype.number();
+
+      const board: NotIncludeUserInfoResponse = {
+        title: faker.lorem.sentence(),
+        content: faker.lorem.sentences(),
+      } as any;
+
+      const boardList = [board];
+
+      const successResponse = {
+        success: true,
+        data: boardList,
+      };
+
+      service.getBoardListSpecificUser = jest
+        .fn()
+        .mockResolvedValueOnce(successResponse);
+      // when
+
+      const result = controller.getBoardListSpecificUser(validUserId);
+
+      // then
+
+      expect(result).resolves.toStrictEqual(successResponse);
     });
   });
 });
