@@ -1,5 +1,7 @@
 import { PageRequest } from '../../common/abstract/page.request';
+import { ApiExtraModels } from '@nestjs/swagger';
 
+@ApiExtraModels()
 export class UserSearchRequest extends PageRequest {
   constructor() {
     super();
