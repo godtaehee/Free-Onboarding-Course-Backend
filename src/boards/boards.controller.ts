@@ -23,13 +23,11 @@ import { User } from '../users/users.entity';
 import {
   ApiBadRequestResponse,
   ApiBearerAuth,
-  ApiOkResponse,
   ApiOperation,
   ApiParam,
   ApiQuery,
   ApiTags,
   ApiUnauthorizedResponse,
-  getSchemaPath,
 } from '@nestjs/swagger';
 import { BoardSearchRequest } from './dto/board.search.request';
 import { CommonBoardResponse } from '../common/response/board/common.board.response';
@@ -43,6 +41,7 @@ import { FourHundredOneError } from '../common/response/error/four.hundred.one.e
 import { FourHundredError } from '../common/response/error/four.hundred.error';
 import { NotValidNumberError } from '../common/response/error/not.valid.number.error';
 import { Board } from './boards.entity';
+import { ApiCommonPaginationOkResponseForm } from '../common/decorators/pagination/api.common.Ok.response.form';
 
 @ApiTags('게시글')
 @Controller('boards')
@@ -128,33 +127,9 @@ export class BoardsController {
     description:
       '게시판의 시작페이지의 수를 나타냅니다. 0을 제외한 양수의 값입니다.',
   })
-  @ApiOkResponse({
-    schema: {
-      allOf: [
-        {
-          properties: {
-            pageSize: {
-              type: 'number',
-              example: '10',
-            },
-            totalCount: {
-              type: 'number',
-              example: '200',
-            },
-            totalPage: {
-              type: 'number',
-              example: '5',
-            },
-            items: {
-              type: 'array',
-              items: {
-                $ref: getSchemaPath(NotIncludeSensitiveBoardInfoResponse),
-              },
-            },
-          },
-        },
-      ],
-    },
+  @ApiCommonPaginationOkResponseForm(NotIncludeSensitiveBoardInfoResponse, {
+    description:
+      '유저의 패스워드와 같은 민감한정보를 포함하지않는 Board의 응답입니다.',
   })
   @ApiBadRequestResponse({
     type: NotValidNumberError,
