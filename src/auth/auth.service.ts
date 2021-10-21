@@ -5,7 +5,7 @@ import { SignInDto } from './dto/sign.in.dto';
 import * as bcrypt from 'bcrypt';
 import { User } from '../users/users.entity';
 import { JwtService } from '@nestjs/jwt';
-import { RegisterSuccessResponse } from '../common/response/user/register.success.response';
+import { RequestAboutUserSuccessResponse } from '../common/response/user/request.about.user.success.response';
 import { SignInSuccessResponse } from '../common/response/user/sign.in.success.response';
 
 @Injectable()
@@ -15,7 +15,7 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  async signUp(signUpDto: SignUpDto): Promise<RegisterSuccessResponse> {
+  async signUp(signUpDto: SignUpDto): Promise<RequestAboutUserSuccessResponse> {
     return this.usersRepository.signUp(signUpDto);
   }
 

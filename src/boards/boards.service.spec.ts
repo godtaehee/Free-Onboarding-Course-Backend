@@ -7,7 +7,7 @@ import { BoardCreateDto } from './dto/board.create.dto';
 import { Board } from './boards.entity';
 import { BoardSearchRequest } from './dto/board.search.request';
 import { PaginationHelper } from '../common/utils/pagination.helper';
-import { NotInclueSensitiveBoardInfoResponse } from '../common/response/board/not.inclue.sensitive.board.info.response';
+import { NotIncludeSensitiveBoardInfoResponse } from '../common/response/board/not.include.sensitive.board.info.response';
 
 const mockBoardsRepository = {
   save: jest.fn(),
@@ -24,7 +24,7 @@ describe('BoardsService', () => {
   let service: BoardsService;
   let commandRepository: BoardsRepository;
   let queryRepository: BoardsQueryRepository;
-  let paginationHelper: PaginationHelper<NotInclueSensitiveBoardInfoResponse>;
+  let paginationHelper: PaginationHelper<NotIncludeSensitiveBoardInfoResponse>;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -49,7 +49,7 @@ describe('BoardsService', () => {
     commandRepository = module.get<BoardsRepository>(BoardsRepository);
     queryRepository = module.get<BoardsQueryRepository>(BoardsQueryRepository);
     paginationHelper =
-      module.get<PaginationHelper<NotInclueSensitiveBoardInfoResponse>>(
+      module.get<PaginationHelper<NotIncludeSensitiveBoardInfoResponse>>(
         PaginationHelper,
       );
   });

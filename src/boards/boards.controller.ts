@@ -33,7 +33,7 @@ import {
 } from '@nestjs/swagger';
 import { BoardSearchRequest } from './dto/board.search.request';
 import { CommonBoardResponse } from '../common/response/board/common.board.response';
-import { NotInclueSensitiveBoardInfoResponse } from '../common/response/board/not.inclue.sensitive.board.info.response';
+import { NotIncludeSensitiveBoardInfoResponse } from '../common/response/board/not.include.sensitive.board.info.response';
 import { PositiveNumberValidationPipe } from '../common/pipe/positive.number.validation.pipe';
 import { CommonResponseFormInterceptor } from '../common/interceptors/common.response.form.interceptor';
 import { ApiCommonCreateResponseForm } from '../common/decorators/api.common.create.response.form';
@@ -94,7 +94,7 @@ export class BoardsController {
     required: true,
     description: '읽어올 게시글의 고유 번호입니다.',
   })
-  @ApiCommonOkResponseForm(NotInclueSensitiveBoardInfoResponse, {
+  @ApiCommonOkResponseForm(NotIncludeSensitiveBoardInfoResponse, {
     description: '성공적으로 Board를 가져왔을때의 응답입니다.',
   })
   @ApiBadRequestResponse({
@@ -148,7 +148,7 @@ export class BoardsController {
             items: {
               type: 'array',
               items: {
-                $ref: getSchemaPath(NotInclueSensitiveBoardInfoResponse),
+                $ref: getSchemaPath(NotIncludeSensitiveBoardInfoResponse),
               },
             },
           },
@@ -162,7 +162,7 @@ export class BoardsController {
   @Get('/')
   getAllBoard(
     @Query(new ValidationPipe({ transform: true })) query: BoardSearchRequest,
-  ): Promise<Page<NotInclueSensitiveBoardInfoResponse>> {
+  ): Promise<Page<NotIncludeSensitiveBoardInfoResponse>> {
     this.logger.debug(
       `${this.tag} ${new Date()} ${
         (query.offset - 1) * query.limit
@@ -182,7 +182,7 @@ export class BoardsController {
     required: true,
     description: '수정할 게시글의 고유 번호입니다.',
   })
-  @ApiCommonOkResponseForm(NotInclueSensitiveBoardInfoResponse, {
+  @ApiCommonOkResponseForm(NotIncludeSensitiveBoardInfoResponse, {
     description:
       '성공적으로 Board를 업데이트 했을때의 응답입니다. 업데이트 후의 Board의 상태를 응답합니다.',
   })

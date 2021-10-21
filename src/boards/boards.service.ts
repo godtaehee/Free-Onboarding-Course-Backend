@@ -7,7 +7,7 @@ import { CommonBoardResponse } from '../common/response/board/common.board.respo
 import { BoardSearchRequest } from './dto/board.search.request';
 import { BoardsQueryRepository } from './boards.query.repository';
 import { Page } from '../common/page';
-import { NotInclueSensitiveBoardInfoResponse } from '../common/response/board/not.inclue.sensitive.board.info.response';
+import { NotIncludeSensitiveBoardInfoResponse } from '../common/response/board/not.include.sensitive.board.info.response';
 import { Board } from './boards.entity';
 import { PaginationHelper } from '../common/utils/pagination.helper';
 
@@ -19,7 +19,7 @@ export class BoardsService {
     @InjectRepository(BoardsQueryRepository)
     private boardsQueryRepository: BoardsQueryRepository,
     @Inject(PaginationHelper)
-    private paginationHelper: PaginationHelper<NotInclueSensitiveBoardInfoResponse>,
+    private paginationHelper: PaginationHelper<NotIncludeSensitiveBoardInfoResponse>,
   ) {}
 
   createBoard(
@@ -39,17 +39,17 @@ export class BoardsService {
 
   async getAllBoard(
     query: BoardSearchRequest,
-  ): Promise<Page<NotInclueSensitiveBoardInfoResponse>> {
+  ): Promise<Page<NotIncludeSensitiveBoardInfoResponse>> {
     const [boards, count] = await this.boardsQueryRepository.getAllBoard(query);
 
     if (boards.length <= 0)
       throw new BadRequestException(
         `해당 ${query.offset}번째 페이지의 게시글이 존재하지 않습니다.`,
       );
-    return this.paginationHelper.getPaginationItems<NotInclueSensitiveBoardInfoResponse>(
+    return this.paginationHelper.getPaginationItems<NotIncludeSensitiveBoardInfoResponse>(
       count,
       query.limit,
-      boards.map((b) => new NotInclueSensitiveBoardInfoResponse(b, b.user)),
+      boards.map((b) => new NotIncludeSensitiveBoardInfoResponse(b, b.user)),
     );
   }
 

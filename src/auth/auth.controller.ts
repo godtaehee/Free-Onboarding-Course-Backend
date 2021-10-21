@@ -17,7 +17,7 @@ import {
   ApiTags,
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
-import { RegisterSuccessResponse } from '../common/response/user/register.success.response';
+import { RequestAboutUserSuccessResponse } from '../common/response/user/request.about.user.success.response';
 import { SignInSuccessResponse } from '../common/response/user/sign.in.success.response';
 import { CommonResponseFormInterceptor } from '../common/interceptors/common.response.form.interceptor';
 import { ApiCommonCreateResponseForm } from '../common/decorators/api.common.create.response.form';
@@ -43,7 +43,7 @@ export class AuthController {
       '회원가입을 하지않아도 게시글을 볼수는 있습니다. ' +
       '하지만 회원가입을 해야 게시글을 작성, 수정, 삭제를 할수 있습니다.',
   })
-  @ApiCommonCreateResponseForm(RegisterSuccessResponse, {
+  @ApiCommonCreateResponseForm(RequestAboutUserSuccessResponse, {
     description: '회원가입 성공시의 응답입니다.',
   })
   @ApiBadRequestResponse({
@@ -52,7 +52,7 @@ export class AuthController {
   @Post('sign-up')
   signUp(
     @Body(ValidationPipe) signUpDto: SignUpDto,
-  ): Promise<RegisterSuccessResponse> {
+  ): Promise<RequestAboutUserSuccessResponse> {
     this.logger.debug(
       `${this.tag} ${new Date().toLocaleString()} '${
         signUpDto.email
