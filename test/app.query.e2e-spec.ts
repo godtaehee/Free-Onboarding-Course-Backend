@@ -33,4 +33,11 @@ describe('AppController (e2e) Query', () => {
     console.log(result.body);
     expect(result.body.success).toBeTruthy();
   });
+
+  it('/users?offset&limit (GET)', async () => {
+    const result = await request(app.getHttpServer()).get(
+      '/users?offset=1&limit=20',
+    );
+    expect(result.body.pageSize).toBeTruthy();
+  });
 });
