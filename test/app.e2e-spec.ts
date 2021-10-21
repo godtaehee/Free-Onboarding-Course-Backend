@@ -86,7 +86,7 @@ describe('AppController (e2e)', () => {
       const getAllBoardResult = await request(app.getHttpServer()).get(
         '/boards?offset=1&limit=20',
       );
-      expect(getAllBoardResult.body).toBeTruthy();
+      expect(getAllBoardResult.body.pageSize).toBeTruthy();
 
       // 방금 만든 게시글 업데이트
       const updateBoardResult = await request(app.getHttpServer())
