@@ -22,7 +22,7 @@ export class BoardsQueryRepository extends Repository<Board> {
 
   getBoardListSpecificUser(userId: number): Promise<Board[]> {
     return this.createQueryBuilder('boards')
-      .where('userId = :userId', {
+      .where('user_id = :userId', {
         userId,
       })
       .getMany();
@@ -30,7 +30,6 @@ export class BoardsQueryRepository extends Repository<Board> {
 
   getAllBoard(query: BoardSearchRequest): Promise<[Board[], number]> {
     const coveringIndexQueryBuilder = this.createQueryBuilder('covers')
-      .innerJoinAndSelect('covers.user', 'user')
       .select('covers.id')
       .orderBy('covers.id', 'DESC')
       .limit(query.getLimit())
@@ -40,10 +39,10 @@ export class BoardsQueryRepository extends Repository<Board> {
       .innerJoin(
         `(${coveringIndexQueryBuilder.getQuery()})`,
         'covers',
-        'boards.id = covers_id',
+        'boards.id = covers.id',
       )
       .innerJoinAndSelect('boards.user', 'user')
-      .select(['boards', 'user.id', 'user.nickname'])
+      .select(['boards', 'user.userId', 'user.nickname'])
       .getManyAndCount();
   }
 }
