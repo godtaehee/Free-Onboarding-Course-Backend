@@ -31,7 +31,7 @@ import {
 } from '@nestjs/swagger';
 import { BoardSearchRequest } from './dto/board.search.request';
 import { CommonBoardResponse } from '../common/response/board/common.board.response';
-import { NotIncludeSensitiveBoardInfoResponse } from '../common/response/board/not.include.sensitive.board.info.response';
+import { NotIncludeSensitiveInfoBoardResponse } from '../common/response/board/not.include.sensitive.info.board.response';
 import { PositiveNumberValidationPipe } from '../common/pipe/positive.number.validation.pipe';
 import { CommonResponseFormInterceptor } from '../common/interceptors/common.response.form.interceptor';
 import { ApiCommonCreateResponseForm } from '../common/decorators/api.common.create.response.form';
@@ -125,7 +125,7 @@ export class BoardsController {
     required: true,
     description: '수정할 게시글의 고유 번호입니다.',
   })
-  @ApiCommonOkResponseForm(NotIncludeSensitiveBoardInfoResponse, {
+  @ApiCommonOkResponseForm(NotIncludeSensitiveInfoBoardResponse, {
     description:
       '성공적으로 Board를 업데이트 했을 때의 응답입니다. 업데이트 후의 Board의 상태를 응답합니다.',
   })
@@ -207,7 +207,7 @@ export class BoardsController {
     required: true,
     description: '읽어올 게시글의 고유 번호입니다.',
   })
-  @ApiCommonOkResponseForm(NotIncludeSensitiveBoardInfoResponse, {
+  @ApiCommonOkResponseForm(NotIncludeSensitiveInfoBoardResponse, {
     description: '성공적으로 Board를 가져왔을 때의 응답입니다.',
   })
   @ApiBadRequestResponse({
@@ -243,7 +243,7 @@ export class BoardsController {
     description:
       '게시판의 시작페이지의 수를 나타냅니다. 0을 제외한 양수의 값입니다.',
   })
-  @ApiCommonPaginationOkResponseForm(NotIncludeSensitiveBoardInfoResponse, {
+  @ApiCommonPaginationOkResponseForm(NotIncludeSensitiveInfoBoardResponse, {
     description:
       '유저의 패스워드와 같은 민감한 정보를 포함하지 않는 Board의 응답입니다.',
   })
@@ -254,7 +254,7 @@ export class BoardsController {
   @Get('/')
   getAllBoard(
     @Query(new ValidationPipe({ transform: true })) query: BoardSearchRequest,
-  ): Promise<Page<NotIncludeSensitiveBoardInfoResponse>> {
+  ): Promise<Page<NotIncludeSensitiveInfoBoardResponse>> {
     this.logger.debug(
       `${this.tag} ${new Date()} ${
         (query.offset - 1) * query.limit

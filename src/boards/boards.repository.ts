@@ -3,6 +3,7 @@ import { Board } from './boards.entity';
 import { BoardCreateDto } from './dto/board.create.dto';
 import { BoardUpdateDto } from './dto/board.update.dto';
 import { CommonBoardResponse } from '../common/response/board/common.board.response';
+import { NotIncludeSensitiveInfoBoardResponse } from '../common/response/board/not.include.sensitive.info.board.response';
 
 @EntityRepository(Board)
 export class BoardsRepository extends Repository<Board> {
@@ -28,7 +29,7 @@ export class BoardsRepository extends Repository<Board> {
   }
 
   async updateBoard(
-    board: Board,
+    board: NotIncludeSensitiveInfoBoardResponse,
     updateRequestBody: BoardUpdateDto,
   ): Promise<Board> {
     const { title, content } = updateRequestBody;

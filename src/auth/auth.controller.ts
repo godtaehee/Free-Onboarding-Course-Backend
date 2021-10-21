@@ -68,7 +68,7 @@ export class AuthController {
     description:
       '로그인할 때 이메일, 패스워드를 입력받습니다. ' +
       '로그인 후 게시글 작성, 수정, 삭제를 위한 JWT 기반의 Access-Token을 반환받습니다. ' +
-      '로그인 후 이 토큰을 이용해야만 게시글을 작성, 수정, 삭제를 할 수 있습니다.' +
+      '로그인 후 이 토큰을 이용해야만 게시글을 작성, 수정, 삭제를 할 수 있습니다. ' +
       '토큰은 1시간 뒤 만료됩니다.',
   })
   @ApiCommonCreateResponseForm(SignInSuccessResponse, {

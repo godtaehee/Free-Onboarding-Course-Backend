@@ -3,7 +3,7 @@ import { Board } from '../../../boards/boards.entity';
 import { NotInclueSensitiveUserInfoResponse } from '../user/not.inclue.sensitive.user.info.response';
 
 @ApiExtraModels()
-export class NotIncludeSensitiveBoardInfoResponse extends PickType(Board, [
+export class NotIncludeSensitiveInfoBoardResponse extends PickType(Board, [
   'boardId',
   'title',
   'content',
