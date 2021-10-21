@@ -1,4 +1,11 @@
-import { Controller, Get, Param, Query, ValidationPipe } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Param,
+  Query,
+  UseInterceptors,
+  ValidationPipe,
+} from '@nestjs/common';
 import { UsersService } from './users.service';
 import { UserSearchRequest } from './dto/user.search.request';
 import {
@@ -12,6 +19,7 @@ import { ApiCommonOkResponseForm } from '../common/decorators/api.common.Ok.resp
 import { NotValidNumberError } from '../common/response/error/not.valid.number.error';
 import { UserResponse } from '../common/response/user/user.response';
 import { ApiCommonPaginationOkResponseForm } from '../common/decorators/pagination/api.common.Ok.response.form';
+import { CommonResponseFormInterceptor } from '../common/interceptors/common.response.form.interceptor';
 
 @Controller('users')
 export class UsersController {
@@ -36,6 +44,7 @@ export class UsersController {
   @ApiBadRequestResponse({
     type: NotValidNumberError,
   })
+  @UseInterceptors(CommonResponseFormInterceptor)
   @Get('/:userId')
   async getSingleUserInfo(@Param('userId') userId: number) {
     return this.usersService.getSingleUserInfo(userId);
