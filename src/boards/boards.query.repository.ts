@@ -15,7 +15,7 @@ export class BoardsQueryRepository extends Repository<Board> {
   getSingleBoardSpecificUser(userId: number, boardId: number): Promise<Board> {
     return this.createQueryBuilder('boards')
       .innerJoinAndSelect('boards.user', 'user')
-      .select(['boards', 'user.id', 'user.nickname'])
+      .select(['boards', 'user.userId', 'user.nickname'])
       .where('user.id = :userId AND boards.id = :boardId', { userId, boardId })
       .getOne();
   }
