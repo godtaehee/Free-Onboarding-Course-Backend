@@ -221,4 +221,9 @@ export class BoardsController {
     );
     return this.boardsService.deleteBoard(user.userId, boardId);
   }
+
+  @Get('/user')
+  getBoardListSpecificUser(@Query('id') userId: number) {
+    return this.boardsService.getBoardListSpecificUser(userId);
+  }
 }
