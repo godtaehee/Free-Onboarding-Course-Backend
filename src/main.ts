@@ -1,15 +1,16 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { RegisterSuccessResponse } from './common/response/user/register.success.response';
+import { RequestAboutUserSuccessResponse } from './common/response/user/request.about.user.success.response';
 import { SignInSuccessResponse } from './common/response/user/sign.in.success.response';
-import { NotInclueSensitiveBoardInfoResponse } from './common/response/board/not.inclue.sensitive.board.info.response';
+import { NotIncludeSensitiveBoardInfoResponse } from './common/response/board/not.include.sensitive.board.info.response';
 import { CommonBoardResponse } from './common/response/board/common.board.response';
 import { FourHundredOneError } from './common/response/error/four.hundred.one.error';
 import { FourHundredError } from './common/response/error/four.hundred.error';
 import { SignInFailError } from './common/response/error/sign.in.fail.error';
 import { NotValidNumberError } from './common/response/error/not.valid.number.error';
 import * as morgan from 'morgan';
+import { UserResponse } from './common/response/user/user.response';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -30,14 +31,15 @@ async function bootstrap() {
 
   const swaggerDocument = SwaggerModule.createDocument(app, swaggerConfig, {
     extraModels: [
-      RegisterSuccessResponse,
+      RequestAboutUserSuccessResponse,
       SignInSuccessResponse,
-      NotInclueSensitiveBoardInfoResponse,
+      NotIncludeSensitiveBoardInfoResponse,
       CommonBoardResponse,
       FourHundredError,
       FourHundredOneError,
       SignInFailError,
       NotValidNumberError,
+      UserResponse,
     ],
   });
 
