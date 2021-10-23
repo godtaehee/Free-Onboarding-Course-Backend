@@ -8,7 +8,7 @@ export class BoardsQueryRepository extends Repository<Board> {
     return this.createQueryBuilder('boards')
       .innerJoinAndSelect('boards.user', 'user')
       .select(['boards', 'user.userId', 'user.nickname'])
-      .where({ boardId })
+      .where('boards.boardId = :boardId', { boardId })
       .getOne();
   }
 
@@ -28,21 +28,26 @@ export class BoardsQueryRepository extends Repository<Board> {
       .getMany();
   }
 
-  getAllBoard(query: BoardSearchRequest): Promise<[Board[], number]> {
+  async getAllBoard(query: BoardSearchRequest): Promise<[Board[], number]> {
     const coveringIndexQueryBuilder = this.createQueryBuilder('covers')
-      .select('covers.id')
-      .orderBy('covers.id', 'DESC')
+      .select(['covers.boardId'])
+      .orderBy('covers.boardId', 'DESC')
       .limit(query.getLimit())
       .offset(query.getOffset());
 
-    return this.createQueryBuilder('boards')
+    const count = await coveringIndexQueryBuilder.getCount();
+
+    console.time('커버링을 적용');
+    const boards = await this.createQueryBuilder('boards')
       .innerJoin(
         `(${coveringIndexQueryBuilder.getQuery()})`,
         'covers',
-        'boards.id = covers.id',
+        'boards.boardId = covers.covers_id',
       )
       .innerJoinAndSelect('boards.user', 'user')
       .select(['boards', 'user.userId', 'user.nickname'])
-      .getManyAndCount();
+      .getMany();
+
+    return [boards, count];
   }
 }
