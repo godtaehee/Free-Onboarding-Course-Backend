@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsPositive } from 'class-validator';
+import { IsNotEmpty, IsPositive, Max } from 'class-validator';
 import { Type } from 'class-transformer';
 
 export abstract class PageRequest {
@@ -9,6 +9,7 @@ export abstract class PageRequest {
 
   @IsNotEmpty()
   @IsPositive()
+  @Max(50)
   @Type(() => Number)
   limit: number | 10;
 
