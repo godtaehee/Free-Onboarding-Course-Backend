@@ -29,25 +29,61 @@ export class BoardsQueryRepository extends Repository<Board> {
   }
 
   async getAllBoard(query: BoardSearchRequest): Promise<[Board[], number]> {
-    const coveringIndexQueryBuilder = this.createQueryBuilder('covers')
+    if (query.getOffset() === 0) {
+      const fixedPageCount = 10 * query.getLimit();
+      return [
+        await this.getBoardsQueryBuilder(0, query.getLimit()).getMany(),
+        fixedPageCount,
+      ];
+    }
+
+    const totalCount = await this.createQueryBuilder('covers')
+      .select(['covers.boardId'])
+      .getCount();
+
+    if (totalCount > query.getOffset()) {
+      return [
+        await this.getBoardsQueryBuilder(
+          query.getOffset(),
+          query.getLimit(),
+        ).getMany(),
+        totalCount,
+      ];
+    }
+
+    return [
+      await this.createQueryBuilder('boards')
+        .innerJoin(
+          `(${this.getCoveringIndexQueryBuilder(
+            Math.ceil(totalCount / query.getOffset()) - 1,
+            query.getLimit(),
+          ).getQuery()})`,
+          'covers',
+          'boards.boardId = covers.covers_id',
+        )
+        .innerJoinAndSelect('boards.user', 'user')
+        .select(['boards', 'user.userId', 'user.nickname'])
+        .getMany(),
+      totalCount,
+    ];
+  }
+
+  getCoveringIndexQueryBuilder(offset: number, limit: number) {
+    return this.createQueryBuilder('covers')
       .select(['covers.boardId'])
       .orderBy('covers.boardId', 'DESC')
-      .limit(query.getLimit())
-      .offset(query.getOffset());
+      .limit(limit)
+      .offset(offset);
+  }
 
-    const count = await coveringIndexQueryBuilder.getCount();
-
-    console.time('커버링을 적용');
-    const boards = await this.createQueryBuilder('boards')
+  getBoardsQueryBuilder(offset: number, limit: number) {
+    return this.createQueryBuilder('boards')
       .innerJoin(
-        `(${coveringIndexQueryBuilder.getQuery()})`,
+        `(${this.getCoveringIndexQueryBuilder(offset, limit).getQuery()})`,
         'covers',
         'boards.boardId = covers.covers_id',
       )
       .innerJoinAndSelect('boards.user', 'user')
-      .select(['boards', 'user.userId', 'user.nickname'])
-      .getMany();
-
-    return [boards, count];
+      .select(['boards', 'user.userId', 'user.nickname']);
   }
 }
