@@ -52,7 +52,7 @@ export class BoardsService {
 
     if (boards.length <= 0)
       throw new BadRequestException(
-        `해당 ${query.offset}번째 페이지의 게시글이 존재하지 않습니다.`,
+        `해당 ${query.page}번째 페이지의 게시글이 존재하지 않습니다.`,
       );
     return this.paginationHelper.getPaginationItems<NotIncludeSensitiveInfoBoardResponse>(
       count,
