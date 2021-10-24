@@ -142,6 +142,124 @@ git clone https://github.com/godtaehee/Free-Onboarding-Course-Backend
 
 </details>
 
+<details>
+ <summary><strong>로그인 / 로그아웃 방법</strong></summary>
+
+사용하시는 브라우저의 주소창에 `http://localhost:3000/api`를 입력하고 해당 페이지에 접속하면 아래와 같은 API 명세 문서를 확인하실 수 있습니다.
+
+> 반드시 `npm run start`명령어를 이용하여 애플리케이션 실행이 되어있어야 해당 API문서 및 애플리케이션을 이용하실수 있습니다.
+
+### 인증 / 인가
+
+해당 애플리케이션은 `JWT`를 이용하여 인증 / 인가를 구현했습니다. 따라서 로그인 전후로 사용할수 있는 API들이 각자 다릅니다.
+
+회원가입을 한다음 로그인에 성공했다면 Access-Token을 이용하여 인증 / 인가를 받아야하는 API까지 모두 이용할수 있습니다.
+
+사용방법은 아래와 같습니다.
+
+#### 회원가입
+
+![Screen Shot 2021-10-24 at 8 26 33 PM](https://user-images.githubusercontent.com/44861205/138592068-eb602df5-09b6-45c0-ad0a-76800316b398.png)
+
+API 문서 2번째 카테고리의 `회원가입 & 로그인` 부분에서 회원가입(`POST /auth/sign-up`)을 클릭합니다.
+
+![Screen Shot 2021-10-24 at 8 29 52 PM](https://user-images.githubusercontent.com/44861205/138592180-cea14f49-68a4-46f0-a49e-1e69a787b95e.png)
+
+
+클릭하게 되면 미리 준비해놓은 `Dummy Data`로 요청을 바로 서버로 보낼수가 있습니다.
+
+오른쪽 위의 별표 쳐진곳의 `Try it out`을 클릭하시면 아래와 같이 별표 부분의 요청을 보낼 데이터와 하트부분의 실행버튼을 확인하실수 있습니다.
+
+![Screen Shot 2021-10-24 at 8 31 47 PM](https://user-images.githubusercontent.com/44861205/138592260-1471b4ee-75c4-4ccb-a3fe-c51bc93dfd5e.png)
+
+회원가입후 다른 절차없이 바로 로그인을 할수있도록 회원가입과 로그인의 데이터를 같게 해놓았습니다. 따라서 데이터의 변경 없이 바로 실행버튼을 누르는것을 추천드립니다. 만약 다른 계정으로 회원가입을 하고싶으시다면 `이메일`, `패스워드`, `닉네임` 순으로 입력하시고 하트부분의 실행버튼을 누르시면 됩니다.
+
+![Screen Shot 2021-10-24 at 8 35 33 PM](https://user-images.githubusercontent.com/44861205/138592359-c9dccc90-1fb4-43b0-8778-31bc68bc2ed7.png)
+
+위의 사진처럼 Curl 요청을 보내고 `Server response`에 아래와 같은 데이터를 응답 받았으면 회원가입에 성공한것입니다.
+
+```typescript
+{
+  "success": true,
+  "data": {
+    "userId"L 6830
+  }
+}
+```
+
+이때 data의 userId는 회원가입에 성공후 주어지는 User의 고유 아이디 입니다. 해당 숫자로된 아이디를 가지고 로그인을 하는것은 아닙니다.
+
+
+#### 로그인
+
+![Screen Shot 2021-10-24 at 8 41 55 PM](https://user-images.githubusercontent.com/44861205/138592566-13b3eaf4-13a2-4317-9e0e-5e56de866ac4.png)
+
+
+회원가입 후 회원가입의 API 바로 아래의 로그인 API(POST /auth/sign-in)를 이용하여 로그인할수 있습니다.
+
+회원가입에서 말씀드린것처럼 로그인의 Request Body에 있는 데이터는 앞서 회원가입을 할때 사용했던 정보와 일치합니다 따라서 `Try it out`과 `Execute`버튼을 클릭만하면 로그인이 됩니다.
+
+그렇지 않은경우라면 그에 맞는 아이디와 패스워드를 입력하시면 됩니다.
+
+![Screen Shot 2021-10-24 at 8 43 39 PM](https://user-images.githubusercontent.com/44861205/138592613-57270540-3139-49d5-bb24-15fa5e9a6ad2.png)
+
+별표 부분의 실행 버튼을 누르고 로그인에 성공하면 아래와 같이 Access-Token을 발급받습니다.
+
+![Screen Shot 2021-10-24 at 8 44 39 PM](https://user-images.githubusercontent.com/44861205/138592634-9966f03f-7f85-4f40-ba4a-01ae87ac0146.png)
+
+`data`의 `accessToken`의 데이터를 전부 복사하여 이제 Authorize를 하게되면 애플리케이션의 모든 API를 이용하실수 있습니다. 토큰은 1시간동안 유효합니다.
+
+#### 인증 / 인가
+
+```typescript
+{
+  "success": true,
+    "data": {
+    "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Ik1hcmlseW5lNUB5YWhvby5jb20iLCJpYXQiOjE2MzUwNzU4MzcsImV4cCI6MTYzNTA3OTQzN30.mM6qkjuff8HbRc5tmxtp2X1xx-UdHN1quJ1HSQ9Nkmg"
+  }
+}
+```
+
+로그인에 성공하시면 해당 데이터를 응답받게되고 그 중  accessToken을 전부 복사합니다.
+
+위의 예에선 아래의 데이터가 accessToken이 됩니다.
+
+```typescript
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Ik1hcmlseW5lNUB5YWhvby5jb20iLCJpYXQiOjE2MzUwNzU4MzcsImV4cCI6MTYzNTA3OTQzN30.mM6qkjuff8HbRc5tmxtp2X1xx-UdHN1quJ1HSQ9Nkmg
+```
+
+토큰을 복사한후 API문서의 최상단의 오른쪽에 `Authorize`버튼을 클릭합니다. 아래의 그림에서 하트 부분입니다. 이때 자물쇠가 현재 풀려있는것을 유의깊게 봅니다.
+
+![Screen Shot 2021-10-24 at 8 56 58 PM](https://user-images.githubusercontent.com/44861205/138593002-36f1d80a-827a-4699-ac77-92431adee4be.png)
+
+클릭하면 아래와 같이 `Available authorizations` 모달창을 확인할수 있습니다. 해당 모달창의 `Value`부분에 복사한 토큰을 붙여넣기 후 초록색의 `Authorize`버튼을 누르면 `Authorization`을 한 상태가 됩니다. 하지만 실제 성공 여부는 알수 없으며 잘못된 토큰으로 `Authorization`을 진행할시 API는 여전히 이용할수 없습니다.
+
+
+
+![Screen Shot 2021-10-24 at 8 49 29 PM](https://user-images.githubusercontent.com/44861205/138592796-a83b7a23-0062-415f-b166-a42baa89ec72.png)
+
+`Authorize`버튼을 누르게되면 아래와 같이 언제든지 또 로그아웃을 할수있는 버튼으로 바뀝니다. 해당 버튼을 통해 언제든 로그아웃을 진행하실수있습니다.
+
+![Screen Shot 2021-10-24 at 8 53 37 PM](https://user-images.githubusercontent.com/44861205/138592896-b9295110-19b2-4201-aa76-f916480c15d3.png)
+
+API 문서를 자세히 보시면 오른쪽에 자물쇠가 있는 API와 없는 API가 있습니다. 자물쇠가 있는 API가 위에서 진행했던 `Authorization`이 되어있어야 사용가능한 API입니다.
+
+![Screen Shot 2021-10-24 at 8 59 06 PM](https://user-images.githubusercontent.com/44861205/138593073-cad479d2-5c5f-4f3e-a3e9-d9342021cbf1.png)
+
+Authorization을 마치고나서 `Close`버튼을 누르면 위와 같이 아까 풀려있던 자물쇠가 잠김상태로 되어있는것을 확인하실수 있습니다.
+
+![Screen Shot 2021-10-24 at 9 00 58 PM](https://user-images.githubusercontent.com/44861205/138593132-f7c595a1-2ccc-4de5-ad0f-ce09de567a33.png)
+
+토큰으로 Authorization에 성공하면 위와같이 게시글 생성 API를 성공적으로 이용하실수 있습니다.
+
+</details>
+
+
+
+
+
+
+
 ## 3. 자세한 테스팅 실행방법
 
 
@@ -1508,7 +1626,19 @@ return [
 
 이 값을 Offset으로 설정하여 그 값으로부터 Limit개의 게시글 데이터를 불러오면됩니다.
 
-이렇게 Pagination을 최적화하여 구해봤습니다.
+#### 성능테스트
+
+![Screen Shot 2021-10-24 at 6 09 51 PM](https://user-images.githubusercontent.com/44861205/138587627-7bd7a349-e404-40c8-b2fa-205afd0f5d20.png)
+
+640만개 데이터 기준으로 첫페이지를 가져오는데 27ms로 대폭 줄었습니다. 이는 Count를 하지 않았기때문이며 응답은 아래와같이 나옵니다.
+
+![Screen Shot 2021-10-24 at 6 11 18 PM](https://user-images.githubusercontent.com/44861205/138587674-b61f12b9-4dcd-4376-8f88-8ad9c13226f4.png)
+
+데이터가 분명 640만개임에도 불구하고 총 페이지가 10페이지라고 나와있습니다. 
+
+이는 Count를 계산하지않고 제가 임의로 정해놓은 10개의 페이지를 반환했기때문입니다.
+
+이렇게 Pagination을 `커버링 인덱스`와 `첫페이지 Count 계산하지않기`를 이용하여 최적화하여 구현해보았습니다.
 
 사실 구현하면서 정말 더 많은 최적화 방법을 알게됬습니다.
 
