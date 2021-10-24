@@ -21,9 +21,9 @@ describe('AppController (e2e) Query', () => {
     expect(result.body.success).toBeTruthy();
   });
 
-  it('/boards?offset&limit (GET)', async () => {
+  it('/boards?page&limit (GET)', async () => {
     const result = await request(app.getHttpServer()).get(
-      '/boards?offset=1&limit=20',
+      '/boards?page=1&limit=20',
     );
     expect(result.body.pageSize).toBeTruthy();
   });
@@ -33,9 +33,9 @@ describe('AppController (e2e) Query', () => {
     expect(result.body.success).toBeTruthy();
   });
 
-  it('/users?offset&limit (GET)', async () => {
+  it('/users?page&limit (GET)', async () => {
     const result = await request(app.getHttpServer()).get(
-      '/users?offset=1&limit=20',
+      '/users?page=1&limit=20',
     );
     expect(result.body.pageSize).toBeTruthy();
   });

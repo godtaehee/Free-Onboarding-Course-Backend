@@ -84,7 +84,7 @@ describe('AppController (e2e)', () => {
 
       // 1번째 페이지 20개 제한으로 보기
       const getAllBoardResult = await request(app.getHttpServer()).get(
-        '/boards?offset=1&limit=20',
+        '/boards?page=1&limit=20',
       );
       expect(getAllBoardResult.body.pageSize).toBeTruthy();
 
