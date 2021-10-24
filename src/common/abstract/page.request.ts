@@ -5,7 +5,7 @@ export abstract class PageRequest {
   @IsNotEmpty()
   @IsPositive()
   @Type(() => Number)
-  offset: number | 1;
+  page: number | 1;
 
   @IsNotEmpty()
   @IsPositive()
@@ -14,10 +14,14 @@ export abstract class PageRequest {
   limit: number | 10;
 
   getOffset(): number {
-    return (this.offset - 1) * this.limit;
+    return (this.page - 1) * this.limit;
   }
 
   getLimit(): number {
     return this.limit;
+  }
+
+  getPage(): number {
+    return this.page;
   }
 }
