@@ -11,23 +11,54 @@ export class UsersQueryRepository extends Repository<User> {
       .getOne();
   }
 
-  getAllUserInfoUsingPagination(
+  async getAllUserInfoUsingPagination(
     userSearchRequest: UserSearchRequest,
   ): Promise<[User[], number]> {
-    const coveringIndexQueryBuilder = this.createQueryBuilder('covers')
-      .select('covers.id')
-      .orderBy('covers.id', 'DESC')
-      .limit(userSearchRequest.getLimit())
-      .offset(userSearchRequest.getOffset());
+    const paginationUsers = this.getPaginationUsers(
+      userSearchRequest.getOffset(),
+      userSearchRequest.getLimit(),
+    );
 
+    if (userSearchRequest.getOffset() === 0) {
+      const fixedPageCount = 10 * userSearchRequest.getLimit();
+      return [await paginationUsers, fixedPageCount];
+    }
+
+    const totalCount = await this.createQueryBuilder('covers')
+      .select(['covers.userId'])
+      .getCount();
+
+    if (totalCount > userSearchRequest.getOffset()) {
+      return [await paginationUsers, totalCount];
+    }
+
+    return [
+      await this.getPaginationUsers(
+        Math.floor(totalCount / userSearchRequest.getLimit()) *
+          userSearchRequest.getLimit(),
+        userSearchRequest.getLimit(),
+      ),
+      totalCount,
+    ];
+  }
+
+  getCoveringIndexQueryBuilder(offset: number, limit: number) {
+    return this.createQueryBuilder('covers')
+      .select(['covers.userId'])
+      .orderBy('covers.userId', 'DESC')
+      .limit(limit)
+      .offset(offset);
+  }
+
+  getPaginationUsers(offset: number, limit: number) {
     return this.createQueryBuilder('users')
       .innerJoin(
-        `(${coveringIndexQueryBuilder.getQuery()})`,
+        `(${this.getCoveringIndexQueryBuilder(offset, limit).getQuery()})`,
         'covers',
-        'users.id = covers.id',
+        'users.userId = covers_id',
       )
       .leftJoinAndSelect('users.boards', 'boards')
       .select(['boards', 'users'])
-      .getManyAndCount();
+      .getMany();
   }
 }
