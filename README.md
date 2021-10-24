@@ -151,11 +151,11 @@ git clone https://github.com/godtaehee/Free-Onboarding-Course-Backend
 
 ### 인증 / 인가
 
-해당 애플리케이션은 `JWT`를 이용하여 인증 / 인가를 구현했습니다. 따라서 로그인 전후로 사용할수 있는 API들이 각자 다릅니다.
+해당 애플리케이션은 `JWT`를 이용하여 인증 / 인가를 구현했습니다. 따라서 로그인 전후로 사용할 수 있는 API들이 각자 다릅니다.
 
-회원가입을 한다음 로그인에 성공했다면 Access-Token을 이용하여 인증 / 인가를 받아야하는 API까지 모두 이용할수 있습니다.
+회원가입을 한 다음 로그인에 성공했다면 Access-Token을 이용하여 인증 / 인가를 받아야 하는 API까지 모두 이용할 수 있습니다.
 
-사용방법은 아래와 같습니다.
+사용 방법은 아래와 같습니다.
 
 #### 회원가입
 
@@ -166,17 +166,17 @@ API 문서 2번째 카테고리의 `회원가입 & 로그인` 부분에서 회�
 ![Screen Shot 2021-10-24 at 8 29 52 PM](https://user-images.githubusercontent.com/44861205/138592180-cea14f49-68a4-46f0-a49e-1e69a787b95e.png)
 
 
-클릭하게 되면 미리 준비해놓은 `Dummy Data`로 요청을 바로 서버로 보낼수가 있습니다.
+클릭하게 되면 미리 준비해놓은 `Dummy Data`로 요청을 바로 서버로 보낼 수가 있습니다.
 
-오른쪽 위의 별표 쳐진곳의 `Try it out`을 클릭하시면 아래와 같이 별표 부분의 요청을 보낼 데이터와 하트부분의 실행버튼을 확인하실수 있습니다.
+오른쪽 위의 별표 쳐진 곳의 `Try it out`을 클릭하시면 아래와 같이 별표 부분의 요청을 보낼 데이터와 하트 부분의 실행 버튼을 확인하실 수 있습니다.
 
 ![Screen Shot 2021-10-24 at 8 31 47 PM](https://user-images.githubusercontent.com/44861205/138592260-1471b4ee-75c4-4ccb-a3fe-c51bc93dfd5e.png)
 
-회원가입후 다른 절차없이 바로 로그인을 할수있도록 회원가입과 로그인의 데이터를 같게 해놓았습니다. 따라서 데이터의 변경 없이 바로 실행버튼을 누르는것을 추천드립니다. 만약 다른 계정으로 회원가입을 하고싶으시다면 `이메일`, `패스워드`, `닉네임` 순으로 입력하시고 하트부분의 실행버튼을 누르시면 됩니다.
+회원가입 후 다른 절차 없이 바로 로그인을 할 수 있도록 회원가입과 로그인의 데이터를 같게 해놓았습니다. 따라서 데이터의 변경 없이 바로 실행 버튼을 누르는 것을 추천해 드립니다. 만약 다른 계정으로 회원가입을 하고 싶으시다면 `이메일`, `패스워드`, `닉네임` 순으로 입력하시고 하트 부분의 실행 버튼을 누르시면 됩니다.
 
 ![Screen Shot 2021-10-24 at 8 35 33 PM](https://user-images.githubusercontent.com/44861205/138592359-c9dccc90-1fb4-43b0-8778-31bc68bc2ed7.png)
 
-위의 사진처럼 Curl 요청을 보내고 `Server response`에 아래와 같은 데이터를 응답 받았으면 회원가입에 성공한것입니다.
+위의 사진처럼 Curl 요청을 보내고 `Server response`에 아래와 같은 데이터를 응답받았으면 회원가입에 성공한 것입니다.
 
 ```typescript
 {
@@ -187,19 +187,20 @@ API 문서 2번째 카테고리의 `회원가입 & 로그인` 부분에서 회�
 }
 ```
 
-이때 data의 userId는 회원가입에 성공후 주어지는 User의 고유 아이디 입니다. 해당 숫자로된 아이디를 가지고 로그인을 하는것은 아닙니다.
+이때 data의 userId는 회원가입에 성공 후 주어지는 User의 고유 아이디입니다. 해당 숫자로 된 아이디를 가지고 로그인을 하는 것은 아닙니다.
 
+<hr/>
 
 #### 로그인
 
 ![Screen Shot 2021-10-24 at 8 41 55 PM](https://user-images.githubusercontent.com/44861205/138592566-13b3eaf4-13a2-4317-9e0e-5e56de866ac4.png)
 
 
-회원가입 후 회원가입의 API 바로 아래의 로그인 API(POST /auth/sign-in)를 이용하여 로그인할수 있습니다.
+회원가입 후 회원가입의 API 바로 아래의 로그인 API(POST /auth/sign-in)를 이용하여 로그인할 수 있습니다.
 
-회원가입에서 말씀드린것처럼 로그인의 Request Body에 있는 데이터는 앞서 회원가입을 할때 사용했던 정보와 일치합니다 따라서 `Try it out`과 `Execute`버튼을 클릭만하면 로그인이 됩니다.
+회원가입에서 말씀드린 것처럼 로그인의 Request Body에 있는 데이터는 앞서 회원가입을 할 때 사용했던 정보와 일치합니다. 따라서 `Try it out`과 `Execute` 버튼을 클릭만 하면 로그인이 됩니다.
 
-그렇지 않은경우라면 그에 맞는 아이디와 패스워드를 입력하시면 됩니다.
+그렇지 않은 경우라면 그에 맞는 아이디와 패스워드를 입력하시면 됩니다.
 
 ![Screen Shot 2021-10-24 at 8 43 39 PM](https://user-images.githubusercontent.com/44861205/138592613-57270540-3139-49d5-bb24-15fa5e9a6ad2.png)
 
@@ -207,7 +208,9 @@ API 문서 2번째 카테고리의 `회원가입 & 로그인` 부분에서 회�
 
 ![Screen Shot 2021-10-24 at 8 44 39 PM](https://user-images.githubusercontent.com/44861205/138592634-9966f03f-7f85-4f40-ba4a-01ae87ac0146.png)
 
-`data`의 `accessToken`의 데이터를 전부 복사하여 이제 Authorize를 하게되면 애플리케이션의 모든 API를 이용하실수 있습니다. 토큰은 1시간동안 유효합니다.
+`data`의 `accessToken`의 데이터를 전부 복사하여 이제 Authorize를 하게 되면 애플리케이션의 모든 API를 이용하실 수 있습니다. 토큰은 1시간 동안 유효합니다.
+
+<hr/>
 
 #### 인증 / 인가
 
@@ -220,7 +223,7 @@ API 문서 2번째 카테고리의 `회원가입 & 로그인` 부분에서 회�
 }
 ```
 
-로그인에 성공하시면 해당 데이터를 응답받게되고 그 중  accessToken을 전부 복사합니다.
+로그인에 성공하시면 해당 데이터를 응답받게 되고 그 중 access Token을 전부 복사합니다.
 
 위의 예에선 아래의 데이터가 accessToken이 됩니다.
 
@@ -228,37 +231,31 @@ API 문서 2번째 카테고리의 `회원가입 & 로그인` 부분에서 회�
 eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Ik1hcmlseW5lNUB5YWhvby5jb20iLCJpYXQiOjE2MzUwNzU4MzcsImV4cCI6MTYzNTA3OTQzN30.mM6qkjuff8HbRc5tmxtp2X1xx-UdHN1quJ1HSQ9Nkmg
 ```
 
-토큰을 복사한후 API문서의 최상단의 오른쪽에 `Authorize`버튼을 클릭합니다. 아래의 그림에서 하트 부분입니다. 이때 자물쇠가 현재 풀려있는것을 유의깊게 봅니다.
+토큰을 복사한 후 API 문서의 최상단의 오른쪽에 `Authorize` 버튼을 클릭합니다. 아래의 그림에서 하트 부분입니다. 이때 자물쇠가 현재 풀려있는 것을 유의 깊게 봅니다.
 
 ![Screen Shot 2021-10-24 at 8 56 58 PM](https://user-images.githubusercontent.com/44861205/138593002-36f1d80a-827a-4699-ac77-92431adee4be.png)
 
-클릭하면 아래와 같이 `Available authorizations` 모달창을 확인할수 있습니다. 해당 모달창의 `Value`부분에 복사한 토큰을 붙여넣기 후 초록색의 `Authorize`버튼을 누르면 `Authorization`을 한 상태가 됩니다. 하지만 실제 성공 여부는 알수 없으며 잘못된 토큰으로 `Authorization`을 진행할시 API는 여전히 이용할수 없습니다.
+클릭하면 아래와 같이 `Available authorizations` 모달창을 확인할 수 있습니다. 해당 모달창의 `Value` 부분에 복사한 토큰을 붙여넣기 후 초록색의 `Authorize` 버튼을 누르면 `Authorization`을 한 상태가 됩니다. 하지만 실제 성공 여부는 알 수 없으며 잘못된 토큰으로 `Authorization`을 진행할 시 API는 여전히 이용할 수 없습니다.
 
 
 
 ![Screen Shot 2021-10-24 at 8 49 29 PM](https://user-images.githubusercontent.com/44861205/138592796-a83b7a23-0062-415f-b166-a42baa89ec72.png)
 
-`Authorize`버튼을 누르게되면 아래와 같이 언제든지 또 로그아웃을 할수있는 버튼으로 바뀝니다. 해당 버튼을 통해 언제든 로그아웃을 진행하실수있습니다.
+`Authorize` 버튼을 누르게 되면 아래와 같이 언제든지 또 로그아웃을 할 수 있는 버튼으로 바뀝니다. 해당 버튼을 통해 언제든 로그아웃을 진행하실 수 있습니다.
 
 ![Screen Shot 2021-10-24 at 8 53 37 PM](https://user-images.githubusercontent.com/44861205/138592896-b9295110-19b2-4201-aa76-f916480c15d3.png)
 
-API 문서를 자세히 보시면 오른쪽에 자물쇠가 있는 API와 없는 API가 있습니다. 자물쇠가 있는 API가 위에서 진행했던 `Authorization`이 되어있어야 사용가능한 API입니다.
+API 문서를 자세히 보시면 오른쪽에 자물쇠가 있는 API와 없는 API가 있습니다. 자물쇠가 있는 API가 위에서 진행했던 `Authorization`이 되어있어야 사용 가능한 API입니다.
 
 ![Screen Shot 2021-10-24 at 8 59 06 PM](https://user-images.githubusercontent.com/44861205/138593073-cad479d2-5c5f-4f3e-a3e9-d9342021cbf1.png)
 
-Authorization을 마치고나서 `Close`버튼을 누르면 위와 같이 아까 풀려있던 자물쇠가 잠김상태로 되어있는것을 확인하실수 있습니다.
+Authorization을 마치고 나서 `Close` 버튼을 누르면 위와 같이 아까 풀려있던 자물쇠가 잠김 상태로 되어있는 것을 확인하실 수 있습니다.
 
 ![Screen Shot 2021-10-24 at 9 00 58 PM](https://user-images.githubusercontent.com/44861205/138593132-f7c595a1-2ccc-4de5-ad0f-ce09de567a33.png)
 
-토큰으로 Authorization에 성공하면 위와같이 게시글 생성 API를 성공적으로 이용하실수 있습니다.
+토큰으로 Authorization에 성공하면 위와 같이 게시글 생성 API를 성공적으로 이용하실 수 있습니다.
 
 </details>
-
-
-
-
-
-
 
 ## 3. 자세한 테스팅 실행방법
 
@@ -275,7 +272,7 @@ Authorization을 마치고나서 `Close`버튼을 누르면 위와 같이 아까
 
 후에 로직 변경 등의 이유로 테스트 코드를 다시 수정하거나 작성하여 개발도 진행하였습니다.
 
-테스트 코드를 작성한다고 오류와 버그가 일어나지 않는 것은 아니지만, 개발하면서 많은 디테일한 부분까지 Unit Test 덕분에 챙겨갈 수 있었습니다.
+테스트 코드를 작성한다고 오류와 버그가 일어나지 않는 것은 아니지만, 개발하면서 많은 세세한 부분까지 Unit Test 덕분에 챙겨갈 수 있었습니다.
 
 총 7개의 `Suite`가 있습니다.
 
@@ -330,6 +327,9 @@ Authorization을 마치고나서 `Close`버튼을 누르면 위와 같이 아까
 
 ## 4. API 명세
 
+<details>
+ <summary><strong>API 명세</strong></summary>
+
 총 10개의 API를 이용하실수 있습니다.
 
 각각의 API는 해당 API에 알맞은 Request / Response에 대한 정보를 포함합니다.
@@ -362,6 +362,7 @@ Authorization을 마치고나서 `Close`버튼을 누르면 위와 같이 아까
 그 외의 모든 API는 서버 실행 시 이용 가능한 명세서에 자세하게 설명이 되어있습니다.
 
 해당 문서는 Swagger로 만들어져있으며 애플리케이션 실행 후 http://localhost:3000/api 에서 확인하실 수 있습니다.
+</details>
 
 ## 5. 구현한 방법과 이유에 대한 간략한 내용
 
@@ -385,22 +386,22 @@ Authorization을 마치고나서 `Close`버튼을 누르면 위와 같이 아까
 ...
 ```
 
-해당 명령어는 `typeorm-seeding`을 이용하여 Dummy Data를 테스트 데이터베이스에 제가 원하는 만큼 넣을수 있게 해줍니다.
+해당 명령어는 `typeorm-seeding`을 이용하여 Dummy Data를 테스트 데이터베이스에 제가 원하는 만큼 넣을 수 있게 해줍니다.
 
-해당 명령어들은 `npm run seed:run`과 같이 사용할수 있으며 각 명령어에 대한 설명은 아래와 같습니다.
+해당 명령어들은 `npm run seed:run`과 같이 사용할 수 있으며 각 명령어에 대한 설명은 아래와 같습니다.
 
 > `seed:run`: 유저 10명의 정보, 게시글 100개를 생성합니다.  
 `seed:board`: 게시글 100개를 생성합니다.  
 `seed:user`: 유저 10명의 정보를 생성합니다.
 
 
-저는 testwecode 데이터베이스에 약 10만개, 100만개의 게시글을 생성하여 Pagination의 성능을 측정해보기위한 데이터 생성으로서 사용하였습니다.
+저는 testwecode 데이터베이스에 약 10만 개, 100만 개의 게시글을 생성하여 Pagination의 성능을 측정해보기 위한 데이터 생성으로써 사용하였습니다.
 
-성능 측정의 결과는 후의 Pagination부분에서 다루도록 하겠습니다.
+성능 측정의 결과는 후의 Pagination 부분에서 다루도록 하겠습니다.
 
-유저 521명, 게시글 200개를 생성하여 단순 API를 테스트하기위해서도 사용했습니다.
+유저 521명, 게시글 200개를 생성하여 단순 API를 테스트하기 위해서도 사용했습니다.
 
-#### typeorm-seeding 설정은 아래경로의 `seedConfig.ts`에서 확인하실수 있습니다.
+#### typeorm-seeding 설정은 아래 경로의 `seedConfig.ts`에서 확인하실 수 있습니다.
 
 ```
 📦 
@@ -408,7 +409,7 @@ Authorization을 마치고나서 `Close`버튼을 누르면 위와 같이 아까
 ├─ seedConfig.ts // 해당 파일
 ```
 
-#### seed와 factory에 관한 파일은 아래경로에 해당하는 폴더에 있습니다.
+#### seed와 factory에 관한 파일은 아래 경로에 해당하는 폴더에 있습니다.
 
 ```
 📦 
@@ -448,11 +449,11 @@ define(User, () => {
 
 User 데이터를 어떻게 만들지를 정의해주는 Factory에서 password와 nickname이 같은 값을 갖게 했습니다.
 
-패스워드는 한번 bcrypt로 hash 값이 되면 API 테스트를 하기위해서 결국 수동으로 제가 유저를 하나 만들어야 했습니다.
+패스워드는 한번 bcrypt로 hash 값이 되면 API 테스트를 하기 위해서 결국 수동으로 제가 유저를 하나 만들어야 했습니다.
 
-따라서 어떠한 계정으로도 우선 테스트가 가능하게 하기 위해 위와 같이 구현했습니다.
+따라서 어떠한 계정으로도 우선 테스트가 가능하게 하려고 위와 같이 구현했습니다.
 
-즉 유저의 password는 nickname과 같게됩니다.
+즉 유저의 password는 nickname과 같게 됩니다.
 
 #### Seed
 
@@ -505,7 +506,7 @@ export class AppModule {}
     }),
 ```
 
-process.env 값을 글로벌하게 사용할수 있도록 설정해주었습니다.
+process.env 값을 글로벌하게 사용할 수 있도록 설정해주었습니다.
 
 #### WinstonModule
 
@@ -520,11 +521,11 @@ WinstonModule.forRootAsync({
 }),
 ```
 
-E2E Test를 했을때 `NODE_ENV`값은 `test`가 됩니다.
+E2E Test를 했을 때 `NODE_ENV`값은 `test`가 됩니다.
 
-README의 `자세한 테스팅 실행방법`의 `E2E Test`에서의 예처럼 아무런 로깅없이 로깅이 무조건 적용되지 않게 과제 제출을 했지만 `NODE_ENV`값을 prod가 아닌 dev로 바꾸고 주석을 제거하면 정상적으로 Controller 계층에서 설정해놓은 로그가 출력이 됩니다. 
+README 의 `자세한 테스팅 실행방법`의 `E2E Test`에서의 예처럼 아무런 로깅 없이 로깅이 무조건 적용되지 않게 과제 제출했지만 `NODE_ENV`값을 prod가 아닌 dev로 바꾸고 주석을 제거하면 정상적으로 Controller 계층에서 설정해놓은 로그가 출력됩니다.
 
-Nest.js의 기본 내장 로거도 충분한 편의성을 갖췄지만 Nest.js 공식문서에서도 조금 더 많은 로깅옵션을 이용하고싶다면 `Winston`과 함께 사용해도 된다고 적혀있어 `Winston`을 적용해 보았습니다.
+Nest.js의 기본 내장 로거도 충분한 편의성을 갖췄지만 Nest.js 공식문서에서도 조금 더 많은 로깅 옵션을 이용하고 싶다면 `Winston`과 함께 사용해도 된다고 적혀있어 `Winston`을 적용해 보았습니다.
 
 <hr/>
 
@@ -541,11 +542,11 @@ Nest.js의 기본 내장 로거도 충분한 편의성을 갖췄지만 Nest.js �
 }),
 ```
 
-typeorm을 사용하기위한 설정을 해주었습니다. `SQLite`를 사용하였으며 환경변수에 따라 데이터베이스의 사용이 다릅니다.
+typeorm을 사용하기 위한 설정을 해주었습니다. `SQLite`를 사용하였으며 환경변수에 따라 데이터베이스의 사용이 다릅니다.
 
-`synchronize`를 통해 Database의 컬럼 이름이 바뀌었을때 자동으로 적용시켜주었습니다. prod상태에서는 반드시 false값이 되어야합니다. 그렇지 않으면 모든 테이블이 Drop이 될 위험이 있습니다.
+`synchronize`를 통해 Database의 컬럼 이름이 바뀌었을 때 자동으로 적용시켜주었습니다. prod 상태에서는 반드시 false 값이 되어야 합니다. 그렇지 않으면 모든 테이블이 Drop이 될 위험이 있습니다.
 
-`keepConnectionAlive` 옵션을 이용하여 E2E 테스트시 Connection이 테스트할때 유지되도록 해주었습니다.
+`keepConnectionAlive` 옵션을 이용하여 E2E 테스트시 Connection이 테스트할 때 유지되도록 해주었습니다.
 
 <hr/>
 
@@ -582,8 +583,7 @@ export class AuthModule {}
 TypeOrmModule.forFeature([UsersRepository]),
 ```
 
-UsersRepository를 Auth Domain영역 전체에서 사용하기 위해 import 해주었습니다.
-
+UsersRepository를 Auth Domain 영역 전체에서 사용하기 위해 import 해주었습니다.
 #### PassportModule
 
 ```typescript
@@ -592,7 +592,7 @@ PassportModule.register({ defaultStrategy: 'jwt' }),
 
 제 애플리케이션에서는 Passport의 jwt전략을 기본전략으로 사용하여 인증 / 인가 처리를 해줬습니다.
 
-그외에 `local`, `kakao`등등의 많은 전략이 있습니다.
+그 외에 `local`, `kakao`등등의 많은 전략이 있습니다.
 
 #### JwtModule
 
@@ -607,28 +607,28 @@ JwtModule.registerAsync({
 }),
 ```
 
-과제를 진행함에 있어서 당황스러웠던 부분입니다.
+과제를 진행하면서 당황스러웠던 부분입니다.
 
-`JwtModule.register`를 통하여 처음에는 동기적으로 JwtModule을 register해주었는데
+`JwtModule.register`를 통하여 처음에는 동기적으로 JwtModule을 register 해주었는데
 
-`JwtService`의 `signin` method가 `process.env`의 값을 인식하지 못하여 undefined로 읽어 `POST /auth/sign-in` API를 개발함에 있어 어려움이 있었습니다.
+`JwtService`의 `signin` method가 `process.env`의 값을 인식하지 못하여 undefined로 읽어 `POST /auth/sign-in` API를 개발하면서 어려움이 있었습니다.
 
 ![Screen Shot 2021-10-22 at 2 02 00 AM](https://user-images.githubusercontent.com/44861205/138324027-91aacdb1-f7d8-451b-a0d3-358af8ddd517.png)
 
-> why I use가 아닌 why should I~ 로 질문을 했어야했는데 과동기 형한테 이 부분을 체크받았습니다.
- 
-Nest.js의 공식 `Discord`를 이용하여 여쭤보았는데 Module에서 만들어진 환경값을 서비스에서 사용하기위해서 `registerAsync`와 `useFactory`를 이용해야했습니다.
+> why I use가 아닌 why should I~ 로 질문을 해야 했었는데 과 동기 형한테 이 부분을 체크받았습니다.
+
+Nest.js의 공식 `Discord`를 이용하여 여쭤보았는데 Module에서 만들어진 환경 값을 서비스에서 사용하기 위해서 `registerAsync`와 `useFactory`를 이용해야 했습니다.
 
 > **Dynamic module**  
 With static module binding, there's no opportunity for the `consuming module` to influence how providers from the `host module` are configured. Why does this matter? Consider the case where we have a general purpose module that needs to behave differently in different use cases. This is analogous to the concept of a "plugin" in many systems, where a generic facility requires some configuration before it can be used by a consumer. [링크](https://docs.nestjs.com/fundamentals/dynamic-modules#dynamic-modules)
 
-정확히는 `Nest.js` 공식문서의 `Dynamic module`글의 일부를 발췌해서 이해했습니다.
+정확히는 `Nest.js` 공식문서의 `Dynamic module` 글의 일부를 발췌해서 이해했습니다.
 
-현재 제가 처한 상황은 `AppModule`에서 `ConfigModule`에서 `isGlobal`옵션을 통해 환경값을 글로벌하게 사용할수 있게 해주었지만 AppModule이 아닌 다른 모듈인 AuthModule에서 환경값을 사용하려고 했기 때문입니다.
+현재 제가 처한 상황은 `AppModule`에서 `ConfigModule`에서 `isGlobal`옵션을 통해 환경 값을 글로벌하게 사용할 수 있게 해주었지만 AppModule이 아닌 다른 모듈인 AuthModule에서 환경 값을 사용하려고 했기 때문입니다.
 
 위에서 consuming module이 AuthModule이 되고 host Module이 AppModule이 됩니다.
 
-이러한 이유때문에 저는 환경값을 불러오지 못하는 상황을 마주했고 이것을 해결하기 위해 Dynamic하게 JwtModule의 설정을 해주었습니다.
+이러한 이유로 저는 환경 값을 불러오지 못하는 상황을 마주했고 이것을 해결하기 위해 Dynamic하게 JwtModule의 설정을 해주었습니다.
 
 <hr/>
 
@@ -664,7 +664,7 @@ constructor(
 }
 ```
 
-Controller에서는 Service와 Logger를 주입받아 사용하고 있습니다. 또한 각각 어떠한 부분에서 로그가 찍혔는지를 알기 쉽게 하기위해 tag를 사용했습니다. 로깅은 다음과 같이 사용했습니다.
+Controller에서는 Service와 Logger를 주입받아 사용하고 있습니다. 또한 각각 어떠한 부분에서 로그가 찍혔는지를 알기 쉽게 하기 위해 tag를 사용했습니다. 로깅은 다음과 같이 사용했습니다.
 
 ```typescript
 this.logger.debug(
@@ -676,7 +676,7 @@ this.logger.debug(
 
 [태그] [로그가 찍힌 날짜 및 시간] [요청으로 들어온 DTO의 프로퍼티] [내용] 의 형식으로 로그 메시지를 구성하였습니다.
 
-> @ApiOk~, @ApiCreate~ 와같은 데코레이터에 관해서는 Decorator 파트에서 설명하겠습니다.
+> @ApiOk~, @ApiCreate~ 와 같은 데코레이터에 관해서는 Decorator 파트에서 설명하겠습니다.
 
 
 <hr/>
@@ -693,13 +693,13 @@ constructor(
 
 #### **Repository
 
-Service 계층에서는 `**Repository` 혹은 `**QueryRepository`로 네이밍 되어있는 Repository들을 주입받습니다. 해당 AuthService에서는 조회(Query)부분이 없고 명령(Command)로직만을 사용하므로 `**Repository`를 주입받아 사용했습니다.
+Service 계층에서는 `**Repository` 혹은 `**QueryRepository`로 네이밍 되어있는 Repository 들을 주입받습니다. 해당 Auth Service에서는 조회(Query) 부분이 없고 명령(Command) 로직만을 사용하므로 `**Repository`를 주입받아 사용했습니다.
 
 #### JwtService
 
-JwtService의 sign메서드를 사용하여 JWT웹토큰을 발급받기위하여 주입받은 종속성입니다.
+JwtService의 sign메서드를 사용하여 JWT웹토큰을 발급받기 위하여 주입받은 종속성입니다.
 
-앞서 말씀드린 환경값을 불러오지 못한 이슈가 일어났던 부분입니다.
+앞서 말씀드린 환경 값을 불러오지 못한 이슈가 일어났던 부분입니다.
 
 #### signIn Method
 
@@ -724,7 +724,7 @@ const user: User = await this.usersRepository.signIn(email);
 
 email을 이용하여 유효한 유저인지를 판단합니다.
 
-password는 이미 bcrypt를 통해 암호화가 되어있으므로 요청으로 들어온 password값과 Repository로 가져온 password의 값을 비교해줘야할 필요성이 있습니다.
+password는 이미 bcrypt를 통해 암호화가 되어있으므로 요청으로 들어온 password 값과 Repository로 가져온 password의 값을 비교해줘야 할 필요성이 있습니다.
 
 ```typescript
 if (user && (await bcrypt.compare(password, user.password))) {
@@ -742,17 +742,17 @@ if (user && (await bcrypt.compare(password, user.password))) {
   const accessToken = this.jwtService.sign(payload);
 ```
 
-User가 존재하고 요청 DTO로 넘어온 password와 현재 Database에 저장된 유저 정보중 password를 `bcrypt.compare`함수로 비교를 합니다. 2개의 검증이 모두 통과가되면 본격적으로 다른 인증이 필요한 API들을 이용할 수 있도록 토큰을 발급합니다.
+User가 존재하고 요청 DTO로 넘어온 password와 현재 Database에 저장된 유저 정보 중 password를 `bcrypt.compare` 함수로 비교합니다. 2개의 검증이 모두 통과가 되면 본격적으로 다른 인증이 필요한 API들을 이용할 수 있도록 토큰을 발급합니다.
 
-이때 JWT의 `PAYLOAD` 부분의 데이터를 유저의 고유값인 `email`로 설정해줌으로서 Token을 통한 인증이 필요한 API에서 해당 토큰의 PAYLOAD부분에 저장되어있는 email을 가지고 유저가 실제 존재하는지에 대한 여부를 판별합니다.
+이때 JWT의 `PAYLOAD` 부분의 데이터를 유저의 고윳값인 `email`로 설정해줌으로써 Token을 통한 인증이 필요한 API에서 해당 토큰의 PAYLOAD 부분에 저장되어있는 email을 가지고 유저가 실제 존재하는지에 대한 여부를 판별합니다.
 
-프론트가 없는 관계로 현재는 JSON형태로 그냥 반환하게 됬고 이 토큰을 Swagger 문서의 Authorization 에 등록을 해주면 `Bearer Header`에 토큰값을 저장하게 된것과 동일한 효과를 누릴수있습니다.
+프론트가 없는 관계로 현재는 JSON 형태로 그냥 반환하게 됐고 이 토큰을 Swagger 문서의 Authorization 에 등록을 해주면 `Bearer Header`에 토큰값을 저장하게 된 것과 같은 효과를 누릴 수 있습니다.
 
 ```typescript
 } else throw new UnauthorizedException('logIn failed');
 ```
 
-유저가 존재하지않거나 bcrypt로 hash화된 password가 서로 일치하지 않으면 `UnauthorizaedException`을 발생시킵니다.
+유저가 존재하지 않거나 bcrypt로 hash화된 password가 서로 일치하지 않으면 `UnauthorizaedException`을 발생시킵니다.
 
 <hr/>
 
@@ -803,11 +803,11 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 }
 ```
 
-`passport-jwt` 패키지 속의 Strategy를 매개변수로 받는 `PassportStrategy(Strategy)`를 상속함으로서
+`passport-jwt` 패키지 속의 Strategy를 매개변수로 받는 `PassportStrategy(Strategy)`를 상속함으로써
 
-Strategy가 `jwt`방식일때 어떠한 옵션을 가지고 Strategy를 초기화 시켜주는지에 대한 로직을 작성합니다.
+Strategy가 `jwt`방식일 때 어떠한 옵션을 가지고 Strategy를 초기화 시켜주는지에 대한 로직을 작성합니다.
 
-super의 생성자의 매개변수로 JWT를 생성할때 사용할 secretKey를 지정해주고 JWT토큰이 저장되어있는 곳이 Header의 `Bearer Token`임을 알려줍니다.
+super의 생성자의 매개변수로 JWT를 생성할 때 사용할 secretKey를 지정해주고 JWT토큰이 저장되어있는 곳이 Header의 `Bearer Token`임을 알려줍니다.
 
 ```typescript
   async validate(payload) {
@@ -820,24 +820,24 @@ super의 생성자의 매개변수로 JWT를 생성할때 사용할 secretKey를
   }
 ```
 
-후에 `BoardsController`에서 다루겠지만 `@UseGuards(AuthGuard('jwt'))` 데코레이터를 가진 Route Handler는 이 인증 / 인가를 처리할때 해당 validate 함수에서 처리를 하게됩니다.
+후에 `BoardsController`에서 다루겠지만 `@UseGuards(AuthGuard(`jwt`))` 데코레이터를 가진 Route Handler는 이 인증 / 인가를 처리할 때 해당 validate 함수에서 처리를 하게 됩니다.
 
 ![Screen Shot 2021-10-22 at 3 09 50 PM](https://user-images.githubusercontent.com/44861205/138401939-bc5f45d1-5e19-4dee-97de-dd2f7dfa0bad.png)
 
-발급받으신 토큰을 [JWT 공식 사이트](https://jwt.io/)에서 사람이 알수있는 정보로 해석하실수 있으며 저희 애플리케이션에서 사용하는 토큰의 PAYLOAD부분은 위의 스크린샷과 같이 `email`을 가지고있으며 토큰 만료 시간을 1시간으로 해놓았기때문에 `exp`에서 `iat`를 뺀 값이 `3600`인것도 확인하실수 있습니다. 
+발급받으신 토큰을 [JWT 공식 사이트](https://jwt.io/)에서 사람이 알 수 있는 정보로 해석하실 수 있으며 저희 애플리케이션에서 사용하는 토큰의 PAYLOAD 부분은 위의 스크린샷과 같이 `email`을 가지고 있으며 토큰 만료 시간을 1시간으로 해놓았기 때문에 `exp`에서 `iat`을 뺀 값이 `3600`인 것도 확인하실 수 있습니다.
 
-해당 PAYLOAD에서 email을 destructuring하여 User의 실제 정보를 찾습니다.
+해당 PAYLOAD에서 email을 de structuring 하여 User의 실제 정보를 찾습니다.
 
-유저의 정보가 있다면 `req.user`에 해당 validate함수가 유저의 정보를 저장해주며 그렇지 못할경우에는 에러를 발생시킵니다.
+유저의 정보가 있다면 `req.user`에 해당 validate 함수가 유저의 정보를 저장해주며 그렇지 못할 경우에는 에러를 발생시킵니다.
 
 <hr/>
 
 
 ### BoardsController
 
-모든 Controller들은 공통된 부분을 가지고있으며 이는 AuthController에서 설명을 드렸습니다.
+모든 Controller들은 공통된 부분을 가지고 있으며 이는 AuthController에서 설명해 드렸습니다.
 
-이외의 BoardsController에서 가지고있는 부분을 설명 드리고자 합니다.
+이외의 BoardsController에서 가지고 있는 부분을 설명해 드리고자 합니다.
 
 ```typescript
 // Boards Controller에 있는 Route Handler중 하나
@@ -859,23 +859,23 @@ super의 생성자의 매개변수로 JWT를 생성할때 사용할 secretKey를
 
 #### @UseGuards(AuthGuard('jwt'))
 
-앞서 `JwtStrategy`에서도 설명을 드렸지만 
+앞서 `JwtStrategy`에서도 설명해 드렸지만
 
-> 어떠한 API가 `JWT`전략을 이용하며 요청 Header의 Bearer Token이 필요하다
- 
+> 어떠한 API가 `JWT`전략을 이용하며 요청 Header의 Bearer Token이 필요하다.
+
 라는 말은 게시글 생성, 수정, 삭제와 같은 인증/인가가 필요한 API를 말합니다.
 
-게시글 생성은 회원가입을 마친 유저만 이용할수 있습니다.
+게시글 생성은 회원가입을 마친 유저만 이용할 수 있습니다.
 
 따라서 JwtStrategy를 이용하여 해당 유저가 유효한 유저인지 Route Handler가 실행되기 이전에 검증합니다.
 
-> Nest.js의 [Request LifeCycle](https://docs.nestjs.com/faq/request-lifecycle)에 Request의 생명주기가 자세히 순서대로 나와있습니다.
+> Nest.js의 [Request LifeCycle](https://docs.nestjs.com/faq/request-lifecycle)에 Request의 생명주기가 자세히 순서대로 나와 있습니다.
 
- 무사히 검증을 성공하고 Request Body부분도 문제가 없다면 Service계층에게 작업을 넘깁니다.
+무사히 검증에 성공하고 Request Body 부분도 문제가 없다면 Service 계층에게 작업을 넘깁니다.
 
-#### @UseInterceptors(CommonResponseFormInterceptor)
+#### @UseInterceptors(CommonResponseFormIntercept)
 
-해당 데코레이터를 가진 Route Handler는 항상 다음과 같은 응답 Body를 갖게됩니다.
+해당 데코레이터를 가진 Route Handler는 항상 다음과 같은 응답 Body를 갖게 됩니다.
 
 ```typescript
 {
@@ -884,19 +884,19 @@ super의 생성자의 매개변수로 JWT를 생성할때 사용할 secretKey를
 }
 ```
 
-[알바로그](https://github.com/AlbalogTeam/AlbalogServer) 프로젝트를 진행하였을때 당시 협업을 하던 프론트 분들의 요청으로 매 요청의 응답으로서 위와같은 형태를 갖춰 보내주실것을 원하셨습니다.
+[알바로그](https://github.com/AlbalogTeam/AlbalogServer) 프로젝트를 진행하였을 때 당시 협업하던 프론트 분들의 요청으로 매 요청의 응답으로서 위와 같은 형태를 갖춰 보내주실 것을 원하셨습니다.
 
-`Express`를 처음으로 사용할 당시에는 매번 모든 요청에 저러한 형태의 데이터를 임의로 만들어 주었는데, Nest.js에서 `Interceptor`를 사용하여 응답 바디가 위와같은 형태를 갖게 처리해 주었습니다.
+`Express`를 처음으로 사용할 당시에는 매번 모든 요청에 저러한 형태의 데이터를 임의로 만들어 주었는데, Nest.js에서 `Interceptor`를 사용하여 응답 바디가 위와 같은 형태를 갖게 처리해 주었습니다.
 
-이렇게 하면 요청의 성공 여부를 프론트분들이 쉽게 판단할수 있다고 하셔서 이렇게 데이터를 구성하게 되었습니다.
+이렇게 하면 요청의 성공 여부를 프론트분들이 쉽게 판단할 수 있다고 하셔서 이렇게 데이터를 구성하게 되었습니다.
 
-하지만 알바로그 프로젝트분들과 현재 과제를 진행하면서 다시 이부분에대해서 여쭤봤을때는
+하지만 알바로그 프로젝트 분들과 현재 과제를 진행하면서 다시 이 부분에 대해서 여쭤봤을 때는
 
-`try ... catch`문으로 요청을 감싸면 알아서 성공여부를 알수있다고해서 굳이 필요없다라는 말씀을 해주셨습니다.
+`try ... catch`문으로 요청을 감싸면 알아서 성공 여부를 알 수 있다고 해서 굳이 필요 없다는 말씀을 해주셨습니다.
 
-아직 위의 방식을 채택하시는 분도 있으실것같고 아니면 위의 방식을 사용하시지 않은 분이 있을것같습니다.
+아직 위의 방식을 채택하시는 분도 있으실 것 같고 아니면 위의 방식을 사용하시지 않은 분이 있을 것 같습니다.
 
-따라서 이 부분에 대해서는 협업을 하는 분과 충분한 협의를 통해 결정하면 될것 같습니다.
+따라서 이 부분에 대해서는 협업을 하는 분과 충분한 협의를 통해 결정하면 될 것 같습니다.
 
 #### ValidationPipe 보충내용 && Pagination
 
@@ -912,7 +912,7 @@ getAllBoard(limit: number, page: number) {
 
 CQRS 패턴과 커버링 인덱스를 Pagination 처리에 적용하기 이전에 저는 다음과 같이 `limit`과 `page`를 QueryBduilder에 직접 매개변수로 넣어주어 코드를 작성하였습니다.
 
-서비스가 커짐에 따라 Pagination을 할 Domain이 만약 Board뿐만 아니라 다른 도메인도 Pagination을 처리해줘야 한다면 limit과 page의 관리가 어려워질수가 있습니다.
+서비스가 커짐에 따라 Pagination을 할 Domain이 만약 Board뿐만 아니라 다른 도메인도 Pagination을 처리해줘야 한다면 limit과 page의 관리가 어려워질 수가 있습니다.
 
 따라서 저는 limit과 page의 관리에 대한 책임이 있고 이를 적절한 값으로 반환해주는 임무를 담당하는 객체를 생성했습니다.
 
@@ -946,14 +946,13 @@ export abstract class PageRequest {
 
 해당 클래스는 limit과 page를 가지는 `PageRequest` 클래스입니다.
 
-Pagination은 실제로 각각의 도메인의 정보량이 많아진다면 각각 도메인마다 필요한 기능이 될수 있습니다. 
+Pagination은 실제로 각각의 도메인의 정보량이 많아진다면 각각 도메인마다 필요한 기능이 될 수 있습니다.
 
 따라서 해당 클래스를 `abstract` 클래스로 만들어주고 Pagination을 사용할 Domain에서 해당 클래스를 상속받는 또다른 클래스를 만들어 관리하는 방식을 택했습니다.
 
-이렇게 하면 모든 Pagination을 처리해야하는 Domain에서 동일하게 limit값과 page값을 얻을 수 있으며 Pagination의 동일한 결과를 도출하는데 큰 역할을 합니다.
+이렇게 하면 모든 Pagination을 처리해야 하는 Domain에서 동일하게 limit값과 page값을 얻을 수 있으며 Pagination의 동일한 결과를 도출하는 데 큰 역할을 합니다.
 
 실제 사용 예시는 아래와 같습니다.
-
 
 ```typescript
 // BoardSearchRequest
@@ -983,13 +982,13 @@ export class UserSearchRequest extends PageRequest {
 }
 ```
 
-해당 클래스들은 각각 Board, User에 대한 Pagination처리를 하기위한 DTO로서 사용됩니다.
+해당 클래스들은 각각 Board, User에 대한 Pagination 처리를 하기위한 DTO로서 사용됩니다.
 
 추후 Board와 User의 도메인이 점점 더 커지고 그에 따른 요청 Body로 받아야 하는 추가적인 데이터가 있다면 따로 추가해주어도 됩니다.
 
-> 예를들어 게시글의 제목을 기준으로 데이터를 가져옴과 동시에 Pagination처리를 하고싶다면 BoardSearchRequest에 title 프로퍼티를 추가하여 데이터를 추가적으로 요청할때 받아 처리해줍니다.
+> 예를 들어 게시글의 제목을 기준으로 데이터를 가져옴과 동시에 Pagination 처리를 하고 싶다면 BoardSearchRequest에 title 프로퍼티를 추가하여 데이터를 추가로 요청할 때 받아 처리해줍니다.
 
-현재는 두 DTO는 단순히 limit과 page를 통해서만 페이지네이션처리를 하고 있습니다.
+현재는 두 DTO는 단순히 limit과 page를 통해서만 페이지네이션 처리를 하고 있습니다.
 
 
 
@@ -1002,30 +1001,29 @@ export class UserSearchRequest extends PageRequest {
     return this.boardsService.getAllBoard(query);
   }
 ```
+해당 Route Handler에서 아래와 같이 요청 쿼리로 들어온 값을 받아오고 있습니다.
 
-해당 Route Handler에서 아래와 같이 요청 쿼리로 들어온 값을 받아오고있습니다.
 
-
-하지만 기존의 ValidationPipe와는 다른점이 있습니다.
+하지만 기존의 ValidationPipe와는 다른 점이 있습니다.
 
 ```typescript
 // 기존 방식
 @Body(ValidationPipe) boardCreateDto: BoardCreateDto,
 ```
 
-기존의 방식은 단순히 Body가 됬든 Query가 됬든 절대적인 이름만 맞다면 그 이름에 맞는 DTO의 속성에만 매칭을 시켜주었습니다.
+기존의 방식은 단순히 Body가 됐든 Query가 됐든 절대적인 이름만 맞는다면 그 이름에 맞는 DTO의 속성에만 매칭을 시켜주었습니다.
 
 ```typescript
 @Query(new ValidationPipe({ transform: true })) query: BoardSearchRequest,
 ```
 
-하지만 위의 방식에서 BoardSearchRequest는 
+하지만 위의 방식에서 BoardSearchRequest는
 
-abstract class인 `PageRequest`를 상속받고 있으므로 실제 프로퍼티간의 매칭 뿐만이 아니라 PageRequest에 정의된 모든 프로퍼티와 함수(getPage, getOffset, getLimit)를 가지고있는 실제 DTO객체가 되어야합니다.
+abstract class인 `PageRequest`를 상속받고 있으므로 실제 프로퍼티간의 매칭뿐만이 아니라 PageRequest에 정의된 모든 프로퍼티와 함수(getPage, getOffset, getLimit)를 가지고있는 실제 DTO객체가 되어야합니다.
 
-따라서 transform 옵션을주어 이를 해결하였습니다.
+따라서 transform 옵션을 주어 이를 해결하였습니다.
 
-만약 기존의 방식으로 하게된다면 Repository에서 `getPage`, `getOffset`, `getLimit`과 같은 함수는 `undefined`가 나오게 됩니다.
+만약 기존의 방식으로 하게 된다면 Repository에서 `getPage`, `getOffset`, `getLimit`과 같은 함수는 `undefined`가 나오게 됩니다.
 
 <hr/>
 
@@ -1034,7 +1032,7 @@ abstract class인 `PageRequest`를 상속받고 있으므로 실제 프로퍼티
 
 저는 모든 비즈니스 로직은 Service계층, 모든 Database 접근 로직은 Repository에 책임을 맡겨 구분했습니다.
 
-BoardsService의 로직들을 작성하는데 있었던 경험들을 아래에서 공유드리려고합니다.
+BoardsService의 로직들을 작성하는 데 있었던 경험을 아래에서 공유해 드리려고 합니다.
 
 #### Delete시 결과가 실패/성공 여부에 상관없이 같음
 
@@ -1051,15 +1049,15 @@ async deleteBoard(
 }
 ```
 
-SQLite와 TypeORM을 같이 사용하면 Delete시 아래와 같이실패를해도 성공을해도 똑같은 빈배열을 반환했습니다.
+SQLite와 TypeORM을 같이 사용하면 Delete시 아래와 같이 실패를 해도 성공을 해도 똑같은 빈 배열을 반환했습니다.
 
 ```typescript
 { generatedMaps: [], raw: [], affected: undefined }
 ```
 
-이러한 문제는 아직 해결되지 않은것으로 보입니다. [Github Issue Link](https://github.com/typeorm/typeorm/issues/2415)
+이러한 문제는 아직 해결되지 않은 것으로 보입니다. [Github Issue Link](https://github.com/typeorm/typeorm/issues/2415)
 
-하지만 해당 게시글을 삭제하기전에 게시글의 존재유무에 대해서 알아야하며 이 게시글이 요청을 보낸 유저가 작성한 게시글인지를 판별해야했습니다. 
+하지만 해당 게시글을 삭제하기 전에 게시글의 존재 여부에 대해서 알아야 하며 이 게시글이 요청을 보낸 유저가 작성한 게시글인지를 판별해야 했습니다.
 
 이러한 처리는 아래의 코드로 처리해주었습니다.
 
@@ -1067,7 +1065,8 @@ SQLite와 TypeORM을 같이 사용하면 Delete시 아래와 같이실패를해�
 await this.confirmValidBoard(userId, boardId);
 ```
 
-이러한 검증덕분에 Delete를 안전하게 진행할수 있었습니다.
+이러한 검증 덕분에 Delete를 안전하게 진행할 수 있었습니다.
+
 
 #### Pagination 비즈니스 로직
 
@@ -1095,9 +1094,9 @@ await this.confirmValidBoard(userId, boardId);
 const [boards, count] = await this.boardsQueryRepository.getAllBoard(query);
 ```
 
-boardsQueryRepository를 통해 Pagination처리가 된 Board의 리스트를 가져옵니다.
+boardsQueryRepository를 통해 Pagination 처리가 된 Board의 리스트를 가져옵니다.
 
-이때 Board의 전체 개수와 함께 가져옵니다. QueryRepository의 Board를 가져오는 로직에 대해서는 `Repository` 챕터에서 설명드리겠습니다.
+이때 Board의 전체 개수와 함께 가져옵니다. QueryRepository의 Board를 가져오는 로직에 대해서는 `Repository` 챕터에서 설명하겠습니다.
 
 ```typescript
 if (boards.length <= 0)
@@ -1116,11 +1115,11 @@ return this.paginationHelper.getPaginationItems<NotIncludeSensitiveInfoBoardResp
 );
 ```
 
-게시글의 리스트를 반환할때 게시글을 작성한 유저의 정보도 함께 반환됩니다. 하지만 이때 유저의 password와같은 정보는 불필요하다고 판단하여
+게시글의 리스트를 반환할 때 게시글을 작성한 유저의 정보도 함께 반환됩니다. 하지만 이때 유저의 password와 같은 정보는 불필요하다고 판단하여
 
-민감한 정보를 포함하지않은 응답객체를 따로 `NotIncludeSensitiveInfoBoardResponse`로 만들어주었습니다.
+민감한 정보를 포함하지 않은 응답 객체를 따로 `NotIncludeSensitiveInfoBoar`로 만들어주었습니다.
 
-또한 해당 부분은 원래 아래와 같이 어떠한 Helper에 도움없이 바로 반환하는 형태였습니다.
+또한 해당 부분은 원래 아래와 같이 어떠한 Helper에 도움 없이 바로 반환하는 형태였습니다.
 
 ```typescript
 return new Page<NotInclueSensitiveBoardInfoResponse>(
@@ -1130,7 +1129,7 @@ return new Page<NotInclueSensitiveBoardInfoResponse>(
 );
 ```
 
-하지만 Board뿐만이 아니라 User에대한 Pagination처리도 고려하게 되면서 이는 중복제거와 관리를 위해 Helper로 따로 관리해야할 필요성을 느끼게 됬습니다.
+하지만 Board뿐만이 아니라 User에 대한 Pagination 처리도 고려하게 되면서 이는 중복제거와 관리를 위해 Helper로 따로 관리해야 할 필요성을 느끼게 됐습니다.
 
 작성한 헬퍼는 아래와 같이 단순히 `Page<T>`타입의 객체를 반환해주는 함수를 가지고 있습니다.
 
@@ -1146,17 +1145,37 @@ export class PaginationHelper<T> {
 }
 ```
 
+해당 Helper를 사용하여 아래와 같이 적용시켜주었습니다.
+
+```typescript
+  async getAllBoard(
+    query: BoardSearchRequest,
+  ): Promise<Page<NotIncludeSensitiveInfoBoardResponse>> {
+    const [boards, count] = await this.boardsQueryRepository.getAllBoard(query);
+
+    if (boards.length <= 0)
+      throw new BadRequestException(
+        `해당 ${query.page}번째 페이지의 게시글이 존재하지 않습니다.`,
+      );
+    return this.paginationHelper.getPaginationItems<NotIncludeSensitiveInfoBoardResponse>(
+      count,
+      query.limit,
+      boards.map((b) => new NotIncludeSensitiveInfoBoardResponse(b, b.user)),
+    );
+  }
+```
+
 <hr/>
 
 ### BoardsQueryRepository
 
-조회(Query)부분만을 담당하는 Repository입니다.
+조회(Query) 부분만을 담당하는 Repository입니다.
 
-등록/수정/삭제 명령(Command)는 실제 Domain과 상당히 연관이 있지만
+등록/수정/삭제 명령(Command)은 실제 Domain과 상당히 연관이 있지만
 
-조회 같은경우에는 해당 API마다 노출시킬 데이터가 무엇인가에 대해 연관이 있습니다.
+조회 같은 경우에는 해당 API마다 노출시킬 데이터가 무엇인가에 대해 연관이 있습니다.
 
-따라서 집중하는 영역이 다른 두개의 로직을 분리시킬 필요가 있었습니다.
+따라서 집중하는 영역이 다른 두 개의 로직을 분리할 필요가 있었습니다.
 
 이렇게 로직을 분리해놓으니 유지관리도 쉽고 가독성 측면에서도 훨씬 좋았습니다.
 
@@ -1173,24 +1192,24 @@ getAllBoard(limit: number, page: number) {
 }
 ```
 
-처음 구현했던 Pagination 로직은 위와 같았습니다. 
+처음 구현했던 Pagination 로직은 위와 같았습니다.
 
 하지만 이러한 방식은 데이터가 많아지고 유저가 클릭하는 페이지의 번호가 높을수록 상당히 느려진다는 단점이 있습니다.
 
-특히 아래의 사진과 같이 게시글의 데이터 110만개를 기준으로 첫번째 페이지와 마지막페이지를 불러올때 1.5배정도의 시간 차이가 납니다.
+특히 아래의 사진과 같이 게시글의 데이터 110만 개를 기준으로 첫 번째 페이지와 마지막 페이지를 불러올 때 1.5배 정도의 시간 차이가 납니다.
 
 
 ![Screen Shot 2021-10-23 at 12 44 00 AM](https://user-images.githubusercontent.com/44861205/138484336-3963682c-44c9-4e78-b480-fbe2575b5bca.png)
 
-이는 마지막 페이지의 데이터를 불러오기위해 그 결과로서 사용도 하지않을 데이터들을 거쳐서 마지막 페이지의 데이터에 도달하기 때문입니다.
+이는 마지막 페이지의 데이터를 불러오기 위해 그 결과로써 사용도 하지 않을 데이터들을 거쳐서 마지막 페이지의 데이터에 도달하기 때문입니다.
 
-이렇게 첫페이지의 50개의 글만 불러와도 1초에 가까운시간이 걸리는 해당 API는 사용하기에는 무리가 있을것 같습니다.
+이렇게 첫 페이지의 50개의 글만 불러와도 1초에 가까운 시간이 걸리는 해당 API는 사용하기에는 무리가 있을 것 같습니다.
 
-따라서 이러한 단점을 극복할수있는 방법으로 `커버링 인덱스`를 사용하였습니다.
+따라서 이러한 단점을 극복할 수 있는 방법으로 `커버링 인덱스`를 사용하였습니다.
 
-> 커버링 인덱스란 인덱스가 쿼리의 질의를 모두 '커버'한 경우를 말합니다.
+> 커버링 인덱스란 인덱스가 쿼리의 질의를 모두 `커버`한 경우를 말합니다.
 
-해당 과제의 데이터베이스의 경우 board의 id 혹은 user의 id가 인덱스이며, 이것으로만 만약 질의가 이루어져있다면 그것이 바로 커버링 인덱스를 사용한 경우라고 말할수 있습니다.
+해당 과제의 데이터베이스의 경우 board의 id 혹은 user의 id가 인덱스이며, 이것으로만 만약 질의가 이루어져 있다면 그것이 바로 커버링 인덱스를 사용한 경우라고 말할 수 있습니다.
 
 커버링 인덱스를 적용한 코드는 아래와 같습니다.
 
@@ -1218,7 +1237,7 @@ async getAllBoard(query: BoardSearchRequest): Promise<[Board[], number]> {
 }
 ```
 
-아래의 코드는 커버링 인덱스 쿼리를 먼저 만들기위한 작업입니다.
+아래의 코드는 커버링 인덱스 쿼리를 먼저 만들기 위한 작업입니다.
 
 ```typescript
 this.createQueryBuilder('covers')
@@ -1244,19 +1263,19 @@ OFFSET 1
 
 이처럼 1번 Row의 게시글부터 50개의 "게시글의 아이디"만을 가져오는 질의입니다.
 
-이때 게시글의 아이디는 Primary Key로서 Index입니다. 해당 질의의 결과는 아래와 같이 게시글의 아이디로만 이루어져있습니다.
+이때 게시글의 아이디는 Primary Key로서 Index입니다. 해당 질의의 결과는 아래와 같이 게시글의 숫자 아이디로만 이루어져 있습니다.
 
 ![Screen Shot 2021-10-24 at 12 31 38 AM](https://user-images.githubusercontent.com/44861205/138562573-47320b70-88df-45de-9985-bed36e40c6d0.png)
 
-해당 커버링 인덱스의 결과를 얻었으니 이제 실제 저희가 가져와야하는 Board의 데이터를 해당 질의를 이용해 가져와야합니다. 
+해당 커버링 인덱스의 결과를 얻었으니 이제 실제 저희가 가져와야 하는 Board의 데이터를 해당 질의를 이용해 가져와야 합니다.
 
-가져오기전, 총 페이지의 개수를 구하기위한 총 Row의 개수를 아래와 같이 구해줍니다.
+가져오기 전, 총 페이지의 개수를 구하기 위한 총 Row의 개수를 아래와 같이 구해줍니다.
 
 ```typescript
 const count = await coveringIndexQueryBuilder.getCount();
 ```
 
-> TypeORM은 Join과 같은 관계형성이 되어있지않으면 해당 테이블의 전체 Row의 개수를 Count합니다. `node_modules/typeorm/query-builder/SelectQueryBuilder.js`의 `SelectQueryBuilder.prototype.computeCountExpression`에서 확인하실수 있습니다. 처음에 coveringIndexQueryBuilder.getCount()의 결과값이 LIMIT개로 예상했지만 테이블의 전체 데이터의 개수를 가져와서 의문점이 생겨 찾아보았습니다.
+> TypeORM은 Join과 같은 관계 형성이 되어있지 않으면 해당 테이블의 전체 Row의 개수를 Count 합니다. `node_modules/typeorm/query-builder/SelectQueryBuilder.js`의 `SelectQueryBuilder.prototype.computeCountExpression`에서 확인하실 수 있습니다. 처음에 coveringIndexQueryBuilder.getCount()의 결괏값이 LIMIT 개로 예상했지만, 테이블의 전체 데이터의 개수를 가져와서 의문점이 생겨 찾아보았습니다.
 
 이제 커버링 인덱스를 가지고 본격적으로 Board의 데이터를 추출해보겠습니다.
 
@@ -1272,24 +1291,24 @@ const count = await coveringIndexQueryBuilder.getCount();
     .getMany();
 ```
 
-Board테이블의 id와 커버링 인덱스의 결과에 있는 id가 같은 Board의 게시글을 불러오면 
+Board 테이블의 id와 커버링 인덱스의 결과에 있는 id가 같은 Board의 게시글을 불러오면
 
-커버링 인덱스의 결과는 이미 Pagination처리가 되어있던 Board의 id가 있으므로 이와 같은 id를 가지는
+커버링 인덱스의 결과는 이미 Pagination 처리가 되어있던 Board의 id가 있으므로 이와 같은 id를 가지는
 
 Board의 데이터를 가져오면 됩니다.
 
-또한 유저의 정보가 필요하므로 커버링 인덱스와 Board의 조인결과를 바탕으로 User와 Join을 합니다.
+또한 유저의 정보가 필요하므로 커버링 인덱스와 Board의 조인 결과를 바탕으로 User와 Join을 합니다.
 
-이렇게 커버링 인덱스를 적용하여 Pagination처리를 마무리했습니다. 그럼 이제 성능에 대해서 테스트해보겠습니다.
+이렇게 커버링 인덱스를 적용하여 Pagination 처리를 마무리했습니다. 그럼 이제 성능에 대해서 테스트해보겠습니다.
 
 
 ### 게시글 데이터 600만개 기준
 
-> 들어가기에 앞서 저는 성능 테스트를 하기위해 실제 SQLite에 쿼리를 날려봤고, console.time을 이용한 시간측정, QueryRepository의 실제 테스트코드 작성을하여 총 3가지의 방법으로 성능 테스트를 진행해 보았습니다. 이때 QueryRepository의 실제 테스트코드로의 테스트가 console.time을 이용한 테스트보다 월등하게 빨랐습니다. 
- 
-> 예를들어 실제 API호출시는 커버링 인덱스 적용의 전과 후가 100배의 성능이 차이가 났는데 테스트환경에서는 최대 10배밖에 차이가 나지 않았습니다. 이 점을 이상하게 여겨 많은 현업에 계신분들께 여쭤봤지만 마땅한 해결책을 얻지 못해 아무래도 실제 개발환경보다는 조금 더 가벼운 환경이기때문으로 추측을 하고 있습니다. 
- 
-> 만약 제가 실무에서 이러한 상황을 마주친다면 테스트코드의 결과로 10배정도의 성능향상을 생각해 실제 개발이나 운영환경에서는 100배정도의 성능향상이 일어난다고 생각하니 더더욱 "성능측정에 있어서는" 테스트를 100% 맹신하는것은 옳지 못한것이라고 생각을 하게 됬습니다. 10배정도의 성능향상이 일어나 그에 맞게 리소스를 설정해놓았는데 실제로는 100배의 성능향상을 이끌어내서 준비한 리소스의 낭비가 일어날수 있게될것 같다고 생각했기 때문입니다. 이 부분은 추후 Jest가 아닌 Mocha를 통한 테스트로 다시 해볼예정입니다. 많은 원인을 생각해보다가 결국 테스트 프레임워크의 문제인가에 까지 도달하게 됬습니다.
+> 들어가기에 앞서 저는 성능 테스트를 하기 위해 실제 SQLite에 쿼리를 날려봤고, console.time을 이용한 시간 측정, QueryRepository의 실제 테스트코드 작성을 하여 총 3가지의 방법으로 성능 테스트를 진행해 보았습니다. 이때 QueryRepository의 실제 테스트 코드로의 테스트가 console.time을 이용한 테스트보다 월등하게 빨랐습니다.
+
+> 예를 들어 실제 API 호출시에는 커버링 인덱스 적용의 전과 후가 100배의 성능이 차이가 났는데 테스트환경에서는 최대 10배밖에 차이가 나지 않았습니다. 이 점을 이상하게 여겨 많은 현업에 계신 분들께 여쭤봤지만 마땅한 해결책을 얻지 못해 아무래도 실제 개발환경보다는 조금 더 가벼운 환경이기 때문으로 추측하고 있습니다.
+
+> 만약 제가 실무에서 이러한 상황을 마주친다면 테스트코드의 결과로 10배 정도의 성능향상을 생각해 실제 개발이나 운영환경에서는 100배 정도의 성능향상이 일어난다고 생각하니 더더욱 "성능측정에 있어서는" 테스트를 100% 맹신하는 것은 옳지 못한 것이라고 생각하게 됐습니다. 10배 정도의 성능향상이 일어나 그것에 맞게 리소스를 설정해놓았는데 실제로는 100배의 성능향상을 끌어내서 준비한 리소스의 낭비가 일어날 수 있게 될 것 같다고 생각했기 때문입니다. 이 부분은 추후 Jest가 아닌 Mocha를 통한 테스트로 다시 해볼 예정입니다. 많은 원인을 생각해보다가 결국 테스트 프레임워크의 문제인가에 까지, 도달하게 됐습니다.
 
 
 
@@ -1297,53 +1316,50 @@ Board의 데이터를 가져오면 됩니다.
 
 > 사진을 클릭하시면 더 자세하게 보실수 있습니다.
 
-#### 먼저 커버링 인덱스를 적용하지않은 1번 페이지의 50개를 가져오는 쿼리의 실행결과입니다.
+#### 먼저 커버링 인덱스를 적용하지 않은 1번 페이지의 50개를 가져오는 쿼리의 실행 결과입니다.
 
 ![Screen Shot 2021-10-24 at 12 54 46 AM](https://user-images.githubusercontent.com/44861205/138563239-e6bc440a-1bdc-48c4-8ec5-5dbe59b98682.png)
 
-`9ms`가 소요됬습니다.
+`9ms`가 소요됐습니다.
 
-#### 커버링 인덱스를 적용하고 1번 페이지의 50개를 가져오는 쿼리의 실행결과입니다.
+#### 커버링 인덱스를 적용하고 1번 페이지의 50개를 가져오는 쿼리의 실행 결과입니다.
 
 ![Screen Shot 2021-10-24 at 12 53 00 AM](https://user-images.githubusercontent.com/44861205/138563194-42810374-7b7a-4442-992e-59026597b2a8.png)
+`8ms`가 소요 됐습니다.
 
-`8ms`가 소요 됬습니다.
+위와 같이 1번 페이지의 데이터를 가져올 때는 전혀 성능 차이를 볼 수 없습니다.
 
-위와 같이 1번 페이지의 데이터를 가져올때는 전혀 성능차이를 볼수없습니다.
-
-
-
-#### 커버링 인덱스를 적용하지않고 1000번 페이지의 50개를 가져오는 쿼리의 실행결과입니다.
+#### 커버링 인덱스를 적용하지 않고 1000번 페이지의 50개를 가져오는 쿼리의 실행 결과입니다.
 
 ![Screen Shot 2021-10-24 at 2 03 18 AM](https://user-images.githubusercontent.com/44861205/138565301-c723f28b-f3f6-4734-a4c3-11cde70f9e62.png)
 
-`41ms`가 소요 됬습니다.
+`41ms`가 소요 됐습니다.
 
-#### 커버링 인덱스를 적용하고 1000번 페이지의 50개를 가져오는 쿼리의 실행결과입니다.
+#### 커버링 인덱스를 적용하고 1000번 페이지의 50개를 가져오는 쿼리의 실행 결과입니다.
 
 ![Screen Shot 2021-10-24 at 1 02 00 AM](https://user-images.githubusercontent.com/44861205/138563421-9aa55a49-fe40-419b-8c1d-fb6e23595a7e.png)
 
-`3ms`가 소요 됬습니다.
+`3ms`가 소요 됐습니다.
 
-물론 `3ms`와 `41ms`모두 어마어마하게 짧은 시간이지만 수치상으로만 보면 13배차이가 납니다.
+물론 `3ms`와 `41ms` 모두 어마어마하게 짧은 시간이지만 수치상으로만 보면 13배 차이가 납니다.
 
-#### 커버링 인덱스를 적용하지않은 10만번 페이지의 50개를 가져오는 쿼리의 실행결과입니다.
+#### 커버링 인덱스를 적용하지 않은 10만 번 페이지의 50개를 가져오는 쿼리의 실행 결과입니다.
 
 
 ![Screen Shot 2021-10-24 at 1 04 28 AM](https://user-images.githubusercontent.com/44861205/138563505-955ef91c-729e-40e8-af6b-903cc13233a0.png)
 
-`148ms`가 소요 됬습니다. 
+`148ms`가 소요 됐습니다.
 
-#### 커버링 인덱스를 적용하고 10만번 페이지의 50개를 가져오는 쿼리의 실행결과입니다.
+#### 커버링 인덱스를 적용하고 10만 번 페이지의 50개를 가져오는 쿼리의 실행 결과입니다.
 
 
 ![Screen Shot 2021-10-24 at 1 04 05 AM](https://user-images.githubusercontent.com/44861205/138563496-4dc3816f-904c-4581-95d3-58e071e05af0.png)
 
-`58ms`가 소요 됬습니다.
+`58ms`가 소요 됐습니다.
 
-성능 차이가 10배였는데 페이지가 증가할수록 성능차이가 3배로 줄었습니다.
+성능 차이가 10배였는데 페이지가 증가할수록 성능 차이가 3배로 줄었습니다.
 
-사실 Index도 결국 데이터이기 때문에 인덱스만을 담고있는 데이터도 많으면 많아질수록 성능은 떨어지기 마련입니다.
+사실 Index도 결국 데이터이기 때문에 인덱스만을 담고 있는 데이터도 많으면 많아질수록 성능은 떨어지기 마련입니다.
 
 따라서 데이터가 방대하다면 커버링 인덱스의 효과를 많이 보진 못합니다.
 
@@ -1371,7 +1387,6 @@ const boards = await this.createQueryBuilder('boards')
   .getMany();
 console.timeEnd('커버링을 적용');
 ```
-
 해당 코드를 이용하여 실험해보았습니다.
 
 #### 1번 페이지, 50개의 게시글 데이터
@@ -1386,9 +1401,9 @@ console.timeEnd('커버링을 적용');
 
 ![Screen Shot 2021-10-24 at 1 27 24 AM](https://user-images.githubusercontent.com/44861205/138564233-8ba732ad-b1bf-4dbb-bb65-dce9d9fb5304.png)
 
-쿼리를 직접날렸을때와 같이 1000번째 페이지를 가져올때 가장 성능이 좋게 보입니다.
+쿼리를 직접 날렸을 때와 같이 1000번째 페이지를 가져올 때 가장 성능이 좋게 보입니다.
 
-10만번때도 괜찮아보입니다.
+10만 번 때도 괜찮아 보입니다.
 
 ### BoardsQueryRepository Test
 
@@ -1445,7 +1460,7 @@ describe('boards.query.repository', () => {
 });
 ```
 
-사실 앞서 `console.time` 과 코드가 전혀 다르지않습니다. 하지만 앞서 말씀드린것처럼 개발환경과 테스트환경은 분명한 차이가 있었습니다.
+사실 앞서 `console.time` 과 코드가 전혀 다르지 않습니다. 하지만 앞서 말씀드린 것처럼 개발환경과 테스트환경은 분명한 차이가 있었습니다.
 
 #### 1번 페이지, 50개의 게시글 데이터
 
@@ -1457,11 +1472,11 @@ describe('boards.query.repository', () => {
 ![Screen Shot 2021-10-24 at 1 49 44 AM](https://user-images.githubusercontent.com/44861205/138564885-7eedf10e-ba82-4896-855a-e3cd19a1cea9.png)
 
 
-#### 10만번 페이지, 50개의 게시글 데이터
+#### 10만 번 페이지, 50개의 게시글 데이터
 
 ![Screen Shot 2021-10-24 at 2 10 39 AM](https://user-images.githubusercontent.com/44861205/138565523-85acd529-5d0a-420e-a15d-6723249c31b2.png)
 
-결과에서 알수있듯이 테스트환경에서는 10만번 페이지일때 가장 성능이 좋았습니다.
+결과에서 알 수 있듯이 테스트환경에서는 10만 번 페이지일 때 가장 성능이 좋았습니다.
 
 
 ### 해당 테이블의 전체 Row의 개수
@@ -1470,15 +1485,15 @@ describe('boards.query.repository', () => {
 
 ![Screen Shot 2021-10-24 at 2 17 00 AM](https://user-images.githubusercontent.com/44861205/138565709-fcdceecd-aec7-467c-be56-f01b61ec1e2b.png)
 
-앞서 설명드린것처럼 이렇게 1페이지의 50개 데이터를 가져올때 무려 1초에 가까운 시간이 걸렸습니다.
+앞서 설명해 드린 것처럼 이렇게 1페이지의 50개 데이터를 가져올 때 무려 1초에 가까운 시간이 걸렸습니다.
 
-하지만 1페이지의 데이터를 가져올때 30ms가 넘는경우는 없었습니다. 그럼 나머지 `970ms`은 어디갔을까요 ?
+하지만 1페이지의 데이터를 가져올 때 30ms가 넘는 경우는 없었습니다. 그럼 나머지 `970ms`은 어디갔을까요?
 
-사실 Board의 게시글 50개 가져오는것은 앞서 보셨듯이 그리 오래걸리는 연산이 아닙니다.
+사실 Board의 게시글 50개 가져오는 것은 앞서 보셨듯이 그리 오래 걸리는 연산이 아닙니다.
 
-문제는 페이지의 총 개수를 계산하기위해서 Board테이블의 전체 Row의 수를 가져온다는 것입니다.
+문제는 페이지의 총개수를 계산하기 위해서 Board 테이블의 전체 Row의 수를 가져온다는 것입니다.
 
-이 경우가 Pagination API에서 대부분의 시간을 잡아먹습니다.
+이 경우가 Pagination API에서 대부분 시간을 잡아먹습니다.
 
 ```typescript
 async getAllBoard(query: BoardSearchRequest): Promise<[Board[], number]> {
@@ -1503,14 +1518,13 @@ async getAllBoard(query: BoardSearchRequest): Promise<[Board[], number]> {
   return [boards, count];
 }
 ```
-
-이 부분에서 저희는 `count`를 구해줬습니다. 페이지의 총 개수를 알기위해서입니다.
+이 부분에서 저희는 `count`를 구해줬습니다. 페이지의 총개수를 일기 위해서입니다.
 
 ![Screen Shot 2021-10-24 at 2 36 31 AM](https://user-images.githubusercontent.com/44861205/138566227-5f96054f-01a9-46cf-ad40-4f085b1ad673.png)
 
-많은 사용자는 첫페이지말고는 잘 이용하지 않은 경우가 많습니다 물론 여기서는 그렇지 않은 경우도 분명히 있습니다.
+많은 사용자는 첫 페이지 말고는 잘 이용하지 않은 경우가 많습니다. 물론 여기서는 그렇지 않은 경우도 분명히 있습니다.
 
-이렇게 첫번째 페이지의 데이터 50개를 요청했을때 600만개 데이터 기준으로 한개의 API가 1.588초가까이 시간이 소요되고 그중에 전체 Row의 개수를 구하는데만 1.577초를 사용합니다. 즉, 게시글을 실제 읽어오는건 0.011초밖에 되지 않습니다. 그렇다면 첫페이지에대한 요청은 실제 카운트를 하지않고 응답을 하는것으로 로직을 구성하면 더 빠르게 정보를 제공할수 있을것 같습니다. 구현 코드는 아래와 같습니다.
+이렇게 첫 번째 페이지의 데이터 50개를 요청했을 때 600만 개 데이터 기준으로 한 개의 API가 1.588초 가까이 시간이 소요되고 그중에 전체 Row의 개수를 구하는 데만 1.577초를 사용합니다. 즉, 게시글을 실제 읽어오는 건 0.011초밖에 되지 않습니다. 그렇다면 첫 페이지에 대한 요청은 실제 카운트를 하지 않고 응답을 하는 것으로 로직을 구성하면 더 빠르게 정보를 제공할 수 있을 것 같습니다. 구현 코드는 아래와 같습니다.
 
 ```typescript
 async getAllBoard(query: BoardSearchRequest): Promise<[Board[], number]> {
@@ -1573,13 +1587,13 @@ if (query.getOffset() === 0) {
 }
 ```
 
-검색버튼을 누르면 첫번째 페이지를 보여주기때문에 요청으로 들어온 page값은 1입니다. 이때 getOffset은 요청으로들어온 page값에서 1을빼고 limit값을 곱해주기때문에 최종적으로 서버에서는 getOffset값이 0일때를 말하게됩니다.
+검색 버튼을 누르면 첫 번째 페이지를 보여주기 때문에 요청으로 들어온 page 값은 1입니다. 이때 getOffset은 요청으로 들어온 page 값에서 1을 빼고 limit 값을 곱해주기 때문에 최종적으로 서버에서는 getOffset값이 0일 때를 말하게 됩니다.
 
 따라서 이때는 총 Row의 개수를 getCount를 통해 가져오지 않으며 임의로 10페이지가 있다고 응답을 보냅니다.
 
-이렇게 10페이지로 보내버리면 실제 데이터가 10페이지만큼(게시글 500개) 있을수도 있고 없을 수도 있는데요
+이렇게 10페이지로 보내버리면 실제 데이터가 10페이지만큼(게시글 500개) 있을 수도 있고 없을 수도 있는데요
 
-만약 실제 게시글이 6번페이지(400개)밖에없는데 사용자가 8번페이지를 요청한다면 이때는 실제 페이지수를 계산하고 마지막 페이지에 있는 게시글 데이터와 함께 보내줘야합니다.
+만약 실제 게시글이 6번 페이지(400개) 밖에 없는데 사용자가 8번 페이지를 요청한다면 이때는 실제 페이지수를 계산하고 마지막 페이지에 있는 게시글 데이터와 함께 보내줘야 합니다.
 
 
 ```typescript
@@ -1600,55 +1614,118 @@ return [
 ];
 ```
 
-첫번째 페이지의 요청에 대한 응답을 받은 사용자는 총 페이지의 개수가 10개로 알고있습니다 하지만 10개는 임의로 제가 설정한 값이며 페이지의 개수는 10개 일수도 있고, 적을수도 있고, 클수도 있습니다.
+첫 번째 페이지의 요청에 대한 응답을 받은 사용자는 총 페이지의 개수가 10개로 알고 있습니다 하지만 10개는 임의로 제가 설정한 값이며 페이지의 개수는 10개 일수도 있고, 적을 수도 있고, 클 수도 있습니다.
 
-따라서 첫페이지가 아닌 요청이 오면 그제서야 실제 Row의 개수를 Database로 부터 가져옵니다.
+따라서 첫 페이지가 아닌 요청이 오면 그제야 실제 Row의 개수를 Database로부터 가져옵니다.
 
 이때 offSet이 실제 Row의 개수보다 작다면 그대로 Board의 데이터를 응답해주면 되지만
 
-반대의 경우라면 사용자입장에서는 존재하는 페이지인줄 알고 요청을보냈는데 막상 서버입장에서보면 없는 데이터이기때문에
+반대의 경우라면 사용자 입장에서는 존재하는 페이지인 줄 알고 요청을 보냈는데 막상 서버 입장에서 보면 없는 데이터이기 때문에
 
-제일 마지막페이지의 데이터를 반환해주는 작업을 해줘야합니다.
+제일 마지막 페이지의 데이터를 반환해주는 작업을 해줘야 합니다.
 
 ```typescript
-    return [
-  await this.getPaginationBoards(
-    Math.floor(totalCount / query.getLimit()) * query.getLimit(),
-    query.getLimit(),
-  ),
-  totalCount,
-];
+return [
+    await this.getPaginationBoards(
+      Math.floor(totalCount / query.getLimit()) * query.getLimit(),
+      query.getLimit(),
+    ),
+      totalCount,
+    ];
 ```
 
-마지막 페이지의 첫 데이터의 Offset을 구하기위해 전체 데이터 개수에서 Limit값을 나누어 내림을합니다
+마지막 페이지의 첫 데이터의 Offset을 구하기 위해 전체 데이터 개수에서 Limit 값을 나누어 내림을 합니다
 
-내림한 값과 다시 Limit값을 곱하게 되면 마지막페이지의 첫 데이터의 Row의 번호를 알수 있습니다.
+내림한 값과 다시 Limit 값을 곱하게 되면 마지막 페이지의 첫 데이터의 Row의 번호를 알 수 있습니다.
 
-이 값을 Offset으로 설정하여 그 값으로부터 Limit개의 게시글 데이터를 불러오면됩니다.
+이 값을 Offset으로 설정하여 그 값으로부터 Limit 개의 게시글 데이터를 불러오면 됩니다.
 
 #### 성능테스트
 
 ![Screen Shot 2021-10-24 at 6 09 51 PM](https://user-images.githubusercontent.com/44861205/138587627-7bd7a349-e404-40c8-b2fa-205afd0f5d20.png)
 
-640만개 데이터 기준으로 첫페이지를 가져오는데 27ms로 대폭 줄었습니다. 이는 Count를 하지 않았기때문이며 응답은 아래와같이 나옵니다.
+640만 개 데이터 기준으로 첫 페이지를 가져오는데 27ms로 대폭 줄었습니다. 이는 Count를 하지 않았기 때문이며 응답은 아래와 같이 나옵니다.
 
 ![Screen Shot 2021-10-24 at 6 11 18 PM](https://user-images.githubusercontent.com/44861205/138587674-b61f12b9-4dcd-4376-8f88-8ad9c13226f4.png)
 
-데이터가 분명 640만개임에도 불구하고 총 페이지가 10페이지라고 나와있습니다. 
+데이터가 분명 640만 개임에도 불구하고 총 페이지가 10페이지라고 나와 있습니다.
 
-이는 Count를 계산하지않고 제가 임의로 정해놓은 10개의 페이지를 반환했기때문입니다.
+이는 Count를 계산하지 않고 제가 임의로 정해놓은 10개의 페이지를 반환했기 때문입니다.
 
-이렇게 Pagination을 `커버링 인덱스`와 `첫페이지 Count 계산하지않기`를 이용하여 최적화하여 구현해보았습니다.
+이렇게 Pagination을 `커버링 인덱스`와 `첫 페이지 Count 계산하지 않기`를 이용하여 최적화하여 구현해보았습니다.
 
-사실 구현하면서 정말 더 많은 최적화 방법을 알게됬습니다.
+사실 구현하면서 정말 더 많은 최적화 방법을 알게 됐습니다.
 
-게시글의 데이터를 가져오는 부분과 개수를 세는 API를 아예 따로 분리하여 프론트가 어떠한 API를 호출할지를 판단하는것입니다.
+게시글의 데이터를 가져오는 부분과 개수를 세는 API를 아예 따로 분리하여 프론트가 어떠한 API를 호출할지를 판단하는 것입니다.
 
-이렇게 하면 첫페이지에 한정짓지 않고 원하는 페이지까지는 카운트를 세지않고 빠르게 응답을 줄수있었습니다.
+이렇게 하면 첫 페이지에 한정 짓지 않고 원하는 페이지까지는 카운트를 세지 않고 빠르게 응답을 줄 수 있었습니다.
 
-협업을 하는 클라이언트와, 회사정책에 따라 이러한 구현방법들이 달라질것같아서 다양한 시도를 미리 많이 해보는게 변화하는 상황에 잘 대처할수 있겠다라고 생각이 들었던 구현경험이였습니다.
+협업하는 클라이언트와 회사정책에 따라 이러한 구현 방법들이 달라질 것 같아서 다양한 시도를 미리 많이 해보는 게 변화하는 상황에 잘 대처할 수 있겠다고 생각이 들었던 구현 경험이었습니다.
 
 <hr/>
+
+### UsersQueryRepository
+
+```typescript
+// src/users/users.query.repository.ts
+getPaginationUsers(offset: number, limit: number) {
+return this.createQueryBuilder('users')
+  .innerJoin(
+    `(${this.getCoveringIndexQueryBuilder(offset, limit).getQuery()})`,
+    'covers',
+    'users.userId = covers_id',
+  )
+  .leftJoinAndSelect('users.boards', 'boards')
+  .select(['boards', 'users'])
+  .getMany();
+}
+```
+
+User 또한 데이터의 양이 많아짐에 따라 Pagination이 필요할 수 있습니다. 구현 로직은 대부분 같지만
+
+Covering index를 구하는 과정에서는 똑같이 `Inner Join`을 사용하지만
+
+`유저가 작성한 게시글`을 가져올 때는 `Left join`을 사용하였습니다. 왜냐하면 게시글을 작성하지 않은 유저의 정보도 가져와야 하기 때문입니다.
+
+이러한 차이점 외에는 Board와 페이지네이션 구현 방법이 같습니다.
+
+### User Entity && Board Entity
+
+#### User Entity
+
+```typescript
+// src/users/user.entity.ts
+  @OneToMany((type) => Board, (board) => board.user, { eager: false })
+  boards: Board[];
+
+  @BeforeInsert()
+  async setPassword(password: string) {
+    const salt = await bcrypt.genSalt();
+    this.password = await bcrypt.hash(password || this.password, salt);
+  }
+```
+
+User Entity의 2개의 부분에 대해서 설명해 드리려고 합니다.
+
+우선 위의 예에서 `@BeforeInsert` 데코레이터를 사용하여 `AuthService`에서 처리하던 Bcrypt암호화 로직을 User Entity에서 맞게 했습니다.
+
+```typescript
+// src/boards/boards.entity.ts
+@ApiProperty({
+type: () => User,
+title: '작성자 정보',
+description: '게시글을 작성한 작성자의 정보를 나타냅니다.',
+})
+@ManyToOne((type) => User, (user) => user.boards, { eager: false })
+@JoinColumn({ name: 'user_id' })
+user: User;
+```
+
+또한 유저와 게시글은 1:N 관계에 있으므로 TypeORM의 `@OneToMany`데코레이션과 `@ManyToOne` 데코레이션을 통해 관계 설정을 해주었습니다. User와 Board 관계를 맺을 서로의 Property에 대한 정보를 데코레이터를 통해 설정해주고 있습니다
+
+또한 `eager: false`를 이용하여 User 정보를 가져올 땐 User 정보만 가져오게, Board 정보를 가져올 땐 Board 정보만 가져오게 하였습니다.
+
+예를 들어, User의 정보만을 가져와야 하는데 사용하지도 않을 Board의 정보를 가져오느라 자원 낭비가 발생할 수 있기 때문입니다.
 
 
 ### Custom Decorator
@@ -1666,14 +1743,13 @@ export const GetUser = createParamDecorator(
   },
 );
 ```
+Nest는 HTTP Server Framework로 Express와 Fastify를 사용할 수 있습니다.
 
-Nest는 HTTP Server Framework로 Express와 Fastify를 사용할수 있습니다.
+이렇게 여러 개의 HTTP Server Framework를 사용하는 Nest.js의 HTTP Server Framework는 변경 될 수 있습니다.
 
-이렇게 여러개의 HTTP Server Framework를 사용하는 Nest.js의 HTTP Server Framework는 변경 될수 있습니다.
+만약 이미 Express로 개발했는데 Fastify로 바꿔야 하는 상황이 온다면 서로 Request, Response 등등의 객체들이 모두 다르기 때문에 실제코드 및 심지어 작성해놓은 테스트 코드 또한 모두 변경해야 하는 일이 생길 수 있습니다.
 
-만약 이미 Express로 개발을 했는데 Fastify로 바꿔야하는 상황이 온다면 서로 Request, Response등등의 객체들이 모두 다르기때문에 실제코드 및 심지어 작성해놓은 테스트 코드또한 모두 변경해야하는 일이 생길수 있습니다.
-
-6이러한 일을 막기위해 현재의 @GetUser 데코레이터 처럼 Request의 User객체를 가져와서 실제 우리가 필요한 유저 정보만 반환해주는 커스텀 데코레이터를 만듬으로서 이러한 종속성 문제를 해결할수 있습니다.
+이러한 일을 막기위해 현재의 @GetUser 데코레이터 처럼 Request의 User 객체를 가져와서 실제 우리가 필요한 유저 정보만 반환해주는 커스텀 데코레이터를 만듦으로서 이러한 종속성 문제를 해결할 수 있습니다.
 
 #### @ApiCommon~ Decorator
 
@@ -1709,7 +1785,7 @@ export const ApiCommonCreateResponseForm = <TModel extends Type<any>>(
 };
 ```
 
-제가 앞서 `CommonResponseFormInterceptor`에 대해 설명드릴때 해당 Interceptor를 사용하는 모든 Route Handler는 다음과 같은 형태를 클라이언트에게 응답한다고 설명드렸습니다.
+제가 앞서 `CommonResponseFormIntercept`에 대해 설명해 드릴 때 해당 Interceptor를 사용하는 모든 Route Handler는 다음과 같은 형태를 클라이언트에게 응답한다고 설명해 드렸습니다.
 
 ```typescript
 {
@@ -1718,15 +1794,15 @@ export const ApiCommonCreateResponseForm = <TModel extends Type<any>>(
 }
 ```
 
-이러한 응답형태에서 data Property에는 어떠한 데이터든 들어올수가 있습니다.
+이러한 응답 형태에서 data Property에는 어떠한 데이터든 들어올 수가 있습니다.
 
-하지만 따로 Response로 정의된 객체도 없어 `@ApiExtraModels()`를 사용하여 Swagger의 Schema로 만들수도 없었고
+하지만 따로 Response로 정의된 객체도 없어 `@ApiExtraModels()`를 사용하여 Swagger의 Schema로 만들 수도 없었고
 
-임의로 Interceptor로 만든 형태에 불과했기때문에 직접 schema 옵션을 이용하여 매 라우터마다 schema를 정의해 줘야했습니다.
+임의로 Interceptor로 만든 형태에 불과했기 때문에 직접 schema 옵션을 이용하여 매 라우터마다 schema를 정의해 줘야 했습니다.
 
-또한 Nest.js의 Swagger가 제네릭에 대한 Swagger 스키마를 지원하지 않은것 같습니다.
+또한 Nest.js의 Swagger가 제네릭에 대한 Swagger 스키마를 지원하지 않은 것 같습니다.
 
-결국 매 라우터마다 아래와 같이 schema를 정의해줬지만 해당 소스코드는 너무 많은 줄을 차지하고 이것이 많아지면 많아질수록 Route Handler를 찾기 어려워졌습니다.
+결국 매 라우터마다 아래와 같이 schema를 정의해줬지만, 해당 소스 코드는 너무 많은 줄을 차지하고 이것이 많아지면 많아질수록 Route Handler를 찾기 어려워졌습니다.
 
 ```typescript
     @ApiCreatedResponse({
@@ -1748,8 +1824,13 @@ export const ApiCommonCreateResponseForm = <TModel extends Type<any>>(
     }),
 ```
 
-따라서 처음의 예시와 같이 중복을 제거하고 좀더 효율적인 관리를 위해 data로 들어올 타입과 나머지 @ApixxxResponse의 옵션들을 인자로 받는 커스텀 데코레이터를 생성하여 처리했습니다.
+따라서 처음의 예시와 같이 중복을 제거하고 좀 더 효율적인 관리를 위해 data로 들어올 타입과 나머지 @ApixxxResponse의 옵션들을 인자로 받는 커스텀 데코레이터를 생성하여 처리했습니다.
 
 해당 데코레이터 덕분에 많은 양의 중복을 제거하고 관리가 매우 쉬워졌습니다.
 
 
+## 마치며..
+
+이상 과제를 마치도록 하겠습니다!
+
+너무 긴 글을 읽어주셔서 너무 감사드립니다.
