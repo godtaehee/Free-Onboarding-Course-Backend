@@ -49,7 +49,7 @@ export class BoardsQueryRepository extends Repository<Board> {
 
     return [
       await this.getPaginationBoards(
-        Math.ceil(totalCount / query.getOffset()) - 1,
+        Math.floor(totalCount / query.getLimit()) * query.getLimit(),
         query.getLimit(),
       ),
       totalCount,
