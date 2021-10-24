@@ -362,6 +362,23 @@ Authorization을 마치고 나서 `Close` 버튼을 누르면 위와 같이 아�
 그 외의 모든 API는 서버 실행 시 이용 가능한 명세서에 자세하게 설명이 되어있습니다.
 
 해당 문서는 Swagger로 만들어져있으며 애플리케이션 실행 후 http://localhost:3000/api 에서 확인하실 수 있습니다.
+
+### Endpoint 호출 방법
+
+모든 Endpoint는 Swagger API Docs의 아래 사진처럼 하트 부분의 `Try it out` 버튼으로 이용하실 수 있습니다.
+
+![Screen Shot 2021-10-24 at 10 40 09 PM](https://user-images.githubusercontent.com/44861205/138596743-2f66a47a-dd20-4319-bf45-3fd770842e7a.png)
+
+`Try it out` 버튼 클릭 후 아래와 같이 별 부분에 API에 알맞은 요청정보를 입력하고 하트 부분의 `Execute` 버튼을 눌러 이용 가능합니다.
+
+로그인과 로그아웃 또한 Authorization에 대해서는 `목차 2번의 자세한 애플리케이션 실행방법`의 `로그인 / 로그아웃 방법`에 있습니다.
+
+![Screen Shot 2021-10-24 at 10 46 57 PM](https://user-images.githubusercontent.com/44861205/138597014-3eba42c0-9ca4-438e-9259-29f22b37d56a.png)
+
+
+
+
+
 </details>
 
 ## 5. 구현한 방법과 이유에 대한 간략한 내용
