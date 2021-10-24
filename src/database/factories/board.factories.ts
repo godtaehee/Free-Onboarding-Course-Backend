@@ -1,4 +1,4 @@
-import { define, factory } from 'typeorm-seeding';
+import { define } from 'typeorm-seeding';
 import * as faker from 'faker';
 import { Board } from '../../boards/boards.entity';
 
@@ -11,7 +11,7 @@ define(Board, () => {
   board.title = title;
   board.content = content;
   board.user = {
-    id: faker.datatype.number({
+    userId: faker.datatype.number({
       min: 1,
       max: 20,
     }),
