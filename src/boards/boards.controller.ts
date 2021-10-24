@@ -41,7 +41,7 @@ import { FourHundredOneError } from '../common/response/error/four.hundred.one.e
 import { FourHundredError } from '../common/response/error/four.hundred.error';
 import { NotValidNumberError } from '../common/response/error/not.valid.number.error';
 import { Board } from './boards.entity';
-import { ApiCommonPaginationOkResponseForm } from '../common/decorators/pagination/api.common.Ok.response.form';
+import { ApiCommonPaginationOkResponseForm } from '../common/decorators/pagination/api.common.pagination.Ok.response.form';
 import { NotIncludeUserInfoResponse } from '../common/response/board/not.include.user.info.response';
 import { ApiCommonOkArrayResponseForm } from '../common/decorators/api.common.ok.array.response.form';
 
@@ -238,7 +238,7 @@ export class BoardsController {
     description: '최대 몇 개의 Board를 가져올 것인지에 대한 값입니다.',
   })
   @ApiQuery({
-    name: 'offset',
+    name: 'page',
     required: true,
     description:
       '게시판의 시작페이지의 수를 나타냅니다. 0을 제외한 양수의 값입니다.',
@@ -257,7 +257,7 @@ export class BoardsController {
   ): Promise<Page<NotIncludeSensitiveInfoBoardResponse>> {
     this.logger.debug(
       `${this.tag} ${new Date()} ${
-        (query.offset - 1) * query.limit
+        (query.page - 1) * query.limit
       }번째부터 최대 '${query.limit}'개의 게시물을 읽어옵니다.`,
     );
     return this.boardsService.getAllBoard(query);
