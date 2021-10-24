@@ -69,7 +69,7 @@ export class UsersController {
       '최대 50개의 유저정보를 가져올 수 있습니다.',
   })
   @ApiQuery({
-    name: 'offset',
+    name: 'page',
     required: true,
     description:
       'User 정보의 페이지 수를 나타냅니다. 0을 제외한 양수의 값입니다. ',
