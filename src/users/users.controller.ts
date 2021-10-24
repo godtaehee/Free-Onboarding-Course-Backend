@@ -17,7 +17,7 @@ import {
 } from '@nestjs/swagger';
 import { NotValidNumberError } from '../common/response/error/not.valid.number.error';
 import { UserResponse } from '../common/response/user/user.response';
-import { ApiCommonPaginationOkResponseForm } from '../common/decorators/pagination/api.common.Ok.response.form';
+import { ApiCommonPaginationOkResponseForm } from '../common/decorators/pagination/api.common.pagination.Ok.response.form';
 import { CommonResponseFormInterceptor } from '../common/interceptors/common.response.form.interceptor';
 import { ApiCommonOkResponseForm } from '../common/decorators/api.common.Ok.response.form';
 
