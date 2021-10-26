@@ -29,7 +29,7 @@ async function bootstrap() {
       `<ul>
         <li>[위코드 x 원티드] 백엔드 프리온보딩 선발 과제에 대한 API 문서입니다. </li> <br/>
         <li>In-Memory Database 확인용 태그에 있는 API를 사용하여 database에 저장된, 혹은 저장이 될 데이터들을 JSON 형태의 데이터로 직접 확인하실 수 있습니다. </li> <br/>
-        <li>현재 유저 20명, 게시글 200개 정도의 데이터가 Database에 저장되어 있습니다.</li>
+        <li>현재 유저 20명, 게시글 200개 정도의 데이터가 Database에 저장되어 있습니다.</li> <br/>
         <li>대부분의 API는 미리 준비되어있는 데이터로 이용 가능합니다.</li>
        </ul>`,
     )
